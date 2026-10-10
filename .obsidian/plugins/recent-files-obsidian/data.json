@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "GitHub学习资源清单",
+      "path": "60-项目/北洋机甲培训/GitHub学习资源清单.md"
+    },
+    {
+      "basename": "硬件与采购清单",
+      "path": "60-项目/北洋机甲培训/硬件与采购清单.md"
+    },
+    {
+      "basename": "北洋机甲培训",
+      "path": "60-项目/北洋机甲培训/北洋机甲培训.md"
+    },
+    {
+      "basename": "03-Git与Gitee",
+      "path": "60-项目/北洋机甲培训/03-Git与Gitee.md"
+    },
+    {
+      "basename": "科研项目",
+      "path": "60-项目/科研项目.md"
+    },
+    {
       "basename": "AGENTS",
       "path": "AGENTS.md"
     },
@@ -137,10 +157,6 @@
       "path": "10-课程笔记/每日四题/2026-10-05 每日四题.md"
     },
     {
-      "basename": "科研项目",
-      "path": "60-项目/科研项目.md"
-    },
-    {
       "basename": "GPIO按键控制LED（轮询）",
       "path": "10-课程笔记/程序设计原理/嵌入式开发/GPIO按键控制LED（轮询）.md"
     },
@@ -173,18 +189,6 @@
       "path": "60-项目/北洋机甲培训/04-通识.md"
     },
     {
-      "basename": "03-Git与Gitee",
-      "path": "60-项目/北洋机甲培训/03-Git与Gitee.md"
-    },
-    {
-      "basename": "硬件与采购清单",
-      "path": "60-项目/北洋机甲培训/硬件与采购清单.md"
-    },
-    {
-      "basename": "北洋机甲培训",
-      "path": "60-项目/北洋机甲培训/北洋机甲培训.md"
-    },
-    {
       "basename": "10-PID",
       "path": "60-项目/北洋机甲培训/10-PID.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "07-UART",
       "path": "60-项目/北洋机甲培训/07-UART.md"
-    },
-    {
-      "basename": "06-NVIC与EXTI",
-      "path": "60-项目/北洋机甲培训/06-NVIC与EXTI.md"
     }
   ],
   "omittedPaths": [],
