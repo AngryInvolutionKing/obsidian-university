@@ -1,0 +1,27 @@
+{
+  "promptDelete": true,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "00-Inbox",
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "40-Attachments",
+  "userIgnoreFilters": [
+    "copilot/",
+    ".copilot/",
+    ".opencode/",
+    ".agents/",
+    ".claude/",
+    "node_modules/",
+    "90-Tools/",
+    "00-Inbox/",
+    "20-专题笔记/",
+    "30-Templates/",
+    "40-Attachments/",
+    "50-Daily/"
+  ],
+  "enabledPlugins": [
+    "atomic-notes-extractor",
+    "bamboo-walking",
+    "bamboo-immortals"
+  ]
+}

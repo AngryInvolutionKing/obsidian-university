@@ -1,0 +1,26 @@
+{
+  "promptDelete": true,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "newFileFolderPath": "10-课程笔记",
+  "newLinkFormat": "shortest",
+  "attachmentFolderPath": "40-Attachments",
+  "userIgnoreFilters": [
+    "copilot/",
+    ".copilot/",
+    ".opencode/",
+    ".agents/",
+    ".claude/",
+    "node_modules/",
+    "90-Tools/",
+    "00-Inbox/",
+    "30-Templates/",
+    "40-Attachments/",
+    "50-Daily/"
+  ],
+  "enabledPlugins": [
+    "atomic-notes-extractor",
+    "bamboo-walking",
+    "bamboo-immortals"
+  ]
+}

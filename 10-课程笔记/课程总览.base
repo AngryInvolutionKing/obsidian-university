@@ -1,0 +1,27 @@
+views:
+  - type: table
+    name: 课程总览
+    filters:
+      and:
+        - type == "课程主页"
+    order:
+      - file.name
+      - course
+      - tags
+      - created
+    sort:
+      - property: course
+        direction: ASC
+  - type: table
+    name: 待整理
+    filters:
+      and:
+        - file.hasTag("状态/待整理")
+    order:
+      - file.name
+      - type
+      - course
+      - created
+    sort:
+      - property: file.mtime
+        direction: DESC

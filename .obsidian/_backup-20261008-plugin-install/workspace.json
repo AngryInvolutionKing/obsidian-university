@@ -1,0 +1,296 @@
+{
+  "main": {
+    "id": "e0fedf591c967d67",
+    "type": "split",
+    "children": [
+      {
+        "id": "88f9a53e7f7bc53e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a9a24193f8e6ffb8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "10-课程笔记/高等代数（新工科）I/02-线性方程组/02-线性方程组.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02-线性方程组"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ff00d5ac59b89209",
+    "type": "split",
+    "children": [
+      {
+        "id": "f9d26278e2493967",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bde4741c55e41d0c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "78d6a3d68558db73",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "e9f5dace2090dbff",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "3fb962f084bb7ac6",
+            "type": "leaf",
+            "state": {
+              "type": "notebook-navigator",
+              "state": {},
+              "icon": "notebook-navigator",
+              "title": "笔记本导航器"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "5749016b4e346e77",
+    "type": "split",
+    "children": [
+      {
+        "id": "d8fd004ff23b5534",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8703884623a95ae6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "思政.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "思政 的反向链接列表"
+            }
+          },
+          {
+            "id": "663026ed27a8d64c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "思政.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "思政 的出链列表"
+            }
+          },
+          {
+            "id": "934e501d3401846d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "6a24467902158b9d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "11-课程资料/英语作文资料(按主题分类).md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          },
+          {
+            "id": "97cf2e424de6fd3d",
+            "type": "leaf",
+            "state": {
+              "type": "copilot-chat-view",
+              "state": {},
+              "icon": "message-square",
+              "title": "Copilot (Quick Chat)"
+            }
+          },
+          {
+            "id": "5b9d2e607fda9d84",
+            "type": "leaf",
+            "state": {
+              "type": "copilot-agent-chat-view",
+              "state": {},
+              "icon": "copilot-agent",
+              "title": "Copilot Agent"
+            }
+          },
+          {
+            "id": "3272ece85bca117b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "ffc26202bd44c57b",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "fba26d7a3a47fc82",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
+              "state": {
+                "file": "10-课程笔记/课程表.md"
+              },
+              "icon": "lucide-file-signature",
+              "title": "脚注"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 453
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "audio-recorder:开始/结束录音": false,
+      "bases:新建数据库": false,
+      "templater-obsidian:Templater": false,
+      "chinese-plugin-market:插件搜索": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "omnisearch:Omnisearch": false,
+      "copilot:Open Copilot Agent Chat": false,
+      "notebook-navigator:Notebook Navigator": false,
+      "workspaces:管理工作区布局": false
+    }
+  },
+  "active": "5b9d2e607fda9d84",
+  "lastOpenFiles": [
+    "copilot/copilot-conversations/attachments/copilot-image-1845217b85f0703df916c68950eb86130b3c26da92f5ee5c20c38ffd4089e283.jpg",
+    "copilot/copilot-conversations/attachments/copilot-image-04bfa7b8d757e7af15de18cc55d7ec546870d3f001c66b08574e32ccc3726680.jpg",
+    "copilot/copilot-conversations/attachments/copilot-image-e2da132acf78b6efcd12f5b25b335c88b148a8cdf96dc5788a4bf537d7f8881e.jpg",
+    "copilot/copilot-custom-prompts/公式核对.md",
+    "AGENTS.md",
+    "10-课程笔记/高等代数（新工科）I/带运算的集合.md",
+    "10-课程笔记/高等代数（新工科）I/01-线性函数/01.6-子空间与线性映射.md",
+    "10-课程笔记/高等代数（新工科）I/02-线性方程组/02-线性方程组.md",
+    "copilot/copilot-conversations/attachments/copilot-image-4809d4301de56d96a26422fa7b0a2768808d75cf536b4662f983a7428a43a48b.jpg",
+    "copilot/copilot-conversations/attachments/copilot-image-b46fa4be5cdfffe6dda3f281e21de94d354878824017e8a1257cba7f264fc7f3.jpg",
+    "10-课程笔记/高等代数（新工科）I/02-线性方程组",
+    "copilot/copilot-conversations/attachments/copilot-image-4c5c9e2fbba4979f82b75ca79322fcdb21c8e2a3aaef3f0cf7b7f4a36c250865.jpg",
+    "10-课程笔记/高等代数（新工科）I/01-线性函数/01.4-集合上的运算与域.md",
+    "copilot/copilot-conversations/attachments/copilot-image-1df74949636949d5df1cf25d7eea32ebcb7dad81b2a6714ff677984b80a05d7b.jpg",
+    "copilot/copilot-conversations/agent__把图片放里面@20261008_154239.md",
+    "10-课程笔记/高等代数（新工科）I/01-线性函数/01.5-习题1.2与hw2补充题（带运算的集合）.md",
+    "copilot/copilot-conversations/agent__Untitled_Agent_Chat@20261008_153436.md",
+    "copilot/copilot-conversations/attachments/copilot-image-05cd00e2e03f4c36e7f24c09be97cb6ad914c158166bb495cca513bddb79982a.jpg",
+    "10-课程笔记/程序设计原理/12-冷藏库.md",
+    "90-Tools/回校可用资源与待办（天大校园网）.md",
+    "10-课程笔记/每日四题/2026-10-07 每日四题.md",
+    "10-课程笔记/全国大学生数学竞赛选讲(翻转).md",
+    "10-课程笔记/程序设计原理/嵌入式开发/UART轮询定长收发与双LED控制.md",
+    "copilot/copilot-conversations/agent__收录@20261007_101517.md",
+    "copilot/copilot-conversations/attachments/copilot-image-ce75e1b7247a63296bd80cf534332f731cafd1e950ca7a1cdbd86c8945ab4c0e.png",
+    "copilot/copilot-conversations/agent__讲一下算法思路@20261006_200122.md",
+    "10-课程笔记/程序设计原理/11-小孩姐永不妥协.md",
+    "10-课程笔记/程序设计原理/01-最小整型选择.md",
+    "tmp/pdfs/math-20261006/mit-comb-page1.png",
+    "tmp/pdfs/math-20261006/linear-space-page5.png",
+    "10-课程笔记/英语资料.md",
+    "10-课程笔记/课程总览.base",
+    "10-课程笔记/每日四题/2026-10-06 每日四题.md",
+    "10-课程笔记/每日四题/2026-10-05 每日四题.md",
+    "10-课程笔记/每日四题.md",
+    "10-课程笔记/每日四题",
+    "60-项目/科研项目.md",
+    "10-课程笔记/每日两题.md",
+    "copilot/copilot-conversations/agent__把标题改为每日四题，每四题挂一个目录@20261006_155145.md",
+    "tmp/pdfs/math-20261006",
+    "tmp/pdfs",
+    "tmp",
+    "10-课程笔记/程序设计原理/嵌入式开发",
+    "10-课程笔记/每日两题/2026-10-05",
+    "10-课程笔记/每日两题",
+    "10-课程笔记/程序设计原理/嵌入式开发/2026-10-05"
+  ]
+}

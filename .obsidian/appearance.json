@@ -1,0 +1,7 @@
+{
+  "theme": "moonstone",
+  "baseFontSizeAction": true,
+  "enabledCssSnippets": [
+    "hide-except-course-notes"
+  ]
+}

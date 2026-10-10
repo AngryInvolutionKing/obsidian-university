@@ -1,0 +1,8 @@
+/* 只显示课程笔记：隐藏文件管理器中除 10-课程笔记 外的顶层文件夹 */
+.tree-item:has(> .tree-item-self[data-path="00-Inbox"]) { display: none; }
+.tree-item:has(> .tree-item-self[data-path="20-专题笔记"]) { display: none; }
+.tree-item:has(> .tree-item-self[data-path="30-Templates"]) { display: none; }
+.tree-item:has(> .tree-item-self[data-path="40-Attachments"]) { display: none; }
+.tree-item:has(> .tree-item-self[data-path="50-Daily"]) { display: none; }
+.tree-item:has(> .tree-item-self[data-path="90-Tools"]) { display: none; }
+.tree-item:has(> .tree-item-self[data-path="copilot"]) { display: none; }

@@ -1,0 +1,411 @@
+---
+title: "Microduck Replica"
+type: microduck-doc
+tags:
+  - Microduck
+  - Microduck/项目文档
+---
+# Microduck Replica
+
+**English** · [[60-项目/Microduck/02-项目文档/README|简体中文]]
+
+> A third-party reconstruction study of [Pollen Robotics' Microduck](https://pollen-robotics.com/microduck/).
+> Assembly drawings, exploded views, CAD-importable assemblies, and a complete
+> electronics teardown — all derived from publicly released files and source code.
+
+Microduck is a 25 cm, 737 g bipedal robot duck driven by 15 Dynamixel XL330 servos
+(14 under policy control) that learns to walk with reinforcement learning.
+
+Its **software is open source (Apache-2.0)**. Its hardware is **partly** open:
+
+- ✅ **The RPI Robot HAT board is fully published** — [`pollen-robotics/elec_RPI_Robot_HAT`](https://github.com/pollen-robotics/elec_RPI_Robot_HAT)
+  (Apache-2.0): KiCad 9 project, Gerbers, BOM, pick-and-place and STEP. **You do not need to redraw this board.**
+- ❌ **The `imu_to_dxl` board is not published** — no public project exists anywhere; the reconstruction
+  in this repo is the only one available.
+- ❌ **No editable mechanical CAD**, no whole-robot BOM, no assembly documentation. Pollen Robotics
+  [[60-项目/Microduck/02-项目文档/docs/社区动态|told the press not to call it "open-source hardware" (for now)]].
+
+> 📌 **Correction (2026-09-03)**: this document previously stated "its hardware is not [open], no PCB
+> schematics". **That was wrong** — it searched only `pollen-robotics/microduck` and missed the
+> organisation's `elec_`-prefixed hardware repositories.
+
+But two public artifacts turn out to be enough:
+
+1. **`microduck_rl` ships the full MJCF model and 47 STL meshes.** The MJCF contains the
+   complete kinematic tree — which part mounts to which, relative positions accurate to
+   0.1 mm, joint axes, travel limits, masses and inertia tensors.
+2. **The Rust runtime is open source, and a runtime that drives real hardware must
+   hard-code device paths, I²C addresses, register offsets, baud rates and protocols.**
+   The code *is* the datasheet.
+
+This repository is what falls out of reading both.
+
+> ✅ **Independently verified.** On 2026-08-31, [@tspy](https://x.com/tspy/status/2094249218735300630)
+> published a hardware teardown on X (169 likes) that matches this repository's
+> conclusions exactly — including the critical one: **the main board is a Radxa Zero 3W**.
+> Two independent paths, one answer. See [[60-项目/Microduck/02-项目文档/docs/社区动态|Community Intelligence]].
+
+---
+
+## Two tracks — pick one
+
+This repository covers two servo choices. **Mechanics, electronics and software all differ**, so decide before building:
+
+| | Original · Dynamixel XL330 | Feetech · HD-1910 |
+|---|---|---|
+| **Servos** | XL330-M288-T ×15 | HD-1910-C001 ×15 — half the price, 2.5× the torque |
+| **Voltage** | rated 6 V, run at 6.6–8.2 V, **37% over** | rated 4–8.4 V, within spec; a full pack sits at the 8.4 V ceiling |
+| **Printed parts** | [[`print/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print) upstream STLs as-is | **8 mating parts remodelled** (HD-1910 horn protrudes, XL330's is recessed) — [MakerWorld](https://makerworld.com.cn/zh/models/2963569-microduck#profileId-3478428) / [3mf](https://github.com/fanhao375/microduck-replica-cad/tree/master/打印) |
+| **Editable CAD** | [CAD repo v1.1](https://github.com/fanhao375/microduck-replica-cad/releases/tag/v1.1) | [CAD repo v2.0](https://github.com/fanhao375/microduck-replica-cad/releases/tag/v2.0), files carry an `-FT` suffix |
+| **Electronics** | official HAT + [`imu_to_dxl`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl) | same; servo connectors are 2.0 mm (official 2.5), `imu_to_dxl` has J4/J5 at 2.0 |
+| **Software** | official runtime runs as-is | different bus protocol, swap the protocol module; policy retrained for HD-1910 — [[60-项目/Microduck/02-项目文档/docs/HD-1910训练前数据清单|training data checklist]] |
+| **Status** | paper analysis + first prints | **full robot assembled** (2026-09-13), bus bring-up in progress |
+
+The selection argument is in [[60-项目/Microduck/02-项目文档/docs/actuator-selection.en|Actuator Selection]]. This repo's main line is Feetech; the original track is documented just as fully.
+
+---
+
+## Community
+
+A WeChat group for people working on the same thing — build progress, pitfalls, sourcing.
+
+**Groups 1–5 are full (200 members each — WeChat's cap for QR joins).** The code below is for **group 6**.
+
+
+  ![[60-项目/Microduck/_assets/repo/assets/wechat-group-6.png|Microduck replica WeChat group]]
+  
+
+  Duck Replica Group 6 · expires 2026-09-22 — WeChat group codes are valid for 7 days
+
+  If it has expired, open an [issue](https://github.com/fanhao375/microduck-replica/issues) and I will post a fresh one
+
+
+## Latest
+
+
+
+
+
+### 🔌 Electronics · `imu_to_dxl` PCB is done
+
+![[60-项目/Microduck/_assets/repo/assets/hw/imu_to_dxl-PCB.png|imu_to_dxl PCB top assembly]] [↗](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl)
+
+The one board Pollen **did not** open-source — a third-party reconstruction, taken all
+the way from schematic to PCB. STM32G031F8P6 + LSM6DSV16X + half-duplex buffer, sitting
+on the servo bus as the **16th device**.
+
+**45 × 22 mm, 2 layers**, R2 rounded corners, two diagonal M2 holes, solid GND plane on
+the bottom. All 23 nets connected, **DRC clean**, every IC power pin has a 100nF within
+2.3 mm. Still **never fabricated or validated on hardware**.
+
+**[Design notes · review points · audit](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl)**　·　
+[Schematic PDF](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl/imu_to_dxl-%E5%8E%9F%E7%90%86%E5%9B%BE.pdf)　·　
+[PCB PDF](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl/imu_to_dxl-PCB.pdf)　·　
+[3D STEP](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl/imu_to_dxl-PCB.step)　·　
+[[60-项目/Microduck/02-项目文档/hardware/imu_to_dxl/imu_to_dxl-接线表|Netlist]]　·　
+[EasyEDA project](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/hardware/imu_to_dxl/imu_to_dxl.eprj2)
+
+
+
+
+### 🔨 Mechanical · Feetech HD-1910 build is assembled
+
+![[60-项目/Microduck/_assets/repo/build-log/photos/2026-09-13-飞特版装机-正面.jpg|Feetech HD-1910 build]] [[60-项目/Microduck/02-项目文档/BUILD-LOG.en|↗]]
+
+**All 15 Feetech HD-1910 servos configured and mounted.** Not the official XL330 — half the
+price, 2.5× the torque, running inside its rated voltage; the path argued in
+[[60-项目/Microduck/02-项目文档/docs/actuator-selection.en|Actuator Selection]], now physical.
+
+**The HD-1910 horn protrudes where the XL330's is recessed**, so the 8 parts that mate with
+horns were remodelled and reprinted. The editable SolidWorks drawings have an FT variant
+(`-FT` suffix) with what changed and why.
+
+**[[60-项目/Microduck/02-项目文档/BUILD-LOG.en|Build Log]]**　·
+**[Feetech-variant SolidWorks drawings](https://github.com/fanhao375/microduck-replica-cad)**　·
+**[Print on MakerWorld (Feetech build)](https://makerworld.com.cn/zh/models/2963569-microduck#profileId-3478428)**　·
+[[60-项目/Microduck/02-项目文档/调试记录|Debug Log]]　·
+[Printable parts](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print)
+
+
+
+
+> **Schematic review wanted** — feedback especially welcome on: the half-duplex buffer
+> enable logic (`2OE` tied high, so the MCU hears its own echo, vs. also driven by DE,
+> which lets RX float while transmitting); copper width for the J1/J2 pass-through;
+> and running 1 Mbps off HSI16 with no crystal (TSSOP-20 does not bring out `OSC_OUT`).
+> Please open an [issue](https://github.com/fanhao375/microduck-replica/issues) if you spot something.
+
+---
+
+## 🔨 Build Progress
+
+> This repository states repeatedly that simulation STLs are not manufacturing files.
+> **The build log is the test of that claim.** The result gets recorded either way.
+
+**→ [[60-项目/Microduck/02-项目文档/BUILD-LOG.en|Build Log]]**
+
+---
+
+## Exploded Assembly View
+
+![[60-项目/Microduck/_assets/repo/assembly-drawings/06_爆炸图_四分之三.png|Exploded view]]
+
+Seven drawings under [`assembly-drawings/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/assembly-drawings):
+
+| File | Contents |
+|---|---|
+| `01_正面` `02_侧面` `03_背面` `04_四分之三` | Front / side / rear / isometric, assembled, natural colors |
+| **`05_爆炸图_侧面`** | 15 parts exploded along the kinematic chain, labeled with names and masses |
+| **`06_爆炸图_四分之三`** | Isometric — shows the left/right leg mirroring clearly |
+| `07_分色对照_装配态` | Assembled state in the same color coding, for cross-reference |
+
+## Assembly Structure
+
+```
+Trunk 199 g
+├─ L hip yaw→roll 23 g → L hip roll 6 g → L thigh 48 g → L shin 22 g → L ankle+foot 30 g
+├─ Neck base 37 g → Neck pitch 6 g → Head yaw/roll 49 g → Head assembly + beak 189 g
+└─ R hip yaw→roll 23 g → R hip roll 6 g → R thigh 48 g → R shin 22 g → R ankle+foot 30 g
+
+Total 737.2 g   Envelope 144 × 141 × 264 mm
+```
+
+The trunk and the head weigh almost the same (199 g vs 189 g) — **the head is a quarter of
+the whole robot and the center of mass sits high**, which explains why its walking policy
+is hard to train.
+
+## Joint Parameters
+
+Five DoF per leg, four for neck and head — **14 under policy control**.
+The robot actually carries **15 Dynamixel XL330**: the 15th drives the beak through a
+passive linkage and never enters the action space.
+
+| Joint | Travel |
+|---|---|
+| `hip_yaw` | −25° … +30° |
+| `hip_roll` | ±22° |
+| `hip_pitch` / `knee` / `ankle` / `head_pitch` | ±90° |
+| `neck_pitch` | −90° … +60° |
+| `head_yaw` | ±170° |
+| `head_roll` | ±25° |
+
+## 📋 Bill of Materials
+
+**What to buy and how many** — [[60-项目/Microduck/02-项目文档/BOM.en|[[60-项目/Microduck/02-项目文档/BOM.en|BOM.en]]]]
+
+15 servos, 14 bearings, ~325 fasteners, 2 boards to fabricate. Quantities are counted from geom
+references in the upstream MJCF (38 mesh types / 75 instances), not estimated. Includes a per-board
+parts list with LCSC numbers.
+
+> ⚠️ Two corrections in there that stop you buying the wrong thing: **the battery is an NP-F550,
+> not an F970**, and **the XL330 is run over-voltage**.
+
+## 3D-Printable Parts
+
+Every individual STL, split into print-these and buy-these, bilingual filenames — [[`print/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print)
+
+| Directory | Count |
+|---|---|
+| [[`print/打印件/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%89%93%E5%8D%B0%E4%BB%B6)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%89%93%E5%8D%B0%E4%BB%B6) | **30 types / 41 pieces** of structural parts |
+| [[`print/标准件-无需打印/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%A0%87%E5%87%86%E4%BB%B6-%E6%97%A0%E9%9C%80%E6%89%93%E5%8D%B0)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%A0%87%E5%87%86%E4%BB%B6-%E6%97%A0%E9%9C%80%E6%89%93%E5%8D%B0) | **9** bought-part models (for fit checking) |
+
+> Upstream's 7 test-bench fixtures and 1 duplicate are excluded. Printing notes:
+> [[60-项目/Microduck/02-项目文档/print/README.en|[[60-项目/Microduck/02-项目文档/print/README.en|README.en]]]].
+
+## CAD Assemblies
+
+[`cad/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/cad) holds STL files **with world transforms already applied** — import them and the
+robot is assembled. (The 47 upstream STLs are each in their own part coordinate frame;
+importing those directly piles every part at the origin.)
+
+- `00_Microduck_整机装配体.stl` — whole robot, single file, 796,792 triangles
+- `01` … `15` — the 15 rigid bodies, filenames are part names
+- `零件对照表.json` — which upstream source meshes make up each body
+
+Units are **millimeters**. Opens in FreeCAD, Fusion 360, SolidWorks, Blender, or any slicer.
+No CAD installed? [`tools/stl_viewer.html`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/tools/stl_viewer.html) is a zero-install WebGL viewer — open it in a
+browser and drop an STL in.
+
+### 📐 Want editable parametric models? Different repo
+
+Everything under [`cad/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/cad) and [`print/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print) here is **mesh** (STL) — printable, viewable,
+measurable, but **not editable**.
+
+**[fanhao375/microduck-replica-cad](https://github.com/fanhao375/microduck-replica-cad)**
+is the companion repo holding **editable SolidWorks source files**: 16 assemblies +
+40 parts, plus a **21-page assembly manual** with per-component steps, figures and cautions.
+
+> Those drawings were modelled — and the manual written — by
+> **[机械行者Robo](https://github.com/fanhao375/microduck-replica-cad#图纸作者机械行者Robo)**.
+> Go there if you want to change dimensions, wall thickness, or generate your own drawings.
+
+---
+
+## Electronics, Reverse-Engineered from the Runtime
+
+
+  ![[60-项目/Microduck/_assets/repo/assets/hw/01-物理布局.png|Microduck electronics overview: where each board sits]]
+  
+
+  Physical layout of the five modules. Dashed grey = physical region, solid = module,
+  dashed red = mounted outside the shell.
+
+  Orange is the servo bus (top-down), red is battery power (bottom-up).
+
+  The one thing people get wrong: the compute board, the HAT and the camera are all in the head —
+  the camera sits ~13 mm from the board centre with no joint between them,
+
+  so the MIPI ribbon never crosses the neck. What does cross it is the servo bus and the power line.
+
+  [[60-项目/Microduck/02-项目文档/docs/硬件入门|Full diagram set (Chinese) →]]　·　[Download PDF (7 diagrams, A3)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/assets/hw/Microduck%E7%A1%AC%E4%BB%B6%E5%9B%BE%E9%9B%86.pdf)
+
+
+
+**One 1 Mbps TTL serial bus does everything.**
+
+```
+                Radxa Zero 3W (RK3566) · Armbian
+                  ├── UART2  1 Mbps TTL half-duplex ── 15× XL330 + imu_to_dxl (ID 200)
+                  ├── I2C3   400 kHz (pins 3/5) ────── AIC3104@0x18 · ToF@0x29 · BMI088 (unused)
+                  ├── I2S3   12.288 MHz ────────────── audio
+                  ├── MIPI CSI ─────────────────────── IMX219 (I2C@0x10, mounted upside down)
+                  ├── Bluetooth ────────────────────── gamepad / phone app
+                  ├── Wi-Fi ────────────────────────── WebRTC
+                  └── USB-C ────────────────────────── power + maskrom
+```
+
+| | |
+|---|---|
+| **Main board** | **Radxa Zero 3W** — an off-the-shelf module, *not* a custom carrier |
+| SoC | RK3566, quad Cortex-A55, Mali-G52, 0.8 TOPS NPU, 1 GB RAM / 32 GB eMMC |
+| **Servo bus** | **Single-wire half-duplex TTL** — *not* RS-232, *not* RS-485. Dynamixel Protocol V2 @ 1 Mbps on `/dev/ttyS2` |
+| **Custom board 1** | **`imu_to_dxl` v2** — an LSM6DSV16X that speaks Dynamixel: bus ID 200, register 124, a 12-byte block read in the *same* `sync_read` as the servos |
+| **Custom board 2** | **RPI Robot HAT** — TLV320AIC3104 @ 0x18, a dormant BMI088, a Stemma header for the ToF. **Published by Pollen** ([`elec_RPI_Robot_HAT`](https://github.com/pollen-robotics/elec_RPI_Robot_HAT)) |
+| Battery | Sony NP-F550, 2S Li-ion. **No fuel gauge, no ADC** — pack voltage is read from what the servos report as their own supply |
+| Sensors | LSM6DSV16X IMU · VL53L5CX/L8CX 8×8 ToF · IMX219 (Pi Camera v2) |
+
+The `imu_to_dxl` design is the elegant part: the IMU is not on I²C. It presents itself as a
+Dynamixel slave, so orientation arrives in the same bus transaction as the joint states —
+no second bus, no host-side sensor fusion (the LSM6DSV16X's on-chip SFLP block emits a game
+rotation quaternion and estimates its own gyro bias).
+
+**Full detail:** [[60-项目/Microduck/02-项目文档/docs/hardware-teardown.en|Hardware Teardown]] (English) ·
+[[60-项目/Microduck/02-项目文档/docs/硬件规格速查|Spec Sheet]] (Chinese)
+
+---
+
+## Can You Actually Build One?
+
+| | Status |
+|---|---|
+| Part geometry | ✅ 47 STLs |
+| Assembly relationships | ✅ 0.1 mm accurate, drawings produced |
+| Joint axes / travel | ✅ all 14 |
+| Mass / inertia | ✅ all 15 bodies |
+| Servo model | ✅ Dynamixel XL330 × 15 |
+| Bearings | ✅ Ø22×16×4 and Ø15×10×3 |
+| Battery / sensors | ✅ NP-F550 2S, IMX219, VL53L8CX, LSM6DSV16X |
+| Main board | ✅ **Radxa Zero 3W, off the shelf** |
+| **HAT board** | ✅ **Officially published** — KiCad + Gerbers + BOM → [`elec_RPI_Robot_HAT`](https://github.com/pollen-robotics/elec_RPI_Robot_HAT) |
+| **`imu_to_dxl` board** | ⚠️ Not published; must be redrawn. Protocol and register layout fully recovered |
+| **Fastener list** | ✅ Reverse-engineered from hole features → M2 system |
+| **Cable routing** | ❌ Nothing published |
+| Control software | ⚠️ Rust runtime is Apache-2.0 and **runs as-is on the same main board** |
+
+⚠️ **Simulation STLs are not manufacturing files.** Simulation only needs outer shape and
+inertia — it guarantees nothing about fit tolerances, threads, heat-set insert bosses or
+cable clearance. Printing these directly will most likely not assemble.
+
+💰 **Building one probably costs more than buying one — but how much more depends entirely on
+your channel.** Fifteen XL330s run about **$359** at ROBOTIS international, **$412** at ROBOTIS US,
+and **€603–629** in Europe inc-VAT — anywhere from slightly under the robot's retail price to well
+above it. Add the compute module, battery, two boards to fabricate and filament, and it is certainly
+more. Full costing: [[60-项目/Microduck/02-项目文档/BOM.en|BOM.en.md]].
+
+**The conclusion has been revised** from "the mechanics are copyable, the electronics are a wall"
+to **"the whole robot is reproducible"** — the main board is an off-the-shelf module, and the custom
+boards' function and protocol have been fully recovered from source.
+See [[60-项目/Microduck/02-项目文档/docs/hardware-teardown.en|Hardware Teardown]].
+
+---
+
+## The Realistic Path
+
+Skip 100% replication and go **"copy the mechanics, build your own electronics"**:
+
+| | Approach |
+|---|---|
+| Mechanics | Use the STLs and drawings here — geometry copies exactly |
+| Servos | XL330 × 15, off the shelf |
+| Main board | **Radxa Zero 3W**, same as the original |
+| IMU board | Roll your own `imu_to_dxl`: LSM6DSV16X + a small MCU + half-duplex transceiver. The protocol is fully documented here |
+| HAT | **Order the official Gerbers** (4-layer); or skip it entirely if you don't need audio |
+| Software | Same main board → the official Rust runtime runs unmodified |
+| Policies | The nine shipped ONNX policies work; retrain with [microduck_rl](https://github.com/pollen-robotics/microduck_rl) if you change hardware |
+
+## Three Pitfalls Worth Knowing
+
+1. **Armbian runs a login console on UART2.** `serial-getty@ttyS2` holds the port —
+   `systemctl mask` it. Pollen found this with `fuser -v /dev/ttyS2`.
+2. **i2c3 collides with the FUSB302.** Using the hardware I²C on header pins 3/5 costs you
+   USB-C PD negotiation (plain 5 V charging still works).
+3. **The NPU ships disabled** in Armbian — flash the overlay and reboot to run RKNN models.
+
+---
+
+## Ecosystem Map
+
+Microduck material is scattered across several GitHub orgs and three HuggingFace resource types —
+**the official hardware repos are especially easy to miss**. [[60-项目/Microduck/02-项目文档/docs/ecosystem.en|[[60-项目/Microduck/02-项目文档/docs/ecosystem.en|ecosystem.en]]]]
+annotates every official repo, simulator, policy, dataset and community project with what it is and
+what it is good for.
+
+## Documentation
+
+| Document | Contents |
+|---|---|
+| [[60-项目/Microduck/02-项目文档/docs/硬件规格速查|**Hardware Spec Sheet**]] | One-page reference — block diagram, part numbers, bus parameters, build list, pitfalls |
+| [[60-项目/Microduck/02-项目文档/docs/硬件入门|**Hardware Primer**]] | **Board by board** — what each of the five modules does, how one 20 ms control tick flows, what changes on the Feetech route, and a closing section on **five checks to run before you replicate** |
+| [[60-项目/Microduck/02-项目文档/docs/电控采购清单|**Electronics Sourcing (CN)**]] | Taobao links with verified availability — main board, camera, ToF, power, both PCBs, cabling and the debug adapter |
+| [[60-项目/Microduck/02-项目文档/docs/机械采购清单|**Mechanical Sourcing (CN)**]] | Bearings, M2 fasteners, heat-set inserts and the insertion tip, thread locker, filament |
+| [[60-项目/Microduck/02-项目文档/docs/hardware-teardown.en|**Hardware Teardown**]] 🇬🇧 | **Full derivation with evidence citations — the main board, both custom boards, bus protocol, sensors, power** |
+| [[60-项目/Microduck/02-项目文档/docs/actuator-selection.en|**Actuator Selection**]] 🇬🇧 | XL330 parameters, BAM M6 config, five calibrated PD sets, backlash modeling — plus **why closed-loop steppers do not work here, what swapping to a Feetech STS3215 actually costs** (737 g vs 2107 g, measured), and a **cross-comparison of same-class servos** including a deep assessment of the Unitree S288 |
+| [[60-项目/Microduck/02-项目文档/docs/fastener-reconstruction.en|**Fastener Reconstruction**]] 🇬🇧 | Hole-feature scan across 47 STLs → M2 system and purchase quantities |
+| [[60-项目/Microduck/02-项目文档/docs/社区动态|Community Intelligence]] | X / GitHub signals, independent verification, noise and scam warnings |
+| [[60-项目/Microduck/02-项目文档/PROGRESS|Progress]] | Status, decisions, open work |
+
+> 🇬🇧 marks documents available in English. The rest are Chinese-only for now — their
+> tables, part numbers, addresses and diagrams are readable without it, and machine
+> translation handles the prose well.
+
+## Reproducing This
+
+```bash
+# 1. Fetch upstream (not re-hosted here)
+bash scripts/fetch_upstream.sh
+
+# 2. Regenerate the drawings
+python scripts/render_assembly.py upstream/microduck_rl assembly-drawings
+
+# 3. Re-export the CAD assemblies
+python scripts/export_assembly_stl.py upstream/microduck_rl cad
+
+# 4. Re-scan hole features
+python scripts/analyze_holes.py upstream/microduck_rl/src/mjlab_microduck/robot/microduck/assets
+```
+
+Requires `mujoco`, `numpy`, `pillow`, `scipy`. Rendering needs a working OpenGL context.
+
+## License
+
+- [`scripts/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/scripts) — Apache-2.0
+- [`assembly-drawings/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/assembly-drawings), [`cad/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/cad) — **CC BY-SA-NC 4.0**. Upstream 3D models are CC BY-SA-NC;
+  ShareAlike requires derivatives to carry the same license. **Non-commercial only.**
+
+See [[60-项目/Microduck/02-项目文档/NOTICE|NOTICE.md]]. Not affiliated with or endorsed by Pollen Robotics.
+
+---
+
+> [!info] 导航与源文件
+> [[60-项目/Microduck/00-Microduck 总览|Microduck 总览]] · [[60-项目/Microduck/01-使用中心/00-使用中心索引|使用中心索引]] · [[60-项目/Microduck/02-项目文档/00-项目文档索引|项目文档索引]] · [[60-项目/Microduck/01-使用中心/00-从这里开始|相关教程 (../)]]
+> [使用中心 Word](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/11-Word%E7%89%88/README.en.docx) · [Markdown 原稿](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/README.en.md)

@@ -1,0 +1,115 @@
+---
+title: "3D 打印件"
+type: microduck-doc
+tags:
+  - Microduck
+  - Microduck/项目文档
+---
+# 3D 打印件
+
+> 🖨️ **不想看图直接打**：[拓竹 MakerWorld · microduck 飞特版](https://makerworld.com.cn/zh/models/2963569-microduck#profileId-3478428) 一键切片，或 [Bambu Studio 工程 `.3mf`](https://github.com/fanhao375/microduck-replica-cad/tree/master/打印)（5 盘排好的）。
+> 🛒 耗材、紧固件、热熔螺母与压头的采购链接见 [[60-项目/Microduck/02-项目文档/docs/机械采购清单|机械采购清单]]。
+
+**简体中文** · [[60-项目/Microduck/02-项目文档/print/README.en|English]]
+
+整机全部 STL，按「**要打印**」和「**买现成的**」分好类，文件名中英双语。
+
+| 目录 | 数量 | 说明 |
+|---|---|---|
+| [[`打印件/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%89%93%E5%8D%B0%E4%BB%B6)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%89%93%E5%8D%B0%E4%BB%B6) | **30 种 / 41 件** | 步行装配体需要的结构件。**有 9 种要打多份，务必看下面的数量表** |
+| [[`变体-轮滑/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E5%8F%98%E4%BD%93-%E8%BD%AE%E6%BB%91)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E5%8F%98%E4%BD%93-%E8%BD%AE%E6%BB%91) | 5 种 / 15 件 | 轮滑功能的替换件，不做轮滑就不用打 |
+| [[`标准件-无需打印/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%A0%87%E5%87%86%E4%BB%B6-%E6%97%A0%E9%9C%80%E6%89%93%E5%8D%B0)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%A0%87%E5%87%86%E4%BB%B6-%E6%97%A0%E9%9C%80%E6%89%93%E5%8D%B0) | 8 | 舵机、轴承、电池、电路板的模型，**仅供对位和干涉检查** |
+| [[`上游已删除/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E4%B8%8A%E6%B8%B8%E5%B7%B2%E5%88%A0%E9%99%A4)](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E4%B8%8A%E6%B8%B8%E5%B7%B2%E5%88%A0%E9%99%A4) | 2 | 任何装配体都不引用，上游 2026-09-01 已移除。存档用 |
+
+## ⚠️ 打几个：8 种零件要打多份
+
+数量取自上游 `robot_walk.xml` 的 geom 引用计数，不是估的。
+
+| 零件 | 数量 |
+|---|---|
+| `leg_腿部` | **×4** |
+| `hip_l_髋部左` | ×2 |
+| `neck_颈部` | ×2 |
+| `power_support_电源支架` | ×2 |
+| `sole_left_左脚底` | ×2 |
+| `sole_right_右脚底` | ×2 |
+| `upper_leg_rigidity_plate_上腿加固板` | ×2 |
+| `yaw2roll_偏航转横滚` | ×2 |
+| `bearing_roll_横滚轴承压盖` | ×2 |
+| 其余 21 种 | 各 ×1 |
+
+**轮滑变体**：`tire_轮胎` **×8**、`rim_轮辋` **×4**、`roller_blade` ×2、`ankle_l_v1`/`ankle_r_v1` 各 ×1。
+
+> ⚠️ 轮滑脚踝比标准脚踝**高 10 mm**（46.5 vs 36.5），两套不能混用。
+
+完整物料清单（含舵机、轴承、螺丝、电子件）见 [[60-项目/Microduck/02-项目文档/BOM|[[60-项目/Microduck/02-项目文档/BOM|BOM]]]]。
+
+## 文件名规则
+
+```
+upper_leg_left_左上腿.stl
+└──── 上游原名 ────┘└─中文─┘
+```
+
+前半段是上游 `microduck_rl` 里的原始文件名，方便和 MJCF、源码对照；后半段是中文，方便直接看懂是什么件。
+
+## 与上游的差异
+
+抓取时上游 `robot/microduck/assets` 有 **47 个 STL**，这里保留 **46 个**。
+
+**去掉的 1 个重复**：右上腿在上游有 `upper_leg_right` 与 `right_upper_leg` 两个文件，
+面数（12250）、包围盒、质心完全一致 —— 同一几何体的两次导出，只保留 `upper_leg_right`。
+
+**分类调整**：轮滑专用件移入 [`变体-轮滑/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E5%8F%98%E4%BD%93-%E8%BD%AE%E6%BB%91)；两个任何 MJCF 都不引用、且上游已删除的躯干壳
+移入 [`上游已删除/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E4%B8%8A%E6%B8%B8%E5%B7%B2%E5%88%A0%E9%99%A4)。
+
+> 上游的 XL330 台架测试夹具（`bench_holder`、`weight`、`spacer`、`axis`、`arm`、`part_1..5`）
+> 在另一个目录 `robot/xl330_test_bench/assets`，不属于机器人，本来就不在这 47 个里。
+
+## 打印建议
+
+本仓库暂无官方打印参数（上游没有公开）。已知的实测信息见 [[60-项目/Microduck/02-项目文档/构建日志|[[60-项目/Microduck/02-项目文档/构建日志|构建日志]]]]。
+
+几个从结构上能看出来的点：
+
+- **头壳、躯干壳**是外观件，建议层高 0.12–0.16 mm
+- **腿部结构件**承力，建议加大壁厚和填充
+- **`soft_mouth_top` / `jaw_soft`** 名字带 soft，原版应为软性材料（TPU 类）
+- **`tire_轮胎`** 同理，轮滑用的胎，硬材料打出来会打滑
+- 打印件上的 M2 孔位建议用**热熔螺母**而不是直接攻丝，螺丝清单见 [[60-项目/Microduck/02-项目文档/docs/紧固件反推|[[60-项目/Microduck/02-项目文档/docs/紧固件反推|紧固件反推]]]]
+
+## 授权
+
+这些 STL 是上游 `pollen-robotics/microduck_rl` 公开发布文件的**衍生作品**（重命名与分类整理），
+遵循与上游一致的 **CC BY-NC-SA 4.0**：署名、相同方式共享、非商业使用。
+
+详见 [[60-项目/Microduck/02-项目文档/NOTICE|[[60-项目/Microduck/02-项目文档/NOTICE|NOTICE]]]]。
+
+---
+
+## 勘误（2026-09-04）
+
+`bearing_roll` 此前被归入 [`标准件-无需打印/`](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/%E6%A0%87%E5%87%86%E4%BB%B6-%E6%97%A0%E9%9C%80%E6%89%93%E5%8D%B0)（当成买现成的轴承），**这是错的**。判据：
+
+1. **几何** —— 实测 **23 × 3 × 40 mm**、带 Ø≈18 mm 中心孔的平板，体积 625 mm³（填充率 23%）。
+   没有任何标准轴承是这个形状；两颗真轴承实测是 22.0/**16.0**/4.0 与 15.0/**10.0**/3.0 的回转体。
+2. **出处** —— `assets/*.part` 的 Onshape `elementId`：`bearing_roll` 与 `trunk_base`、`yaw2roll`、
+   `left_shell`、`right_shell`、`power_support`、`neck` 同属 `d6fcdccc8b25aaa256e7e213`
+   （自建打印件的躯干 Part Studio）；两颗真轴承在 `92eaf48a756ec816309fc756`，
+   带配置串 `..._22x16x4` / `..._Default`，是典型标准件配置库。
+3. **装配** —— 它与 `yaw2roll` 在同一个 body、同一个 `pos`，quat 只差整体符号（同一旋转），
+   是贴在 yaw2roll 侧面、往下多伸 19.5 mm 的一块盖板 —— 功能上是 hip_roll 轴那颗
+   Ø22 轴承的**压盖/挡板**（Ø18 孔小于 Ø22 外径，正好挡住外圈）。
+
+原中译「轴承滚轮」也错了 —— 既不是轴承也不是滚轮，已改为「横滚轴承压盖」。
+打印件计数因此 **29 种 / 39 件 → 30 种 / 41 件**，标准件 **9 → 8**。
+
+> 另注：`robot_walk.xml:264` 里右腿 hip_yaw 那个 link 被 onshape-to-robot 命名成
+> `<body name="bearing_roll">`，但它内部的可视件是 `yaw2roll_2` —— 这只是链接命名巧合，
+> 与零件性质无关。
+
+---
+
+> [!info] 导航与源文件
+> [[60-项目/Microduck/00-Microduck 总览|Microduck 总览]] · [[60-项目/Microduck/01-使用中心/00-使用中心索引|使用中心索引]] · [[60-项目/Microduck/02-项目文档/00-项目文档索引|项目文档索引]] · [[60-项目/Microduck/01-使用中心/01-机械与模型/00-使用教程|相关教程 (../)]]
+> [使用中心 Word](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/11-Word%E7%89%88/print/README.docx) · [Markdown 原稿](file:///C:/Users/zhang/Desktop/Microduck%20%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%BF%83/08-%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93/microduck-replica/print/README.md)

@@ -1,0 +1,15 @@
+views:
+  - type: table
+    name: 课程资料
+    filters:
+      and:
+        - type == "课程资料"
+    order:
+      - file.name
+      - course
+      - 优先级
+      - 仓库目录
+      - updated
+    sort:
+      - property: file.name
+        direction: ASC

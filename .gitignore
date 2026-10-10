@@ -1,0 +1,42 @@
+# ============================================================
+#  Obsidian 大学笔记库 — GitHub 云端备份的忽略规则
+#  原则：只忽略「机器本地状态 / 可重装缓存 / 超限大文件」，
+#        真正的笔记、课程资料、PDF、插件配置一律入库。
+#  分工：Syncthing = PC↔手机 实时同步；Git/GitHub = 带历史版本的异地备份。
+#  改动本文件请同步检查 .stignore，两边规则应当一致。
+# ============================================================
+
+# ---------- Syncthing 本地状态（各机器自己生成，不能入库） ----------
+.stfolder/
+.stversions/
+~syncthing~*.
+
+# ---------- Obsidian 易变状态 ----------
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace*.json
+.obsidian/cache/
+.obsidian/plugins/*/node_modules/
+
+# ---------- 本机 AI Agent 工作目录（体积大、纯机器本地） ----------
+.opencode/
+.claude/
+.agents/
+.copilot/
+copilot/
+tmp/
+
+# ---------- 超大媒体文件 ----------
+# 40-Attachments/engbook/media/ 共 379.8 MB / 24 个视频。
+# 其中 U07-视频-CGTN中国脑机接口技术.mp4 = 117.2 MB，
+# 超过 GitHub 单文件 100 MB 硬上限，推送必被拒。
+# 这些视频已由 Syncthing 同步到手机，无需 GitHub 再存一份。
+# 若确实要备份，改用 Git LFS，并先删掉下面这行。
+40-Attachments/engbook/media/
+
+# ---------- 系统垃圾 ----------
+.trash/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
