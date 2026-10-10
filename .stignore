@@ -1,0 +1,14 @@
+(?d).obsidian/cache
+.obsidian/workspace*.json
+(?d).obsidian/plugins/**/node_modules
+(?d).trash
+(?d).opencode
+(?d).copilot
+(?d)copilot
+(?d).claude
+(?d).agents
+
+// Git 元数据：每台机器各有一份自己的 .git，绝不能由 Syncthing 同步
+// （两个设备同时写 .git 会导致仓库损坏）。GitHub 才是跨设备的那一层。
+(?d).git
+(?d)node_modules
