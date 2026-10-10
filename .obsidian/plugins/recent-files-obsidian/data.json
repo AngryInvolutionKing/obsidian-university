@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "AGENTS",
+      "path": "AGENTS.md"
+    },
+    {
+      "basename": "CLAUDE",
+      "path": "CLAUDE.md"
+    },
+    {
       "basename": "工程力学",
       "path": "10-课程笔记/工程力学/工程力学.md"
     },
@@ -71,14 +79,6 @@
     {
       "basename": "01-拉格朗日中值定理",
       "path": "10-课程笔记/全国大学生数学竞赛选讲(翻转)/01-拉格朗日中值定理.md"
-    },
-    {
-      "basename": "AGENTS",
-      "path": "AGENTS.md"
-    },
-    {
-      "basename": "CLAUDE",
-      "path": "CLAUDE.md"
     },
     {
       "basename": "00-Microduck 总览",
