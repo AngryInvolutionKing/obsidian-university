@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "EN-00 Overview",
-      "path": "10-课程笔记/英语资料/EN-00 Overview.md"
+      "basename": "AI时代英语写作与表达",
+      "path": "10-课程笔记/AI时代英语写作与表达/AI时代英语写作与表达.md"
     },
     {
       "basename": "英语资料",
       "path": "10-课程笔记/英语资料.md"
+    },
+    {
+      "basename": "EN-00 Overview",
+      "path": "10-课程笔记/英语资料/EN-00 Overview.md"
     },
     {
       "basename": "英语作文资料(按主题分类)",
@@ -195,10 +199,6 @@
     {
       "basename": "2026-10-05 每日四题",
       "path": "10-课程笔记/每日四题/2026-10-05 每日四题.md"
-    },
-    {
-      "basename": "GPIO按键控制LED（轮询）",
-      "path": "10-课程笔记/程序设计原理/嵌入式开发/GPIO按键控制LED（轮询）.md"
     }
   ],
   "omittedPaths": [],
