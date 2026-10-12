@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "EN-00 Overview",
+      "path": "10-课程笔记/英语资料/EN-00 Overview.md"
+    },
+    {
+      "basename": "英语资料",
+      "path": "10-课程笔记/英语资料.md"
+    },
+    {
+      "basename": "英语作文资料(按主题分类)",
+      "path": "11-课程资料/英语作文资料(按主题分类).md"
+    },
+    {
       "basename": "02.3-线性组合与生成子空间",
       "path": "10-课程笔记/高等代数（新工科）I/02-线性方程组/02.3-线性组合与生成子空间.md"
     },
@@ -173,10 +185,6 @@
       "path": "tmp/pdfs/math-20261006/calculus-24251-page2.png"
     },
     {
-      "basename": "英语资料",
-      "path": "10-课程笔记/英语资料.md"
-    },
-    {
       "basename": "课程总览",
       "path": "10-课程笔记/课程总览.base"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "GPIO按键控制LED（轮询）",
       "path": "10-课程笔记/程序设计原理/嵌入式开发/GPIO按键控制LED（轮询）.md"
-    },
-    {
-      "basename": "EN-U01-1 Unit Preview",
-      "path": "10-课程笔记/英语资料/EN-U01-1 Unit Preview.md"
-    },
-    {
-      "basename": "嵌入式开发",
-      "path": "10-课程笔记/程序设计原理/嵌入式开发.md"
     }
   ],
   "omittedPaths": [],
