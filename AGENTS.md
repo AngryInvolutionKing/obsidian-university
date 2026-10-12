@@ -41,6 +41,10 @@ created:
 - 讲代码时先给最小可编译示例，再逐行说明，不要贴没解释的长代码。
 - 我练题常用 `#include <bits/stdc++.h>` 与 `ios::sync_with_stdio(false)` 的快读模板。
 
+## 读 PDF
+- 任何 PDF（`11-课程资料` 里的讲义、论文、扫描件）都先跑本机 `pdfread`：`map` 看结构 → `text --pages …` 取正文 → `search` 定位页码 → 扫描页 `ocr` → 只有"本来就是图/要看版式"才 `render --pages N`。
+- **不要**把整本 PDF 逐页渲染成图片来读（贵、且图不可搜索）。命令、绝对路径与实测坑见技能 `copilot/skills/pdfread/SKILL.md`。
+
 ## 安全边界
 - 不删除文件（要删就先问我），不改 `11-课程资料` 下的原始资料，不改 frontmatter 里已有内容除非我明确要求。
 - 改动多篇笔记前先列出「要改哪些文件、改什么」，等我确认。
