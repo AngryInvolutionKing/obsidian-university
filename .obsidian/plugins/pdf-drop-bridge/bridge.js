@@ -162,6 +162,37 @@ async function parseDoc(docPath, opts) {
   };
 }
 
+/**
+ * 把 PDF 的指定页渲染成 PNG —— 扫描页/手写件的唯一读取通道。
+ * 手写件没有文字层，OCR 也读不了（实测 tesseract 出乱码），只能渲染成图交给有视觉的模型。
+ * 产物：<outDir>\<stem>-pNNN.png（pdfread 自己命名、页码补零）
+ */
+async function renderPages(docPath, opts) {
+  const o = toolsOf(opts);
+  const pages = (opts && opts.pages) || '1-5';
+  const dpi = (opts && opts.dpi) || 150;
+  const outDir = (opts && opts.outDir) || tempWorkDir('render');
+  const sync = !!(opts && opts.sync);
+  if (!fs.existsSync(o.pdfread)) {
+    return { ok: false, reason: `pdfread 不存在：${o.pdfread}`, files: [], dir: outDir };
+  }
+  try { fs.mkdirSync(outDir, { recursive: true }); } catch (_) {}
+  const args = [o.pdfread, 'render', docPath, '--pages', String(pages), '--dpi', String(dpi), '--out', outDir];
+  const r = sync ? runSync(o.python, args, o) : await runAsync(o.python, args, o);
+  let files = [];
+  try {
+    files = fs.readdirSync(outDir)
+      .filter((f) => /-p\d+\.png$/i.test(f)).sort()
+      .map((f) => path.join(outDir, f));
+  } catch (_) { files = []; }
+  return {
+    ok: files.length > 0, files, dir: outDir, code: r.code,
+    reason: files.length
+      ? null
+      : `pdfread render exit=${r.code}${(r.stderr || '').trim() ? ' :: ' + (r.stderr || '').trim().slice(0, 200) : ''}`,
+  };
+}
+
 /* ---------- 命名与笔记 ---------- */
 
 function splitName(name) {
@@ -247,6 +278,6 @@ function promptFor(opt) {
 
 module.exports = {
   DOC_EXT, DEFAULT_TOOLS, isDocName, tempWorkDir, parseJsonLoose,
-  runSync, runAsync, parseDoc, miyoParse, pdfreadParse,
+  runSync, runAsync, parseDoc, miyoParse, pdfreadParse, renderPages,
   splitName, uniqueName, stamp, yamlStr, buildExtractNote, promptFor, toolsOf, looksThin,
 };

@@ -41,6 +41,22 @@ Copilot 的聊天输入框只接受**库内文件**作为上下文（合法类�
 | 提取后打开笔记 | 关 | 开了会切换当前笔记 |
 | 单文件大小上限 | 200 MB | 超过就拒绝 |
 | Miyo CLI / Python / pdfread | 空 = 默认路径 | 提取器路径 |
+| 扫描/手写件渲染成图 | 开 | 判定为扫描/手写时，把前几页渲染成 PNG（见下节） |
+| 渲染页数 | 5 | 想整本读就调大（每页约 140–250 KB） |
+| 渲染 dpi | 150 | 手写字小可上 200；再高意义不大（模型侧也会缩） |
+
+## 扫描件/手写件：渲染成图
+
+手写内容 **OCR 读不了**（实测 tesseract 输出乱码），唯一通道是「页面 → 图片 → 有视觉的模型」。
+所以正文异常薄（Miyo `exit=9`「no extractable text」，或正文 < 300 字/页）时，插件会自动：
+
+1. `pdfread render <pdf> --pages 1-N --dpi 150 --out <临时目录>` → `<名字>-pNNN.png`
+2. 把 PNG 复制进库：`40-Attachments/_imported/<名字>-pages/`（PNG 不在 Miyo 的索引扩展名里 ⇒ 不污染语义检索）
+3. **第 1 页图片写进剪贴板**（`clipboard.writeImage`）→ 在 Copilot 输入框 `Ctrl+V`，它就能「看」这一页
+4. 翻页：命令面板 → **PDF Drop Bridge: 复制下一页渲染图（扫描/手写件）**
+
+多页一起读时，也可以用输入框旁的 **+ → Images** 把那几张 PNG 勾上（比剪贴板一次一张快）。
+注意剪贴板里最终留下的是**图片**（提示语会打在上面，但渲染成功后会再写一次图片覆盖掉）——提示语原文在 Notice 和提取笔记里。
 
 ## 提取链路
 
@@ -64,3 +80,8 @@ Copilot 的聊天输入框只接受**库内文件**作为上下文（合法类�
   `this.app.vault.adapter.getBasePath()` 补成绝对路径，否则 require 会按 cwd 解析失败。
 - 排查通道：`Obsidian.exe --remote-debugging-port=9222`，用 CDP 订阅 `Runtime.consoleAPICalled` / `Runtime.exceptionThrown`，
   `Plugin failure:` 那一行就是真因（脚本见 dsh 工作区 `.scratch\obs-console.mjs`）。
+- **改完 `bridge.js` 要重启 Obsidian**：Obsidian 重载插件不会清 Node 的模块缓存，否则还在跑旧代码
+  （典型症状：`bridge.renderPages is not a function`）。`loadBridge` 里已加 `delete require.cache[target]` 兜底，但不保证够。
+- **`drop` 处理器里绝对不能 `stopPropagation()`**：Copilot 的 drop 监听收不到这次事件，它那个
+  「Drop files here…」遮罩就不会收起 —— 表现是拖完之后整个面板像被钉住（2026-10-12 用户实测反馈，已修）。
+  兜底做法见 `clearDropOverlay()`：drop 之后再补发 `dragleave` / `dragend`。

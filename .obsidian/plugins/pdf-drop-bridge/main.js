@@ -27,7 +27,10 @@ function loadBridge(pluginDir, vaultBase) {
   // Obsidian 1.9 的 manifest.dir 是「相对库根」的路径（形如 .obsidian\plugins\pdf-drop-bridge），
   // 必须补成绝对路径，否则 Node 的 require 会按 cwd 解析而找不到文件。
   if (dir && !path.isAbsolute(dir) && vaultBase) dir = path.resolve(vaultBase, dir);
-  bridge = require(path.join(dir, 'bridge.js'));
+  const target = path.join(dir, 'bridge.js');
+  // Obsidian 重载插件时不会清 Node 的模块缓存，改过 bridge.js 后必须自己清，否则还在跑旧代码。
+  try { delete require.cache[target]; } catch (_) {}
+  bridge = require(target);
   return bridge;
 }
 
@@ -42,6 +45,9 @@ const DEFAULT_SETTINGS = {
   miyoCli: '',                            // 空 = 用 bridge.js 里的默认路径
   python: '',
   pdfread: '',
+  renderScanned: true,      // 扫描/手写件：渲染前几页成 PNG（Copilot 读手写只能走图片通道）
+  renderPages: 5,
+  renderDpi: 150,
 };
 
 function bufToArrayBuffer(buf) {
@@ -139,6 +145,12 @@ class PdfDropBridge extends Plugin {
       callback: () => new PathModal(this.app, (p) => this.ingestPath(p)).open(),
     });
 
+    this.addCommand({
+      id: 'copy-next-rendered-page',
+      name: '复制下一页渲染图（扫描/手写件）',
+      callback: () => this.copyNextRendered(),
+    });
+
     // 捕获阶段接住拖放：Copilot 自己的处理器只认图片，我们在它之前把 PDF 拿走。
     this.registerDomEvent(document, 'dragover', (evt) => {
       if (this.wantsDrop(evt)) {
@@ -187,7 +199,9 @@ class PdfDropBridge extends Plugin {
     if (!this.wantsDrop(evt)) return;
 
     evt.preventDefault();
-    evt.stopPropagation();
+    // 千万不要 stopPropagation：Copilot 自己的 drop 监听要收到这次事件才会收起它那个
+    // 「Drop files here…」遮罩，否则拖完之后遮罩卡住、整个面板像被钉住（用户实测反馈）。
+    this.clearDropOverlay(evt);
 
     // DataTransfer 在这一轮事件之后会失效：同步取好路径、启动读取
     const items = docs.map((f) => ({
@@ -199,6 +213,17 @@ class PdfDropBridge extends Plugin {
         new Notice('PDF Drop Bridge 出错：' + (e && e.message ? e.message : e), 12000);
       });
     }
+  }
+
+  /** 兜底：补一次 dragleave/dragend，让宿主（Copilot）的拖放遮罩无论如何都能收起来 */
+  clearDropOverlay(evt) {
+    try {
+      const t = eleFrom(evt && evt.target) || document.body;
+      for (const type of ['dragleave', 'dragend']) {
+        t.dispatchEvent(new DragEvent(type, { bubbles: true, cancelable: true }));
+        document.dispatchEvent(new DragEvent(type, { bubbles: true, cancelable: true }));
+      }
+    } catch (_) { /* 老 Electron 构造不了 DragEvent 就算了 */ }
   }
 
   tools() {
@@ -289,12 +314,26 @@ class PdfDropBridge extends Plugin {
       ? '⚠️ 这份 PDF 没有可用文字层（Miyo 判定为扫描件/纯图片；回退提取只拿到极少文本）。手写内容 OCR 无效，需要把页面渲染成图交给有视觉的模型：pdfread render "<pdf>" --pages N --dpi 120'
       : '⚠️ 抽到的正文异常短，可能是扫描件或版式特殊，建议抽查几页确认。');
 
+    // 扫描/手写件：OCR 读不了（实测乱码），唯一通道是把页面渲染成图交给有视觉的模型。
+    let rendered = null;
+    if (thin && this.settings.renderScanned) {
+      if (notice) notice.setMessage(`PDF Drop Bridge：${name} 疑似扫描/手写，正在渲染前 ${this.settings.renderPages} 页 …`);
+      try {
+        rendered = await this.renderScannedPages({ srcPath, base });
+      } catch (e) {
+        rendered = { ok: false, relPaths: [], reason: String(e && e.message ? e.message : e) };
+      }
+    }
+
     if (!res.ok) {
       if (notice) notice.hide();
       new Notice(
         `已导入 ${relPdf}，但正文提取失败（${String(res.reason || '').slice(0, 160)}）。\n` +
-        '可能是扫描件/手写件：可用 pdfread ocr 出 .ocr.md，或让 agent 渲染成图来看。',
-        20000
+        '这是典型的扫描件/手写件：正文没有文字层，只能看图片。\n' +
+        (rendered && rendered.relPaths && rendered.relPaths.length
+          ? `已渲染 ${rendered.relPaths.length} 页图片 → ${rendered.dir}/\n第 1 页图片已复制：到 Copilot 输入框 Ctrl+V（或 + → Images 多选几页）。`
+          : '渲染页面失败：' + String((rendered && rendered.reason) || '未知原因')),
+        25000
       );
       return;
     }
@@ -317,13 +356,26 @@ class PdfDropBridge extends Plugin {
     });
     const copied = this.settings.copyPrompt ? await this.copyText(prompt) : false;
 
+    // 扫描/手写件：剪贴板里要留的是「图片」而不是提示语 —— 图片是他自己粘贴不出来的那一半。
+    let imageCopied = false;
+    if (rendered && rendered.ok && rendered.relPaths && rendered.relPaths.length) {
+      imageCopied = await this.copyImage(this.absPath(rendered.relPaths[0]));
+    }
+
     if (notice) notice.hide();
     const kb = Math.round(Buffer.byteLength(res.text, 'utf8') / 1024);
     new Notice(
       `PDF Drop Bridge：${base}${ext} 已入库（${mb.toFixed(1)} MB）\n` +
       `正文 ${kb} KB${pages ? `／${pages} 页` : ''}（${res.extractor}）` +
       (relNote ? `\n提取笔记：${relNote}` : '') +
-      (copied ? '\n提示语已复制 —— 到 Copilot 聊天框粘贴发送即可' : '') +
+      (imageCopied
+        ? `\n手写/扫描件：已渲染 ${rendered.relPaths.length} 页图 → ${rendered.dir}/` +
+          '\n第 1 页图片已在剪贴板 —— 到 Copilot 输入框 Ctrl+V，让它「看」这一页（翻页：命令「复制下一页渲染图」）' +
+          `\n提示语（可手打）：${prompt}`
+        : (rendered && rendered.ok && rendered.relPaths.length
+            ? `\n已渲染 ${rendered.relPaths.length} 页图 → ${rendered.dir}/（图片写剪贴板失败）`
+            : '') +
+          (copied ? '\n提示语已复制 —— 到 Copilot 聊天框粘贴发送即可' : '')) +
       (warning ? '\n' + warning : ''),
       warning ? 25000 : (copied ? 12000 : 20000)
     );
@@ -332,6 +384,70 @@ class PdfDropBridge extends Plugin {
       const f = this.app.vault.getAbstractFileByPath(relNote);
       if (f) await this.app.workspace.getLeaf(false).openFile(f);
     }
+  }
+
+  /** 扫描/手写件：把前 N 页渲染成 PNG 落库，并把第 1 页写进剪贴板（Copilot 只有图片通道） */
+  async renderScannedPages(opt) {
+    const src = (opt && opt.srcPath) || '';
+    const base = (opt && opt.base) || 'pages';
+    const tmp = bridge.tempWorkDir(base + '-pages');
+    const r = await bridge.renderPages(src, {
+      pages: `1-${Math.max(1, Number(this.settings.renderPages) || 5)}`,
+      dpi: Number(this.settings.renderDpi) || 150,
+      outDir: tmp,
+      python: this.settings.python || undefined,
+      pdfread: this.settings.pdfread || undefined,
+    });
+    if (!r.ok) {
+      new Notice(`渲染页面失败：${r.reason || '未知原因'}`, 15000);
+      return { ok: false, relPaths: [], dir: tmp, reason: r.reason };
+    }
+    const folder = normalizeFolder(this.settings.importFolder) + '/' + base + '-pages';
+    await this.ensureFolder(folder);
+    const exists = (p) => !!this.app.vault.getAbstractFileByPath(p);
+    const relPaths = [];
+    for (const abs of r.files) {
+      const rel = bridge.uniqueName(exists, folder, path.basename(abs, '.png'), '.png');
+      await this.app.vault.createBinary(rel, bufToArrayBuffer(fs.readFileSync(abs)));
+      relPaths.push(rel);
+    }
+    this.lastRendered = { relPaths, index: 0, base };
+    const copied = await this.copyImage(r.files[0]);
+    return { ok: true, relPaths, dir: folder, tmp, copied };
+  }
+
+  /** 图片进剪贴板（Copilot 输入框只认粘贴/拖入的图片） */
+  async copyImage(absPng) {
+    try {
+      const electron = require('electron');
+      if (electron && electron.clipboard && electron.nativeImage) {
+        const img = electron.nativeImage.createFromPath(absPng);
+        if (img && !img.isEmpty()) { electron.clipboard.writeImage(img); return true; }
+      }
+    } catch (_) { /* 回退到写路径 */ }
+    try { await navigator.clipboard.writeText(absPng); } catch (_) {}
+    return false;
+  }
+
+  absPath(rel) {
+    const b = (this.app.vault.adapter.getBasePath && this.app.vault.adapter.getBasePath()) || '';
+    return b ? path.join(b, rel.split('/').join(path.sep)) : rel;
+  }
+
+  async copyNextRendered() {
+    const last = this.lastRendered;
+    if (!last || !last.relPaths || !last.relPaths.length) {
+      new Notice('还没有渲染过的页面：先把一份扫描/手写 PDF 拖进来。', 10000);
+      return;
+    }
+    last.index = (last.index + 1) % last.relPaths.length;
+    const rel = last.relPaths[last.index];
+    const ok = await this.copyImage(this.absPath(rel));
+    new Notice(
+      `已复制第 ${last.index + 1}/${last.relPaths.length} 页 → ${rel}` +
+      (ok ? '' : '（图片写入剪贴板失败，剪贴板里放的是文件路径）'),
+      12000
+    );
   }
 
   async loadSettings() {
