@@ -1,0 +1,9 @@
+{
+  "id": "pdf-drop-bridge",
+  "name": "PDF Drop Bridge",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "把从资源管理器拖入的 PDF（EPUB/DOCX 亦可）自动复制进库，并用本地 Miyo CLI（失败回退 pdfread）提取正文，生成带 frontmatter 的可读笔记，同时把「让 Copilot 读这条笔记」的提示语复制到剪贴板。不依赖任何插件内部接口，Copilot 升级不受影响。",
+  "author": "zhang + dsh",
+  "isDesktopOnly": true
+}
