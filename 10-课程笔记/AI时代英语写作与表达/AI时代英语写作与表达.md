@@ -21,7 +21,7 @@ coax:persuade the bot to provide you a more suitable output
 tweak:make fine(微小的)adjustments to it
 illustration插图      algorithm算法    cross check交叉验证 human in the loop auto pilot自动
 substance实质   slide deck幻灯片 embodied具身的metaphor比喻
-exaggerated夸大的
+exaggerated夸大的influencer网红
 ### 课堂示例：AI 味学术写作（论文结构段）
 
 幻灯片原文（AI 生成的反面教材，[ ] 处被遮挡，按上下文补齐）：
