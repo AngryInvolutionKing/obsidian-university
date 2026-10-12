@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大圣 · 云上飞行</title>
+<style>
+:root{color-scheme:light;--ink:#254655;--paper:#faf5e9;--accent:#c34e32}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Noto Serif SC',serif}button,input{font:inherit}button{cursor:pointer}main{position:relative;min-height:100svh;overflow:hidden;background:#dbeee9}.scene{width:100%;height:100svh;min-height:600px;display:block}.masthead{position:absolute;top:34px;left:4.5%;right:4.5%;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #25465545;padding-top:15px;font:11px/1.4 system-ui,sans-serif;letter-spacing:3px}.brand{font-weight:700}.edition{letter-spacing:2px}.headline{position:absolute;top:15%;left:8%;pointer-events:none}.eyebrow{font:11px system-ui,sans-serif;letter-spacing:5px;color:#637e7d}.headline h1{font-size:clamp(40px,6.4vw,90px);font-weight:900;letter-spacing:8px;margin:16px 0 12px;line-height:1.2}.headline p{font-size:14px;letter-spacing:4px;color:#59777b;margin:0}.seal{display:inline-flex;background:#be5038;color:#fff7de;font-size:13px;letter-spacing:3px;padding:8px 7px;writing-mode:vertical-rl;position:absolute;right:-36px;top:42px;border-radius:3px;transform:rotate(7deg)}.bottom{position:absolute;bottom:30px;left:4.5%;right:4.5%;display:flex;align-items:end;justify-content:space-between;gap:20px}.caption{font:11px/1.8 system-ui,sans-serif;letter-spacing:2px}.caption strong{font-family:'Noto Serif SC',serif;font-weight:500;font-size:15px;letter-spacing:3px}.controls{display:flex;gap:10px;align-items:center;background:#fcf9efbd;border:1px solid #fff9;border-radius:40px;padding:10px 15px;backdrop-filter:blur(14px);box-shadow:0 8px 30px #214c5310;font:12px system-ui,sans-serif}.controls button{border:0;background:transparent;color:#254655;padding:8px 10px;border-radius:20px}.controls button:hover{background:#2546550d}.controls button:focus-visible{outline:2px solid #b95038}.controls label{display:flex;align-items:center;gap:8px;padding:0 8px;border-left:1px solid #25465525}input{width:70px;accent-color:#c25739}.readout{min-width:28px;font-variant-numeric:tabular-nums}.flight{animation:flight 5s ease-in-out infinite;transform-origin:810px 500px}.scarf-end{animation:scarf .7s ease-in-out infinite alternate;transform-origin:745px 413px}.tail{animation:tail 2.1s ease-in-out infinite alternate;transform-origin:755px 472px}.feather{animation:feather 1.4s ease-in-out infinite alternate;transform-origin:809px 338px}.propeller{animation:propeller .12s linear infinite;transform-origin:1082px 501px}.cloud-near{animation:drift 25s linear infinite}.cloud-mid{animation:drift 45s linear infinite}.cloud-far{animation:drift 85s linear infinite}.speed-lines{animation:wind 1.3s linear infinite}.blink{animation:blink 5s infinite;transform-origin:827px 383px}.sun-halo{animation:halo 8s ease-in-out infinite}.spark{animation:spark 3s ease-in-out infinite}.paused *{animation-play-state:paused!important}.night .scene{filter:brightness(.65) hue-rotate(22deg) saturate(.8)}.night .headline,.night .masthead,.night .caption{color:#f9ebce}.night .headline p,.night .eyebrow{color:#d0e0d5}.night .masthead{border-color:#f9ebce55}.scene{transition:filter 1s}.stars{opacity:0;transition:opacity 1s}.night .stars{opacity:1}.sun{transition:fill 1s}.night .sun{fill:#fffce7}.night main{background:#628d91}
+@keyframes flight{0%,100%{transform:translate(0,0) rotate(-1deg)}25%{transform:translate(-8px,-13px) rotate(1deg)}50%{transform:translate(0,4px) rotate(-.5deg)}75%{transform:translate(6px,-6px) rotate(-2deg)}}
+@keyframes scarf{from{transform:skewY(-5deg) scaleY(.94)}to{transform:skewY(6deg) scaleY(1.07)}}@keyframes tail{to{transform:rotate(6deg)}}@keyframes feather{to{transform:skewX(-5deg) rotate(-3deg)}}@keyframes propeller{0%{transform:scaleY(1)}50%{transform:scaleY(.06)}100%{transform:scaleY(1)}}@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-1600px)}}@keyframes wind{from{transform:translateX(50px);opacity:0}30%{opacity:.6}to{transform:translateX(-250px);opacity:0}}@keyframes blink{0%,44%,48%,100%{transform:scaleY(1)}46%{transform:scaleY(.1)}}@keyframes halo{50%{opacity:.5;transform:scale(1.07)}}@keyframes spark{50%{opacity:.2}}
+@media(max-width:700px){.scene{min-height:700px}.headline{top:16%;left:8%}.headline h1{font-size:47px}.headline p{font-size:12px;letter-spacing:2px}.masthead{top:22px}.edition{font-size:9px;letter-spacing:1px}.bottom{bottom:22px;align-items:start;flex-direction:column}.caption{font-size:9px}.controls{align-self:flex-end}.seal{right:-25px;top:30px}.eyebrow{font-size:9px}.caption strong{font-size:13px}}
+</style>
+</head>
+<body>
+<main id="world">
+<svg class="scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="scene-title scene-description">
+<title id="scene-title">孙悟空驾驶红色双翼飞机，在云海与群山之上飞行</title>
+<desc id="scene-description">戴着金箍和长翎的孙悟空坐在开放式驾驶舱中，红围巾随风飘动，金箍棒绑在机身上。螺旋桨转动，云朵向后流动，飞机上下轻轻起伏。</desc>
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#bededb"/><stop offset=".6" stop-color="#e9edda"/><stop offset="1" stop-color="#f5e7c7"/></linearGradient>
+ <linearGradient id="red" x1="0" y1="0" x2=".2" y2="1"><stop stop-color="#e97c53"/><stop offset=".5" stop-color="#cb5238"/><stop offset="1" stop-color="#9a392d"/></linearGradient>
+ <linearGradient id="wing" x2="0" y2="1"><stop stop-color="#f38b5e"/><stop offset=".7" stop-color="#d45b3c"/><stop offset="1" stop-color="#ab422f"/></linearGradient>
+ <linearGradient id="gold" x2=".7" y2="1"><stop stop-color="#ffe4a0"/><stop offset=".5" stop-color="#eabd5e"/><stop offset="1" stop-color="#b77d35"/></linearGradient>
+ <linearGradient id="fur" x2="0" y2="1"><stop stop-color="#d4a151"/><stop offset="1" stop-color="#a76b36"/></linearGradient>
+ <linearGradient id="glass" x2="1" y2="1"><stop stop-color="#faffef" stop-opacity=".85"/><stop offset="1" stop-color="#83c5c6" stop-opacity=".4"/></linearGradient>
+ <radialGradient id="sunGlow"><stop stop-color="#fff5cf" stop-opacity=".8"/><stop offset="1" stop-color="#fff5cf" stop-opacity="0"/></radialGradient>
+ <filter id="shadow" x="-30%" y="-40%" width="170%" height="200%"><feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#4b665e" flood-opacity=".17"/></filter>
+ <g id="cloud"><path d="M0 45C10 23 39 19 58 30C66-4 120-10 140 23C172 2 210 23 211 45C244 39 265 54 270 66H-20C-19 53-9 46 0 45Z" fill="#fffdf0"/><path d="M-8 65H255" stroke="#e0e9d6" stroke-width="2" opacity=".35"/></g>
+ <g id="tiny-cloud"><path d="M0 20C8 5 22 5 34 12C45-8 72-2 76 15C98 8 111 19 117 27H-10Z" fill="#fffdf0"/></g>
+ <g id="cloud-band"><use href="#cloud" x="40" y="280" opacity=".8" transform="scale(1.1)"/><use href="#cloud" x="670" y="130" opacity=".65"/><use href="#cloud" x="1220" y="360" opacity=".8"/><use href="#tiny-cloud" x="390" y="170" opacity=".6"/></g>
+ <g id="front-band"><use href="#cloud" transform="translate(40 750) scale(2.1)"/><use href="#cloud" transform="translate(880 790) scale(2.7)"/></g>
+</defs>
+<path fill="url(#sky)" d="M0 0H1600V1000H0Z"/>
+<g class="stars" fill="#fffce7"><circle cx="290" cy="130" r="2"/><circle cx="750" cy="130" r="3"/><circle cx="940" cy="225" r="2"/><circle cx="1380" cy="160" r="3"/><circle cx="1100" cy="100" r="2"/><circle cx="1300" cy="390" r="2"/><circle cx="570" cy="300" r="2"/><path d="M1050 190v16m-8-8h16M1400 310v12m-6-6h12" stroke="#fffce7" stroke-width="2"/></g>
+<circle cx="1220" cy="275" r="210" fill="url(#sunGlow)"/>
+<g style="transform-origin:1220px 275px" class="sun-halo"><circle cx="1220" cy="275" r="112" fill="none" stroke="#fff8d9" stroke-width="1" opacity=".7"/><circle cx="1220" cy="275" r="128" fill="none" stroke="#fff8d9" opacity=".4"/></g>
+<circle class="sun" cx="1220" cy="275" r="89" fill="#fff3ce"/>
+<g fill="none" stroke="#6c9290" stroke-width="2" opacity=".5"><path d="M1030 264q10-10 20 0q10-10 20 0M1085 291q7-7 14 0q7-7 14 0M1000 300q6-6 12 0q6-6 12 0"/></g>
+<g class="cloud-far" opacity=".5"><use href="#cloud-band"/><use href="#cloud-band" x="1600"/></g>
+<!-- Layers of distant mountains -->
+<path d="M0 730L70 660L120 691L240 537L310 640L370 590L449 692L555 577L650 701L765 620L884 718L978 588L1045 650L1125 558L1270 689L1370 581L1450 660L1550 526L1600 613V1000H0Z" fill="#a8c7ba" opacity=".6"/>
+<path d="M0 831L115 718L207 793L344 648L422 749L479 709L611 843L729 711L821 811L932 698L1052 799L1179 658L1304 818L1420 708L1520 801L1600 707V1000H0Z" fill="#80aaa0" opacity=".42"/>
+<path d="M211 575L240 537L283 601L252 586L238 564L223 587ZM1103 586L1125 558L1162 600L1137 589L1125 578Z" fill="#f2f0d7" opacity=".5"/>
+<g class="cloud-mid" opacity=".8"><use href="#tiny-cloud" transform="translate(90 570) scale(2.3)"/><use href="#cloud" x="1000" y="640"/><use href="#tiny-cloud" transform="translate(1690 570) scale(2.3)"/><use href="#cloud" x="2600" y="640"/></g>
+<g class="speed-lines" fill="none" stroke="#fffff0" stroke-linecap="round"><path d="M520 470H640M460 503H581M495 610H610" stroke-width="3"/><path d="M600 366H680M1140 584H1230" stroke-width="2"/></g>
+<!-- The aircraft and its pilot share a gentle floating motion. -->
+<g class="flight">
+ <g filter="url(#shadow)">
+ <!-- far wing and tail -->
+ <path d="M815 477L625 431Q611 426 615 417L629 410L928 427L1039 467Z" fill="#ad4434" stroke="#863c30" stroke-width="3"/>
+ <path d="M674 481L595 411Q582 401 578 418L581 480Z" fill="url(#red)" stroke="#913e32" stroke-width="3"/>
+ <path d="M604 440L611 479" fill="none" stroke="#ffd68e" stroke-width="7"/>
+ <path d="M672 501L541 479Q526 478 522 490L650 532Z" fill="#c45038" stroke="#913e32" stroke-width="3"/>
+ <!-- upper wing sits behind the pilot so his face stays visible -->
+ <path d="M722 384L1050 389Q1079 390 1065 403L1006 424L648 412Q618 409 644 397Z" fill="url(#wing)" stroke="#8c3d30" stroke-width="3"/>
+ <path d="M654 402L1005 414L1052 397" fill="none" stroke="#ffc38a" stroke-width="3"/>
+ <g stroke="#9f442e" opacity=".35"><path d="M707 389L685 411M755 386L735 415M807 386L788 416M860 387L842 418M912 388L895 419M965 389L948 421"/></g>
+ <path d="M941 394L964 395L952 407L929 406Z" fill="#f9d393"/>
+ <!-- monkey tail -->
+ <path class="tail" d="M758 465C723 457 714 427 684 433C645 442 679 471 696 455" fill="none" stroke="#754b2e" stroke-width="15" stroke-linecap="round"/>
+ <path class="tail" d="M758 462C723 454 714 424 684 430C645 439 679 468 696 452" fill="none" stroke="#c28c45" stroke-width="9" stroke-linecap="round"/>
+ <!-- flying scarf -->
+ <g class="scarf-end"><path d="M788 415C749 421 736 398 704 397C675 396 656 410 627 394L640 416L621 426C663 441 682 415 709 427C738 440 760 438 790 428Z" fill="#ba3b2e" stroke="#96352c" stroke-width="2"/><path d="M756 421C716 409 690 424 657 419" stroke="#ec7651" stroke-width="3" fill="none"/></g>
+ <!-- shoulder armor, tunic and belt -->
+ <path d="M789 410Q816 404 838 427L858 478L762 481L763 443Z" fill="#e8b64f" stroke="#774b32" stroke-width="3"/>
+ <path d="M785 424L801 467L787 483H762L765 444Z" fill="#295d60"/>
+ <path d="M810 425L824 465L812 479L800 458Z" fill="#f4d685"/>
+ <path d="M768 431Q777 411 796 419L802 436L770 445Z" fill="url(#gold)" stroke="#805533" stroke-width="3"/>
+ <path d="M773 432L796 429M775 438L798 435" stroke="#a57639" stroke-width="2"/>
+ <!-- back of head and ears -->
+ <path d="M779 347L771 360L768 380L775 399Q780 419 809 420Q841 420 852 387L845 361L825 344Z" fill="url(#fur)" stroke="#784c31" stroke-width="3"/>
+ <circle cx="775" cy="385" r="13" fill="#c78e49" stroke="#784c31" stroke-width="3"/><path d="M777 379Q765 377 772 390" fill="none" stroke="#915331" stroke-width="3"/>
+ <!-- face, characteristic monkey mask -->
+ <path d="M785 370Q797 358 810 374Q824 357 840 373L842 390Q855 397 841 410Q822 426 801 412L788 398Z" fill="#f7d5a0" stroke="#986335" stroke-width="2"/>
+ <path d="M840 387L855 392Q858 398 844 400" fill="#f7d5a0" stroke="#986335" stroke-width="2"/>
+ <path d="M799 379L809 377M825 376L837 378" stroke="#754630" stroke-width="3" stroke-linecap="round"/>
+ <g class="blink" fill="#302f2a"><ellipse cx="806" cy="385" rx="3" ry="4"/><ellipse cx="833" cy="383" rx="3" ry="4"/></g>
+ <path d="M817 405Q830 412 841 403" fill="none" stroke="#87492f" stroke-width="2.5" stroke-linecap="round"/>
+ <path d="M787 397L794 400M790 393L797 396" stroke="#cf8b5c" stroke-width="2"/>
+ <!-- gold circlet with curled motif -->
+ <path d="M774 364Q807 349 847 365L846 373Q808 358 777 373Z" fill="url(#gold)" stroke="#946531" stroke-width="2"/>
+ <path d="M806 363C792 344 790 373 806 365C825 349 823 377 808 365" fill="none" stroke="#fbe3a0" stroke-width="4"/>
+ <path d="M785 352L783 337L796 343L807 323L819 342L833 335L833 354Z" fill="url(#gold)" stroke="#8f612f" stroke-width="2.5"/>
+ <ellipse cx="807" cy="345" rx="5" ry="7" fill="#c75138"/>
+ <!-- two long pheasant plumes -->
+ <g class="feather" fill="none" stroke-linecap="round"><path d="M799 336C802 286 759 237 707 254C687 260 682 280 695 284" stroke="#745b3b" stroke-width="6"/><path d="M819 337C842 277 807 225 756 220C726 217 712 231 716 244" stroke="#745b3b" stroke-width="6"/><path d="M799 336C802 286 759 237 707 254" stroke="#e9bd61" stroke-width="3"/><path d="M819 337C842 277 807 225 756 220" stroke="#e9bd61" stroke-width="3"/><path d="M790 291L798 285M779 276L786 269M763 264L768 255M739 255L741 247M825 293L835 290M825 271L833 266M817 252L824 245M801 238L806 229M781 229L784 220" stroke="#a7733a" stroke-width="4"/></g>
+ <!-- scarf collar -->
+ <path d="M784 408Q805 422 829 410L832 423Q804 437 781 420Z" fill="#cb4733" stroke="#94372b" stroke-width="2"/>
+ <!-- arm and hand at control stick -->
+ <path d="M816 434Q821 453 843 451L863 438" fill="none" stroke="#7e5534" stroke-width="20" stroke-linecap="round"/>
+ <path d="M816 432Q821 451 843 449L863 436" fill="none" stroke="#e5ae4e" stroke-width="15" stroke-linecap="round"/>
+ <path d="M859 462L871 428" stroke="#364b4a" stroke-width="7" stroke-linecap="round"/>
+ <ellipse cx="863" cy="437" rx="11" ry="8" transform="rotate(-25 863 437)" fill="#f2cb8f" stroke="#925f33" stroke-width="2"/>
+ <!-- main fuselage -->
+ <path d="M589 478Q661 489 731 476L900 456Q934 450 974 458L1048 478Q1064 491 1051 522Q997 556 914 556L756 537Q659 521 599 512Z" fill="url(#red)" stroke="#833c32" stroke-width="3"/>
+ <path d="M603 484Q671 494 736 482L906 462Q966 453 1029 479" fill="none" stroke="#f99a69" stroke-width="4"/>
+ <path d="M698 514Q847 559 998 528" fill="none" stroke="#862f29" stroke-width="7" opacity=".35"/>
+ <path d="M743 475Q781 491 864 470L886 459Q838 446 743 475Z" fill="#523e32" stroke="#e3ac69" stroke-width="5"/>
+ <!-- windscreen -->
+ <path d="M877 459Q880 428 899 421Q923 429 931 458Z" fill="url(#glass)" stroke="#e8d1a0" stroke-width="4"/>
+ <path d="M889 448L900 431" stroke="#fffceb" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+ <!-- engine cowling -->
+ <path d="M1004 468Q1029 470 1048 479L1056 513Q1034 533 1006 539Q1019 503 1004 468Z" fill="#e8c184" stroke="#835a3c" stroke-width="3"/>
+ <path d="M1024 478L1029 492M1028 501L1028 516" stroke="#6d6d59" stroke-width="5" stroke-linecap="round"/>
+ <path d="M1050 485L1083 493L1083 509L1052 516Z" fill="#536b63" stroke="#364e49" stroke-width="3"/>
+ <!-- landing gear -->
+ <path d="M831 539L868 605L929 542M909 550L936 600" fill="none" stroke="#3a5551" stroke-width="8" stroke-linejoin="round"/>
+ <ellipse cx="938" cy="609" rx="16" ry="24" fill="#324b48"/>
+ <ellipse cx="870" cy="614" rx="22" ry="29" fill="#304843" stroke="#263c3a" stroke-width="3"/>
+ <ellipse cx="875" cy="614" rx="11" ry="17" fill="#d6b078"/><ellipse cx="877" cy="614" rx="4" ry="6" fill="#697c67"/>
+ <!-- bottom wing -->
+ <path d="M790 514L1015 532L941 565L634 559Q605 556 620 544Z" fill="url(#wing)" stroke="#873a30" stroke-width="3"/>
+ <path d="M638 551L930 556L987 536" fill="none" stroke="#f6bc7b" stroke-width="3"/>
+ <g stroke="#923c2e" opacity=".45"><path d="M692 536L700 557M737 530L745 558M784 526L792 559M832 529L840 559M879 533L887 559"/></g>
+ <!-- golden cudgel, mounted along fuselage -->
+ <g transform="rotate(7 725 505)"><rect x="660" y="500" width="226" height="8" rx="4" fill="#9a352c" stroke="#743e2c" stroke-width="2"/><rect x="660" y="498" width="43" height="12" rx="3" fill="url(#gold)"/><rect x="843" y="498" width="43" height="12" rx="3" fill="url(#gold)"/><path d="M670 500v8m7-8v8m183-8v8m7-8v8" stroke="#a37334"/><path d="M725 497v15M820 497v15" stroke="#e9c284" stroke-width="4"/></g>
+ <!-- wing rigging -->
+ <path d="M691 540L735 398L806 530M913 539L968 399L1000 531" fill="none" stroke="#495c51" stroke-width="7" stroke-linejoin="round"/>
+ <path d="M695 531L960 398M738 398L918 531" fill="none" stroke="#6b7360" stroke-width="1.5" opacity=".7"/>
+ <!-- spinning propeller -->
+ <ellipse cx="1082" cy="501" rx="13" ry="84" fill="#fffbed" opacity=".2"/>
+ <ellipse cx="1082" cy="501" rx="6" ry="76" fill="none" stroke="#fff8df" stroke-width="3" opacity=".45"/>
+ <g class="propeller"><path d="M1081 501Q1064 441 1078 422Q1094 411 1087 471L1084 501Q1100 560 1086 580Q1070 592 1077 532Z" fill="#4a645b" stroke="#344f49" stroke-width="2"/><path d="M1076 439L1088 438M1075 563L1088 563" stroke="#ebc380" stroke-width="7"/></g>
+ <circle cx="1082" cy="501" r="10" fill="url(#gold)" stroke="#77583a" stroke-width="2"/>
+ </g>
+ <g class="spark" stroke="#fff3bc" stroke-width="2" fill="none"><path d="M610 457v14m-7-7h14M884 307v14m-7-7h14"/></g>
+</g>
+<!-- Soft foreground clouds pass underneath the airplane. -->
+<g class="cloud-near" opacity=".8"><use href="#front-band"/><use href="#front-band" x="1600"/></g>
+<path d="M0 970Q160 912 316 960Q500 893 702 951Q938 888 1120 955Q1390 884 1600 959V1000H0Z" fill="#fbf5e7" opacity=".85"/>
+<g fill="none" stroke="#567c73" opacity=".3"><circle cx="1450" cy="795" r="36"/><circle cx="1450" cy="795" r="29"/><path d="M1450 751v88M1406 795h88"/><path d="M1450 772L1456 802L1450 798L1444 802Z" fill="#567c73"/></g>
+</svg>
+<header class="masthead"><span class="brand">云游记 &nbsp; / &nbsp; SKY JOURNAL</span><span class="edition">VOL. 001 &nbsp; · &nbsp; 花果山航空</span></header>
+<section class="headline"><div class="eyebrow">THE MONKEY KING TAKES FLIGHT</div><h1>大圣，起飞。</h1><p>十万八千里，今天换个飞法。</p><span class="seal">齐天大圣</span></section>
+<footer class="bottom"><div class="caption"><strong>穿过云海，自在如风。</strong><br>花果山 HGS &nbsp; ────── &nbsp; 南天门 NTM</div><div class="controls"><button id="pause" type="button" aria-label="暂停动画">Ⅱ 暂停</button><button id="night" type="button" aria-pressed="false">☾ 夜航</button><label for="speed">航速 <input id="speed" type="range" min="0.5" max="2" value="1" step="0.25"><span class="readout" id="speedValue">1×</span></label></div></footer>
+</main>
+<script>
+const world = document.getElementById('world');
+const pauseButton = document.getElementById('pause');
+const nightButton = document.getElementById('night');
+const speed = document.getElementById('speed');
+let paused = false;
+pauseButton.addEventListener('click', () => {
+  paused = !paused;
+  world.classList.toggle('paused', paused);
+  pauseButton.textContent = paused ? '▶ 继续' : 'Ⅱ 暂停';
+  pauseButton.setAttribute('aria-label', paused ? '继续动画' : '暂停动画');
+});
+nightButton.addEventListener('click', () => {
+  const night = document.body.classList.toggle('night');
+  nightButton.textContent = night ? '☀ 日航' : '☾ 夜航';
+  nightButton.setAttribute('aria-pressed', String(night));
+});
+const movingElements = [...document.querySelectorAll('.flight,.scarf-end,.tail,.feather,.propeller,.cloud-near,.cloud-mid,.cloud-far,.speed-lines,.blink,.sun-halo,.spark')];
+const baseDurations = movingElements.map(element => parseFloat(getComputedStyle(element).animationDuration));
+speed.addEventListener('input', () => {
+  document.getElementById('speedValue').textContent = speed.value + '×';
+  movingElements.forEach((element, index) => { element.style.animationDuration = baseDurations[index] / Number(speed.value) + 's'; });
+});
+</script>
+</body>
+</html>
