@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "08-DMA",
+      "path": "60-项目/北洋机甲培训/08-DMA.md"
+    },
+    {
+      "basename": "CLAUDE",
+      "path": "CLAUDE.md"
+    },
+    {
+      "basename": "AGENTS",
+      "path": "AGENTS.md"
+    },
+    {
+      "basename": "LeRobot 项目开发文档",
+      "path": "60-项目/LeRobot 项目开发文档.md"
+    },
+    {
       "basename": "AI时代英语写作与表达",
       "path": "10-课程笔记/AI时代英语写作与表达/AI时代英语写作与表达.md"
     },
@@ -97,14 +113,6 @@
       "path": "60-项目/科研项目.md"
     },
     {
-      "basename": "AGENTS",
-      "path": "AGENTS.md"
-    },
-    {
-      "basename": "CLAUDE",
-      "path": "CLAUDE.md"
-    },
-    {
       "basename": "05-数列极限-习题2-2",
       "path": "10-课程笔记/数学分析（新工科）I/05-数列极限-习题2-2.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "课程总览",
       "path": "10-课程笔记/课程总览.base"
-    },
-    {
-      "basename": "2026-10-06 每日四题",
-      "path": "10-课程笔记/每日四题/2026-10-06 每日四题.md"
-    },
-    {
-      "basename": "2026-10-05 每日四题",
-      "path": "10-课程笔记/每日四题/2026-10-05 每日四题.md"
     }
   ],
   "omittedPaths": [],
