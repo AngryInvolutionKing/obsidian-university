@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "舵机接线验证与PWM脉宽换算",
+      "path": "10-课程笔记/程序设计原理/嵌入式开发/舵机接线验证与PWM脉宽换算.md"
+    },
+    {
+      "basename": "编码器回绕与电机角速度",
+      "path": "10-课程笔记/程序设计原理/嵌入式开发/编码器回绕与电机角速度.md"
+    },
+    {
+      "basename": "GPIO按键定次闪烁与消抖",
+      "path": "10-课程笔记/程序设计原理/嵌入式开发/GPIO按键定次闪烁与消抖.md"
+    },
+    {
+      "basename": "北洋机甲培训",
+      "path": "60-项目/北洋机甲培训/北洋机甲培训.md"
+    },
+    {
       "basename": "00_导论",
       "path": "11-课程资料/习近平新时代中国特色社会主义思想概论/教材全文（OCR）/00_导论.md"
     },
@@ -105,10 +121,6 @@
       "path": "60-项目/北洋机甲培训/硬件与采购清单.md"
     },
     {
-      "basename": "北洋机甲培训",
-      "path": "60-项目/北洋机甲培训/北洋机甲培训.md"
-    },
-    {
       "basename": "03-Git与Gitee",
       "path": "60-项目/北洋机甲培训/03-Git与Gitee.md"
     },
@@ -187,18 +199,6 @@
     {
       "basename": "01-最小整型选择",
       "path": "10-课程笔记/程序设计原理/01-最小整型选择.md"
-    },
-    {
-      "basename": "mit-comb-page1",
-      "path": "tmp/pdfs/math-20261006/mit-comb-page1.png"
-    },
-    {
-      "basename": "linear-space-page5",
-      "path": "tmp/pdfs/math-20261006/linear-space-page5.png"
-    },
-    {
-      "basename": "calculus-24251-page2",
-      "path": "tmp/pdfs/math-20261006/calculus-24251-page2.png"
     }
   ],
   "omittedPaths": [],
