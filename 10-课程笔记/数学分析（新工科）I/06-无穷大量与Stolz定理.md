@@ -109,7 +109,7 @@ $$\left|\frac1{x_n}\right|<\varepsilon=\frac1G\iff|x_n|>G .$$
 > **关键一步**：两个方向都是"把要证的结论当作已知极限里的 $\varepsilon$ 或 $G$ 反解出来"——$G=\frac1\varepsilon$ 与 $\varepsilon=\frac1G$ 互为倒数。这说明**无穷大量与无穷小量在 $\varepsilon$-$N$ 语言下完全对称**，只是"小"与"大"的追求方向相反。
 
 **注.** $x_n>0$ 时更精细：
-$$\{x_n\}\text{ 是正无穷大量}\iff\left\{\frac1{x_n}\right\}\to 0^{+}.$$
+$$\{x_n\}\text{ 是正无穷大量}\iff\left\{\frac{1}{x_n}\right\}\to 0^{+}.$$
 
 ---
 
@@ -119,7 +119,7 @@ $$\{x_n\}\text{ 是正无穷大量}\iff\left\{\frac1{x_n}\right\}\to 0^{+}.$$
 ![[40-Attachments/数学分析（新工科）I/2026-10-10-定理2.3.2-倒数关系.jpg|板书 p2：定理 2.3.2 双向证明收尾 + 注 $x_n>0$ 时 $\{x_n\}$ 正无穷大 $\iff\{1/x_n\}\to0^+$；无穷大量的四则运算性质 (1)(2)(3)；定理 2.3.3 与两推论；例 2.3.3 有理分式的极限（2026-10-10）]]
 ![[40-Attachments/数学分析（新工科）I/2026-10-10-待定型与Stolz定理.jpg|板书 p3：注"无穷大量 $\Rightarrow$ 无界，反之不然"；待定型 $0\cdot\infty$、$\infty-\infty$、$0^0$、$\frac\infty\infty$、$1^\infty$；定理 2.3.4 Stolz 定理（$*/\infty$ 型，离散的 L'Hospital 法则）；证明 Case 1 开始（2026-10-10）]]
 ![[40-Attachments/数学分析（新工科）I/2026-10-10-Stolz定理证明.jpg|板书 p4：Stolz 定理 Case 1（$a$ 有限）证明全过程——由差分夹逼推出 $-\varepsilon<\frac{x_n}{y_n}-a<\varepsilon$；Case 2（$a=+\infty$，化为 Case 1 的倒数）；Case 3（$a=-\infty$）（2026-10-10）]]
-![[40-Attachments/数学分析（新工科）I/2026-10-10-Stolz应用与几何解释.jpg|板书 p5：Stolz 定理的几何解释（把 $(y_n,x_n)$ 看作 $xy$ 平面上的点列 $M_n$，$y_n\uparrow+\infty$）；例 2.3.4（Cauchy 命题，即例 2.2.4 的新证法）；例 2.3.5 $\lim\frac{1^k+2^k+\cdots+n^k}{n^{k+1}}=\frac1{k+1}$（2026-10-10）]]
+![[40-Attachments/数学分析（新工科）I/2026-10-10-Stolz应用与几何解释.jpg|板书 p5：上半为 **Stolz 定理的几何解释**（把 $(y_n,x_n)$ 看作 $xy$ 平面上的点列 $M_n$，$y_n\uparrow+\infty$，$\frac{x_n}{y_n}$ 是 $OM_n$ 的斜率）；下半为例 2.3.4（Cauchy 命题，即例 2.2.4 的新证法）与例 2.3.5 $\lim\frac{1^k+2^k+\cdots+n^k}{n^{k+1}}=\frac1{k+1}$（2026-10-10）]]
 
 ---
 
@@ -174,7 +174,7 @@ $$|x_n y_n|=|x_n|\cdot|y_n|>\frac G\delta\cdot\delta=G . \qquad\blacksquare$$
 
 **证明（$k<l$ 的情形）：** 分子分母同除以 $n^l$（$l$ 是两者的较大次数）：
 $$\text{原式}=\lim_{n\to\infty}\frac{\dfrac{a_0}{n^{l-k}}+\dfrac{a_1}{n^{l-k+1}}+\cdots+\dfrac{a_k}{n^l}}{b_0+\dfrac{b_1}{n}+\cdots+\dfrac{b_l}{n^l}} .$$
-由 $l-k\ge1$，分子每一项都是 $\dfrac{\text{常数}}{n^{\text{正整数}}}\to0$，故分子 $\to0$；分母 $\to b_0+0=b_0\ne0$。由[[05-数列极限#1. 定义 2.2.1（数列极限的 ε-N 定义）|极限的商法则]]（分母极限非零）得原式 $=\dfrac0{b_0}=0$。
+由 $l-k\ge1$，分子每一项都是 $\dfrac{\text{常数}}{n^{\text{正整数}}}\to0$，故分子 $\to0$；分母 $\to b_0+0=b_0\ne0$。由极限的商法则（分母极限非零）得原式 $=\dfrac0{b_0}=0$。
 
 **另两种情形：** $k=l$ 时同除 $n^k$ 立刻得 $\dfrac{a_0}{b_0}$；$k>l$ 时同除 $n^l$，分子 $\to a_0\ne0$、分母 $\to b_0\ne0$，由推论 1（取 $x_n$ 为分子、$b\ne0$ 为分母极限）得原式 $=\infty$。
 
@@ -221,7 +221,7 @@ $$a-\frac\varepsilon2<\frac{x_{n+1}-x_n}{y_{n+1}-y_n}<a+\frac\varepsilon2 .$$
 即对每个 $k>N_1$，
 $$\left(a-\frac\varepsilon2\right)(y_{k+1}-y_k)<x_{k+1}-x_k<\left(a+\frac\varepsilon2\right)(y_{k+1}-y_k).$$
 
-$\{y_n\}\uparrow+\infty$，故最终 $y_{k+1}-y_k>0$（严格单调递增）。把 $k=N_1+1,N_1+2,\dots,n-1$ 的这些不等式**相加**（不等号方向不变，且中间项 $x_{N_1+2},\dots,x_{n-1}$ 全部** telescoping 抵消**），得
+$\{y_n\}\uparrow+\infty$，故最终 $y_{k+1}-y_k>0$（严格单调递增）。把 $k=N_1+1,N_1+2,\dots,n-1$ 的这些不等式**相加**（不等号方向不变，且中间项 $x_{N_1+2},\dots,x_{n-1}$ 全部 telescoping 抵消），得
 $$\left(a-\frac\varepsilon2\right)(y_n-y_{N_1})<x_n-x_{N_1}<\left(a+\frac\varepsilon2\right)(y_n-y_{N_1}).$$
 
 除以 $y_n>0$ 并减去 $a$：
@@ -229,7 +229,7 @@ $$-\frac\varepsilon2+\frac{x_{N_1}-\left(a-\frac\varepsilon2\right)y_{N_1}}{y_n}
 
 （这里需 $n>N_2>N_1$ 使 $y_n>0$ 以保证除法方向；$N_1$ 固定后 $\left(a\mp\dfrac\varepsilon2\right)y_{N_1}$ 都是**常数**。）
 
-又 $\lim\limits_{n\to\infty}y_n=+\infty$，故 $\lim\limits_{n\to\infty}\dfrac{x_{N_1}-\left(a\pm\frac\varepsilon2\right)y_{N_1}}{y_n}=0$（**常数除以无穷大量**，由[[06-无穷大量与Stolz定理#4. 定理 2.3.2（无穷小量与无穷大量的关系）|定理 2.3.2]]）。于是 $\exists N_3>N_2$，当 $n>N_3$ 时
+又 $\lim\limits_{n\to\infty}y_n=+\infty$，故 $\lim\limits_{n\to\infty}\dfrac{x_{N_1}-\left(a\pm\frac\varepsilon2\right)y_{N_1}}{y_n}=0$（**常数除以无穷大量**，由 [[06-无穷大量与Stolz定理#4. 定理 2.3.2（无穷小量与无穷大量的关系）|定理 2.3.2]]）。于是 $\exists N_3>N_2$，当 $n>N_3$ 时
 $$\left|\frac{x_{N_1}-\left(a\pm\frac\varepsilon2\right)y_{N_1}}{y_n}\right|<\frac\varepsilon2 . \tag{②}$$
 
 当 $n>N_3$ 时由 ①② 得
@@ -258,7 +258,7 @@ $$\lim_{n\to\infty}\frac{x_n}{y_n}=-\infty . \qquad\blacksquare$$
 
 **把 $(y_n,x_n)$ 看成 $xy$ 平面上的点 $M_n$，$y_n\uparrow+\infty$。**
 
-![[40-Attachments/数学分析（新工科）I/2026-10-10-Stolz定理几何解释-点列斜率.jpg|板书：Stolz 定理的几何解释——点列 $M_1,M_2,\dots,M_n$ 沿 $y$ 轴方向越走越远，$\frac{x_n}{y_n}$ 是 $OM_n$ 的斜率，$\frac{x_{n+1}-x_n}{y_{n+1}-y_n}$ 是割线 $M_nM_{n+1}$ 的斜率（2026-10-10）]]
+（图见上文第 4 节末的**板书 p5**：`2026-10-10-Stolz应用与几何解释.jpg`——该页上半即本节的点列图与割线斜率示意。）
 
 - $\dfrac{x_n}{y_n}$ 是原点 $O$ 到 $M_n$ 的连线 $OM_n$ 的**斜率**；
 - $\dfrac{x_{n+1}-x_n}{y_{n+1}-y_n}$ 是**相邻两点割线** $M_nM_{n+1}$ 的斜率。
@@ -274,12 +274,12 @@ Stolz 定理的几何含义：**当点列沿 $y\to+\infty$ 方向越来越远、
 **例 2.3.4.** 若 $\lim\limits_{n\to\infty}a_n=a$（$a$ 为有限数、$+\infty$ 或 $-\infty$），则
 $$\lim_{n\to\infty}\frac{a_1+a_2+\cdots+a_n}{n}=a .$$
 
-**证明（$\Rightarrow$，即"用法"）：** 令
+**证明（用法）：** 令
 $$x_n=a_1+a_2+\cdots+a_n,\qquad y_n=n\ \uparrow+\infty .$$
 则 $y_n$ 是正无穷大量且严格单调递增，且 $x_{n+1}-x_n=a_{n+1}$、$y_{n+1}-y_n=1$，于是
 $$\text{原式}=\lim_{n\to\infty}\frac{x_n}{y_n}=\lim_{n\to\infty}\frac{x_n-x_{n-1}}{y_n-y_{n-1}}=\lim_{n\to\infty}\frac{a_n}{1}=a . \qquad\blacksquare$$
 
-> **与 [[05-数列极限#4. 例 2.2.4（Cauchy 命题）|例 2.2.4]] 的关系**：这是**同一个命题**，2026-10-09 用极限的定义（分拆固定块/尾块）证明，今天用 Stolz 定理**一行证完**。可见 Stolz 定理的威力：把"平均"这种**累积型**的极限直接转化为"通项"的极限。$a=\pm\infty$ 的情形同样被 Stolz 定理涵盖（Case 2/3），而定义法证明时需单独处理。
+> **与 [[05-数列极限#4. 例 2.2.4（Cauchy 命题）|例 2.2.4]] 的关系**：这是**同一个命题**，2026-10-09 用极限的定义（分拆固定块/尾块）证明，今天用 Stolz 定理**一行证完**。可见 Stolz 定理的威力：把"平均"这种**累积型**的极限直接转化为"通项"的极限。$a=\pm\infty$ 的情形同样被 Stolz 定理涵盖（Case 2/3），而定义法证明时需单独处理（见 [[05-数列极限-习题2-3]] 第 2 题）。
 
 ### 例 2.3.5（幂和公式）
 
@@ -320,6 +320,14 @@ $$=\lim_{n\to\infty}\frac{n^k}{(k+1)n^k+o(n^k)}=\frac1{k+1}. \qquad\blacksquare$
 | Stolz 定理 2.3.4 | $\dfrac{**}{\infty}$ 型、累积和/幂 | 离散版 L'Hospital；差分代替导数 |
 
 **下一步**：[[07-数列的收敛准则与无理数e]]——2.4 节用"单调有界原理"定义自然常数 $\mathrm e$，并证明 $\mathrm e$ 是无理数。
+
+---
+
+## 附：讲义原件
+
+![[40-Attachments/数学分析（新工科）I/讲义-2.3-无穷大量（2026-10-10手写）.pdf]]
+
+（上面 5 张板书图即此 PDF 的逐页渲染；原件同时在 `C:\Users\zhang\Desktop\数学\数学资料\2.3.pdf`。）
 
 ---
 
