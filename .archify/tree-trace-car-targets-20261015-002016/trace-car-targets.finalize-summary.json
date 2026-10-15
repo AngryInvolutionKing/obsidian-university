@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "tree",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\candidate.json",
+    "sha256": "d1488af6973215153317df14dc05ff8ee4af10c3391a3238eea52089af4d326e",
+    "bytes": 1803
+  },
+  "artifact": {
+    "path": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\trace-car-targets.html",
+    "sha256": "0b5c9530f41ccc96dbf2204e30b2198417b31be50a5f1c0e93822fecf08d0a5c",
+    "bytes": 822957
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\trace-car-targets.finalize.json",
+    "summaryReceipt": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\trace-car-targets.finalize-summary.json",
+    "browserCheckReceipt": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\trace-car-targets.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-14T13:56:57.814Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4508
+}

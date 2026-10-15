@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\candidate.json",
+    "sha256": "2e397936a3f55aeb6412e11f07732cad58a02b09c59b71a3e06a4aa798d559c6",
+    "bytes": 3047
+  },
+  "artifact": {
+    "path": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\trace-car-architecture.html",
+    "sha256": "6471c2eb2c8e64604181166165265a4bf112d2cffd3e48e02b937407216cbfc1",
+    "bytes": 818329
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\trace-car-architecture.finalize.json",
+    "summaryReceipt": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\trace-car-architecture.finalize-summary.json",
+    "browserCheckReceipt": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\trace-car-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-14T13:56:57.814Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 8297,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "routesOverSuggestedBends": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [],
+      "detours": [
+        {
+          "relationship": {
+            "id": "power-controller",
+            "from": "power",
+            "to": "controller",
+            "label": "供电",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "bends": 3,
+          "stretch": 1
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "power → controller needs 3 bends: move node power or controller so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  },
+  "layoutReviewRecommendation": {
+    "action": "inspect-leading-space",
+    "evidence": {
+      "measured": true,
+      "emptyTopPx": 195,
+      "emptyTopRatio": 0.361,
+      "occupiedTop": 195,
+      "viewBoxTop": 0,
+      "canvasHeight": 540,
+      "typicalNodeHeight": 66,
+      "reviewSuggested": true
+    },
+    "reason": "Measured content, including routes and labels, leaves a large empty area above the diagram. This is a composition suggestion, not a failed gate.",
+    "repair": "Check whether that leading space is intentional. If not, reposition the connected scene nearer the canvas origin while retaining room for its actual boundaries, labels and return routes. Preserve all meaning and user-fixed geometry, then rerun finalize. No screenshot is required."
+  }
+}

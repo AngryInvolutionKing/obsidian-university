@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "寻迹小车产品架构",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": ".archify/architecture-trace-car-20261015-002016/trace-car-architecture.html"
+  },
+  "components": [
+    {
+      "id": "operator",
+      "type": "external",
+      "label": "操作者",
+      "sublabel": "启动、停止与状态查看",
+      "pos": [40, 195],
+      "size": [142, 62]
+    },
+    {
+      "id": "sensor",
+      "type": "frontend",
+      "label": "轨迹感知模块",
+      "sublabel": "采集轨迹状态",
+      "pos": [245, 305],
+      "size": [148, 66]
+    },
+    {
+      "id": "controller",
+      "type": "backend",
+      "label": "控制与决策模块",
+      "sublabel": "处理信号，输出动作",
+      "pos": [500, 235],
+      "size": [162, 72]
+    },
+    {
+      "id": "status",
+      "type": "frontend",
+      "label": "状态提示模块",
+      "sublabel": "显示运行状态",
+      "pos": [500, 380],
+      "size": [162, 62]
+    },
+    {
+      "id": "drive",
+      "type": "messagebus",
+      "label": "运动执行模块",
+      "sublabel": "驱动与转向控制",
+      "pos": [755, 235],
+      "size": [152, 72]
+    },
+    {
+      "id": "chassis",
+      "type": "external",
+      "label": "车体与行走机构",
+      "sublabel": "承载并完成运动",
+      "pos": [1000, 235],
+      "size": [164, 72]
+    },
+    {
+      "id": "power",
+      "type": "cloud",
+      "label": "电源管理模块",
+      "sublabel": "供能与保护",
+      "pos": [755, 390],
+      "size": [152, 62]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "寻迹小车系统",
+      "wraps": ["sensor", "controller", "status", "drive", "chassis", "power"],
+      "pad": 30
+    }
+  ],
+  "connections": [
+    {
+      "id": "operator-controller",
+      "from": "operator",
+      "to": "controller",
+      "label": "启动 / 停止",
+      "variant": "dashed",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "sensor-controller",
+      "from": "sensor",
+      "to": "controller",
+      "label": "轨迹状态",
+      "variant": "default"
+    },
+    {
+      "id": "controller-drive",
+      "from": "controller",
+      "to": "drive",
+      "label": "控制信号",
+      "variant": "emphasis"
+    },
+    {
+      "id": "drive-chassis",
+      "from": "drive",
+      "to": "chassis",
+      "label": "驱动力 / 转向",
+      "variant": "emphasis"
+    },
+    {
+      "id": "controller-status",
+      "from": "controller",
+      "to": "status",
+      "label": "运行状态",
+      "variant": "dashed"
+    },
+    {
+      "id": "power-controller",
+      "from": "power",
+      "to": "controller",
+      "label": "供电",
+      "variant": "default",
+      "fromSide": "left",
+      "toSide": "bottom"
+    },
+    {
+      "id": "power-drive",
+      "from": "power",
+      "to": "drive",
+      "label": "供电",
+      "variant": "default",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ]
+}

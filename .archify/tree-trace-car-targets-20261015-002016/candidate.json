@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "diagram_type": "tree",
+  "meta": {
+    "title": "寻迹小车产品目标树",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": ".archify/tree-trace-car-targets-20261015-002016/trace-car-targets.html"
+  },
+  "layout": {
+    "direction": "down",
+    "gapX": 28,
+    "gapY": 40,
+    "nodeW": 132,
+    "nodeMaxW": 180
+  },
+  "nodes": [
+    {
+      "id": "trace_car",
+      "label": "寻迹小车",
+      "sublabel": "课程设计产品目标"
+    },
+    {
+      "id": "tracking",
+      "label": "稳定循迹",
+      "parent": "trace_car"
+    },
+    {
+      "id": "safety",
+      "label": "安全可靠",
+      "parent": "trace_car"
+    },
+    {
+      "id": "maintenance",
+      "label": "易用维护",
+      "parent": "trace_car"
+    },
+    {
+      "id": "adaptation",
+      "label": "竞赛适配",
+      "parent": "trace_car"
+    },
+    {
+      "id": "curve",
+      "label": "直线与弯道适应",
+      "parent": "tracking"
+    },
+    {
+      "id": "recovery",
+      "label": "偏离后恢复",
+      "parent": "tracking"
+    },
+    {
+      "id": "structure",
+      "label": "结构牢固",
+      "parent": "safety"
+    },
+    {
+      "id": "safe_stop",
+      "label": "安全启动与停止",
+      "parent": "safety"
+    },
+    {
+      "id": "inspection",
+      "label": "便于检查与调试",
+      "parent": "maintenance"
+    },
+    {
+      "id": "replacement",
+      "label": "便于部件更换",
+      "parent": "maintenance"
+    },
+    {
+      "id": "efficiency",
+      "label": "运行效率",
+      "parent": "adaptation"
+    },
+    {
+      "id": "parking",
+      "label": "停车精度",
+      "parent": "adaptation"
+    },
+    {
+      "id": "size_weight",
+      "label": "尺寸重量适配",
+      "parent": "adaptation"
+    }
+  ]
+}

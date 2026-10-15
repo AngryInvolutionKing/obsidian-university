@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "938e803f-22b4-4211-9f87-7374caa70f01",
+  "status": "current",
+  "command": "deliver",
+  "type": "tree",
+  "input": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\candidate.json",
+  "output": "D:\\学习笔记\\大学\\.archify\\tree-trace-car-targets-20261015-002016\\trace-car-targets.html",
+  "specification": {
+    "sha256": "d1488af6973215153317df14dc05ff8ee4af10c3391a3238eea52089af4d326e",
+    "bytes": 1803
+  },
+  "artifact": {
+    "sha256": "0b5c9530f41ccc96dbf2204e30b2198417b31be50a5f1c0e93822fecf08d0a5c",
+    "bytes": 822957
+  }
+}

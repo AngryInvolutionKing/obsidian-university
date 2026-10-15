@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "08263218-672c-4882-897b-814c0287a8d2",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\candidate.json",
+  "output": "D:\\学习笔记\\大学\\.archify\\architecture-trace-car-20261015-002016\\trace-car-architecture.html",
+  "specification": {
+    "sha256": "2e397936a3f55aeb6412e11f07732cad58a02b09c59b71a3e06a4aa798d559c6",
+    "bytes": 3047
+  },
+  "artifact": {
+    "sha256": "6471c2eb2c8e64604181166165265a4bf112d2cffd3e48e02b937407216cbfc1",
+    "bytes": 818329
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\candidate.json",
+    "sha256": "06f1c6ac4cc1a8860e692f9b4eba4cfb7e76353c9cd257974735cc75f2a07dc8",
+    "bytes": 2812
+  },
+  "artifact": {
+    "path": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\report2-layout-workflow.html",
+    "sha256": "21a19a06d249eec21889e6cbe79ae86e24e886b0762805074f0e886ff58c55c8",
+    "bytes": 817217
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\report2-layout-workflow.finalize.json",
+    "summaryReceipt": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\report2-layout-workflow.finalize-summary.json",
+    "browserCheckReceipt": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\report2-layout-workflow.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-14T13:56:57.814Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4351
+}

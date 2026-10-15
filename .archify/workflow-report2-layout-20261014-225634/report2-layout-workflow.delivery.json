@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b076b847-5472-4b27-8767-fee2571588b1",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\candidate.json",
+  "output": "D:\\学习笔记\\大学\\.archify\\workflow-report2-layout-20261014-225634\\report2-layout-workflow.html",
+  "specification": {
+    "sha256": "06f1c6ac4cc1a8860e692f9b4eba4cfb7e76353c9cd257974735cc75f2a07dc8",
+    "bytes": 2812
+  },
+  "artifact": {
+    "sha256": "21a19a06d249eec21889e6cbe79ae86e24e886b0762805074f0e886ff58c55c8",
+    "bytes": 817217
+  }
+}

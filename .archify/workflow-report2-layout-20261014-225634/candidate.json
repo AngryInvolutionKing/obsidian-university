@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "课程报告2 文档制作工作链",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "output": ".archify/workflow-report2-layout-20261014-225634/report2-layout-workflow.html"
+  },
+  "lanes": [
+    { "id": "sources", "label": "资料与范围" },
+    { "id": "authoring", "label": "结构与表格" },
+    { "id": "quality", "label": "验证" },
+    { "id": "delivery", "label": "交付" }
+  ],
+  "phases": [
+    { "id": "inspect", "label": "提取模板依据", "fromCol": 0, "toCol": 1 },
+    { "id": "compose", "label": "排版与建表", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "verify", "label": "渲染与交付", "fromCol": 4, "toCol": 5, "variant": "dashed" }
+  ],
+  "mainPath": ["inputs", "scope", "mapping", "document", "render", "review", "result"],
+  "nodes": [
+    { "id": "inputs", "lane": "sources", "col": 0, "type": "database", "label": "模板与报告一", "sublabel": "结构、字体、表格依据" },
+    { "id": "scope", "lane": "sources", "col": 1, "type": "security", "label": "范围约束", "sublabel": "不填正文；不虚构事实", "tag": "用户要求" },
+    { "id": "mapping", "lane": "authoring", "col": 2, "type": "backend", "label": "表格映射", "sublabel": "课程要求 → 章节与表格" },
+    { "id": "document", "lane": "authoring", "col": 3, "type": "frontend", "label": "Word 排版", "sublabel": "封面、目录、三线表、预留图区" },
+    { "id": "render", "lane": "quality", "col": 4, "type": "backend", "label": "DOCX 渲染", "sublabel": "逐页生成 PNG" },
+    { "id": "review", "lane": "quality", "col": 5, "type": "security", "label": "视觉检查", "sublabel": "字体、分页、表格与页码" },
+    { "id": "result", "lane": "delivery", "col": 5, "type": "external", "label": "课程报告2", "sublabel": "可编辑 DOCX" }
+  ],
+  "edges": [
+    { "id": "read-scope", "from": "inputs", "to": "scope", "label": "提取格式依据", "variant": "default" },
+    { "id": "scope-map", "from": "scope", "to": "mapping", "label": "限定内容范围", "variant": "security" },
+    { "id": "map-compose", "from": "mapping", "to": "document", "label": "生成表格与版式", "variant": "emphasis" },
+    { "id": "compose-render", "from": "document", "to": "render", "label": "导出并渲染", "variant": "dashed" },
+    { "id": "render-review", "from": "render", "to": "review", "label": "检查全部页面", "variant": "dashed" },
+    { "id": "review-deliver", "from": "review", "to": "result", "label": "通过后交付", "variant": "emphasis" }
+  ],
+  "semanticChecks": {
+    "allowedRoots": ["inputs"],
+    "allowedTerminals": ["result"],
+    "requiredPaths": [
+      { "from": "inputs", "to": "result" }
+    ]
+  }
+}
