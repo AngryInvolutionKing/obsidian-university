@@ -21,7 +21,6 @@ updated: 2026-09-24
 | 模拟题 01 | 期末模拟卷 | [模拟题01.pdf](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/模拟题01.pdf) |
 | 演示代码 | 按知识点命名的 .cpp/.h，上百个 | [演示代码文件夹](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/演示代码) |
 | 教材 | C++ 程序设计（第 3 版），145 MB | [C++程序设计_第3版.pdf](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/C++程序设计_第3版.pdf) |
-| 课程说明 | 仓库版考核与经验 | [2180279_程序设计原理_课程说明.docx](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/2180279_程序设计原理_课程说明.docx) |
 
 ## 演示代码怎么用
 
