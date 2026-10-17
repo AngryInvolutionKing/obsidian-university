@@ -1,0 +1,110 @@
+<div id="linear-output-dimensions">
+  <h3>输入固定为 2 个坐标</h3>
+  <div class="viz-controls">
+    <label class="form-label" for="lod-m">输出坐标数 m
+      <select id="lod-m" class="form-select">
+        <option value="1">m = 1</option>
+        <option value="2">m = 2</option>
+        <option value="3">m = 3</option>
+      </select>
+    </label>
+  </div>
+  <svg class="lod-diagram" role="img" aria-labelledby="lod-title lod-desc">
+    <title id="lod-title">二维输入经过矩阵，得到不同坐标数的输出</title>
+    <desc id="lod-desc">输入固定为二和三。选择 m 等于一、二或三，矩阵相应增加行，输出增加坐标。</desc>
+    <g data-layer="drawing"></g>
+  </svg>
+  <div class="viz-row" aria-live="polite">
+    <span id="lod-space"></span>
+    <span id="lod-status" class="viz-badge"></span>
+  </div>
+</div>
+<style>
+  #linear-output-dimensions .lod-diagram { display:block; width:100%; height:300px; overflow:visible; }
+  #linear-output-dimensions .lod-diagram text { fill:var(--foreground); font-size:var(--font-size-base); font-weight:400; }
+  #linear-output-dimensions .lod-diagram .lod-secondary { fill:var(--muted-foreground); }
+  #linear-output-dimensions .lod-diagram .lod-structure { fill:none; stroke:var(--border); stroke-width:1.5; }
+  #linear-output-dimensions .lod-diagram .lod-flow { fill:none; stroke:var(--viz-series-1); stroke-width:2; }
+  #linear-output-dimensions .lod-diagram .lod-number { font-variant-numeric:tabular-nums; }
+  #linear-output-dimensions .lod-diagram .lod-rule { fill:var(--muted-foreground); }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('linear-output-dimensions');
+  const select = root.querySelector('#lod-m');
+  const svg = root.querySelector('svg');
+  const drawing = root.querySelector('[data-layer="drawing"]');
+  const space = root.querySelector('#lod-space');
+  const status = root.querySelector('#lod-status');
+  const ns = 'http://www.w3.org/2000/svg';
+  const matrices = {1:[[1,0]],2:[[1,0],[0,1]],3:[[1,0],[0,1],[1,1]]};
+  const states = {
+    1:{space:'ℝ² → ℝ',status:'满射 · 非单射',rules:['保留第 1 项']},
+    2:{space:'ℝ² → ℝ²',status:'双射',rules:['保留第 1 项','保留第 2 项']},
+    3:{space:'ℝ² → ℝ³',status:'单射 · 非满射',rules:['保留第 1 项','保留第 2 项','两项相加']}
+  };
+  const add = (name, attrs, text) => {
+    const element = document.createElementNS(ns,name);
+    for (const [key,value] of Object.entries(attrs || {})) element.setAttribute(key,String(value));
+    if(text !== undefined) element.textContent = text;
+    drawing.appendChild(element);
+    return element;
+  };
+  const label = (x,y,text,cls='') => add('text',{x,y,'text-anchor':'middle',class:cls},text);
+  const bracket = (x,y,height,left) => {
+    const sign=left?1:-1;
+    add('path',{d:`M ${x+sign*7} ${y} H ${x} V ${y+height} H ${x+sign*7}`,class:'lod-structure'});
+  };
+  const vector = (x,values) => {
+    const top=146-values.length*19;
+    bracket(x-23,top-15,values.length*38,true);
+    bracket(x+23,top-15,values.length*38,false);
+    values.forEach((value,i)=>label(x,top+i*38+8,String(value),'lod-number'));
+  };
+  const arrow = (x1,x2,y) => {
+    add('path',{d:`M ${x1} ${y} H ${x2} M ${x2-6} ${y-4} L ${x2} ${y} L ${x2-6} ${y+4}`,class:'lod-flow'});
+  };
+  let m=1;
+  const draw = () => {
+    const width=Math.max(280,root.getBoundingClientRect().width);
+    svg.setAttribute('viewBox',`0 0 ${width} 300`);
+    drawing.replaceChildren();
+    const xInput=width*0.14;
+    const xMatrix=width*0.48;
+    const xOutput=width*0.83;
+    label(xInput,32,'输入 X');
+    label(xMatrix,32,'矩阵 A');
+    label(xOutput,32,'输出 AX');
+    label(xInput,57,'2 个坐标','lod-secondary');
+    label(xMatrix,57,`${m} 行 × 2 列`,'lod-secondary');
+    label(xOutput,57,`${m} 个坐标`,'lod-secondary');
+    vector(xInput,[2,3]);
+    const matrix=matrices[m];
+    const top=146-m*19;
+    bracket(xMatrix-37,top-15,m*38,true);
+    bracket(xMatrix+37,top-15,m*38,false);
+    matrix.forEach((row,i)=>row.forEach((value,j)=>label(xMatrix+(j===0?-16:16),top+i*38+8,String(value),'lod-number')));
+    const output=matrix.map(row=>row[0]*2+row[1]*3);
+    vector(xOutput,output);
+    arrow(xInput+28,xMatrix-43,140);
+    arrow(xMatrix+43,xOutput-28,140);
+    states[m].rules.forEach((text,i)=>label(xOutput,top+i*38+27,text,'lod-rule'));
+    space.textContent=states[m].space;
+    status.textContent=states[m].status;
+    svg.setAttribute('aria-label',`m 等于 ${m}，输入为二、三，输出为 ${output.join('、')}，${states[m].status}`);
+  };
+  const restore = value => {
+    const candidate=value?.modelContent?.m;
+    if([1,2,3].includes(candidate)) {m=candidate;select.value=String(m);draw();}
+  };
+  select.addEventListener('change',()=>{
+    m=Number(select.value);
+    draw();
+    if(window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{m},privateContent:null}).catch(()=>{});
+  });
+  window.addEventListener('openai:set_globals',event=>restore(event.detail?.globals?.widgetState));
+  draw();
+  restore(window.openai?.widgetState);
+  new ResizeObserver(draw).observe(root);
+})();
+</script>
