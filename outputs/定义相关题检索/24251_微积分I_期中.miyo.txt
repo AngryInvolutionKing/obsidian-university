@@ -1,0 +1,44 @@
+# 2024～2025 学年第一学期期中考试试卷 《微积分Ⅰ》(共 2 页)
+
+# (考试时间：2024 年 12 月 6 日)
+
+||||2024|～|||||2025 学年第一学期期中考试试卷参考答案|||13. 解:|I|= x 3|2 arctan|xx d|= arctan ∫∫|x d|x ()|33 <sup>x</sup>|= arctan|<sup>x</sup>|x³ d x² 1 +|x − ∫||
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+||1-5 6. 3 三、计算题（共 35 分，每小题 7 分）|7.|B A C B D yx = 2|1 − 2|1 8. e||9. 2|《微积分Ⅰ》（考试时间：2024 年 12 月 6 日） 10.|π² 16|或 (|arctan1)²|14. 解:|I|= arctan =|<sup>3</sup> xx d ∫∫ π|xxxx 12 + −= + 2 01|d − + ∫∫ 1 +|x x² 2 <sup>xdx</sup> 3|3 1 2 x 0|3 arctan π 2 π 4|=<sup>dxxxx</sup> 2cos<sup>22</sup>∫ π|<sup>tt</sup><sup>d</sup>|11 ln (22|22 1− +|xC .)|
+|→ →→ =lim|− e1 1 − e x 1 + x|11 解: lim  x 0 ln 1 + ( <sup>x</sup> =lim →→ xx| x)  00|−= lim 1 x (1 +)² 22|ln (xx −− e<sup>x</sup>|1 +− −) (e 1)ln1 ( = −1. x|(e −+ −+|1) xx) ()|ln lim 00 xx|xx 1 +− − ( 22 xx −++|<sup>xx</sup>(e 1))=2xx  22 () οο x ||15. 解: (1)|2 2 =+<sub>3</sub> I I 12 I I|<sub>π</sub><sup>2</sup> (∫4 e +=∫ <sub>e</sub> −= 12|1 + cos 2 <sup>x</sup> sin <sub>x</sub> sin e<sup>x</sup> ∫ <sub>e</sub><sub>x</sub>|d tt) −+ cos cos −+ −− sin − sin|xx xx xx cos xx cos +|π 1 =++sin 2 342 =+ x xC x d|<sub>1</sub>d, = ln e<sup>x</sup>|2 π t π 4 − sin|1 =+. 46 x + cos|xC +|<sub>2</sub>,||
+|解法二: 原式|= lim x →0|ln (|1 +− − x (e) x²|<sup>x</sup> 1)|=lim x →0||2||x²|2!||= −1.||⇒=− I 2|x 1 22|x|ln e − + + sin|x cos|xC|其中,||CCC 12|,,为积分常数.|||
+||1 11 = 0 00 xx|2 Ix ++|1|++ xx = xx<sup>22</sup>|21 dd ∫∫∫ ++ 11|+ 22|3 x x (|<sup>1</sup>|1 3 ++ 24|)²|x d||(2)|x = − J|1 ln e 22|− <sup>x</sup> sin|+| xx cos  |π 2 π − 2|π 22|π|−+ 1)|11 =−ln(e²² ln(e 2|π −|+ 1).|
+|||1|||x + 21|1|1||3||||||四、计算题（共 24 分, 每小题 8 分）|||||||||||
+|= ln<sup>1</sup>|2 xx ( 2|++ 1) 0||+3 arctan|3|0|=|ln 3 + 26|π.|||16. 解:|fx|′()=++ −|1 11 x xx e ee (|x 6)|1  |=|( xx|+− xx 2)(3) 22|,|驻点||xx =−= 2,|3.|
+|x|13 += 2|tan, 2|π tt|π ,  63 |∈, 则 d x |3 2|= sec²|t t d,|||||x 当|<−2 时,|′(fx|) > 0;|当 −< <|x|20 时,|′(fx|) < 0,|f 故|(−= 2)|− 4e|1 2 为极大值.|
+||||π|tan|33 t +||||||||x|<< 当 03 时,|′(|fx) < 0;|x 当|> 3 时,||′(fx) > 0,|故|f|1 3 (3) = 9e||为极小值.|
+|1I <sub>0</sub>|x = 2 xx|x d ++ 1|3 π ∫∫ 6|= 3 4|22 sec² t|+ 23 ⋅ 2|sec|²t d t||||17. 解:|F||Fx (0)= 3,|′ ()|1 + sin|x F x =,||(2 +<sup>2</sup> ′′ ()=|x) cos|xx 2|−+ (1 sin|x)|,|
+|π= <sup>3</sup>(|+ =−|<sup>3</sup>)<sup>d</sup>|<sup>tanttcost</sup>|ln (|π+=+)³<sub>π</sub>||π ln|3|33 π||||||||2 +||||2 + (|x²² x²)||||
+|π ∫|||||66||||66|||于是,||′ (0) =,|′′ (0) FF|11, 22|px (|F ) =|′′ (0) 2!|+ F|′(0) x|+ = ++ F (0)|1 x²² 4|1 x 2|x 3.|
+
+## 一、选择题
+
+## 二、填空题
+
+11.
+12. 解:
+## 解法二: 令
+
+||||||||||||1||||||五、证明题（共 11 分，第 19 题 5 分，第 20 题 6 分）|||||||||||
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+||||||||||||3|||||||||||||||||
+|18.|解:0<sup>u</sup>|1∫<sub>0</sub>|2 =−= 1d,|xx|π|1=1<sup>u</sup> ∫<sub>0</sub>|x − =−− 1|xx d||<sup>22</sup>(1 = x²|)|11.|19.|证明:||对任意两点|x y,|∈[ab,|],|||由拉格朗日中值定理, ∃∈||(ξ|xy ,), 使得|||
+||||||4||||||0|33||(|fx) −|fy (|′(ξ)() = f||xy|) −< −|Mxy.|||||||
+||u =− n||x d (1 3|−=− − + ¹x)|2|n −1 (1|33 <sup>22</sup>x)|1 <sup>2</sup>|11 xn − − (1 ∫∫ 00 33|11|xx x|3 22 <sup>nn</sup><sup>−−</sup>)² d||(1) 若|xx|−≤ 21|− ba, 2|则|fx ()||fx ()<sub>21</sub>|M −<− (2|b a)|.||||
+|||1 =|(1|− n 22 − xx)|1|2 x x d|−− nn 11 −= (|0 u|u)|||||(2) 若|xx|−> 12|ba −,|不妨设||ax x b|≤<≤<sub>12</sub>|则,|xa xb|−+ −<||−|ba.|
+||u|∫<sub>0</sub> n −1 ⇒= n + 2|un<sub>−2</sub> (nn||2, 3,L .)||33 =|−2|nn||||由于|fa () = fx|fb ( ()() fx|), <sub>21</sub>− = −+−|2 fx|2|fb|()()()() fa|fx|<sub>1</sub>|fx ≤ −+ −|<sup>12</sup> ()() ()() fb|fx 21|2|fa|
+|解法二:||ux n|1 −<sub>n</sub> =|2|11 d ∫∫ 00|xxx = (|11 nn −+)|11 −−|xx d −⋅ 22 xx||xxx (|1 11 nn +− d1 = −) ∫ 0|x<sup>2</sup>||||≤|b|Mx₂₁ −+ Mx|a|M −< 2|b − (|a).|||||
+|||= (|x¹¹<sup>nn</sup>|+− x − 1)|x|1 1 − −<sup>2</sup>∫ (<sub>0</sub> 0|<sup>(n</sup>|1)+ −− x|n (n 1)|− x²<sup>n</sup>)|1|2 xx − d|20.|证明:|(1)|x 对 ∀>|0, y|2 = e<sup>x</sup>|在[0,|x|||] 上连续, 由积分中值定理可得,|||∃< <|0, ξ<sub>x</sub> x|
+|||=−+ (|nu nu|1) +− (|<sub>nn</sub>1)|−2|||||||使得|x t∫<sub>0</sub>|2 ed tx =|2ξ <sup>x</sup>|e. 由于函数||y = e|2 <sup>x</sup>|||在[0, +∞) 上严格单调增, 所以 ξ|||<sub>x</sub>|是唯一的.|
+|||||||||||||||||2 x||||||||||||
+|解法三:||= − n|ux|1d|xx 2 nn|11 nn ++ = 1 11 ++||1 x −− 0|11 1 ∫∫ 00 1 n +|21 n + x|− ⋅ 1 − x²|x d x||(2) ξ<sub>x</sub>|<sub>ln</sub> 2|t∫<sub>0</sub> = x|ed t|xe <sup>ln</sup> ∫<sub>0</sub>|2 <sup>t</sup>|d= tx ln,|lim x →+∞|ln x x²|= 0,|||||
+|||=|1 ⋅ 1 n +|2 x|11 −+|=−+|1 xu|<sub>n</sub> nn|11 1 ⋅ ∫∫ 00 11 ++|nn −1|xx x 11 −−|dd x 22|xx₂₂|lim →+∞|2 ξ x|lim →+∞ xx|<sup>ln</sup> =|ed xx||∫∫ 00 lim = →+∞ x|2e<sup>x</sup> 22 xx tt ed tt² 2 x||lim = →+∞ x 2|e<sup>x</sup> 2 x t xt ed||||
+|||=−|u n =−+|11 + ++ nn n − nn ++|− 11 11 uu nn −2 11 π|1|1 − +− x¹² x 0|<sup>(n1)</sup>|1 ∫<sub>0</sub> π|−− nn 1|− x²²| xx d  |解法二:|lim →+∞|= x <sup>2</sup>∫<sub>0</sub>|2e x e d|2 <sup>x</sup> tx + 2e<sup>tx</sup>|22 xx|( lim →+∞ (|24 + = 44 +|x <sup>2</sup> e x) x <sup>2</sup> e x)|2 1. 2||∫<sub>0</sub> =||||
+|解法四:|u|1 n|= x 1 ∫∫ ∫|<sup>xdx−</sup>|00|t|22 sin= cos|nnn tt d|22 ⋅ sin|t (0|1=|sin² t t d ,)|||2|||ed|2 t ln|tx||2 x xx ed|e1 − 2 <sup>t</sup>x t||−−||22 x ed t|
+|记 I|π=<sup>2</sup> n∫<sub>0</sub>|sin<sup>n</sup>|tt d, 则|u = I n nn|I|又 − .<sub>+2</sub>|I <sup>n</sup>||= II|−+ nn <sup>22</sup>|nn −+ 11 nn + 2|,, = I n||lim →+∞|ξ<sub>x</sub>|lim →+∞ xx|<sup>ln</sup> =|22 xx|||∫∫lim→+∞<sup>x</sup>|00 = 2 x||lim →+∞|<sup>x</sup><sup>e</sup> = 2<sup>2</sup> <sup>x</sup>|x t ∫<sub>0</sub>|<sup>xt</sup>∫0 2xt ed|
+|于是,|n nn n ⇒= u n|uII −1 nn + 2|=−= +2 un<sub>−2</sub> (|1 n + 2 2, 3,L|<sub>n</sub>, I .)|=|= −= −− 22||n uIIIII|nnnnnn|1 −=, nn −−|11||lim →+∞|= 4 x|2 2e x ed|2 t t|2 2 e x|lim 2 x →+∞|= xx 2 ed ∫∫ 00|<sup>xx</sup>e xx ++|²²e 22 <sup>tx</sup>e tx|lim xx|+ (= →+∞(<sup>+</sup>|12<sup>2</sup>x) 32<sup>2</sup>x)|2 x 2 e<sup>x</sup>|1. =|
