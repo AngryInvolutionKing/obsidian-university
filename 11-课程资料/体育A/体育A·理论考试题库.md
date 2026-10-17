@@ -4,7 +4,7 @@ course: 体育A
 tags: [资料/体育, 来源/课程共享计划, 优先级/中]
 优先级: 中
 仓库目录: 体育
-source: C:/Users/zhang/Desktop/TJU-CourseSharing
+source: C:/Users/zhang/Desktop/软件/TJU-CourseSharing
 created: 2026-09-24
 updated: 2026-09-24
 ---
@@ -15,11 +15,11 @@ updated: 2026-09-24
 
 ## 题库
 
-[理论考试题库文件夹](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库)
+[理论考试题库文件夹](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库)
 
-通用：[普通体育.xls](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/普通体育.xls) ｜ [体质健康.xlsx](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/体质健康.xlsx) ｜ [安全教育题库.xls](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/安全教育题库.xls)
+通用：[普通体育.xls](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/普通体育.xls) ｜ [体质健康.xlsx](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/体质健康.xlsx) ｜ [安全教育题库.xls](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/安全教育题库.xls)
 
-按项目：[篮球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/篮球.xls) ｜ [排球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/排球.xls) ｜ [足球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/足球.xls) ｜ [羽毛球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/羽毛球.xls) ｜ [乒乓球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/乒乓球.xls) ｜ [网球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/网球.xls) ｜ [武术](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/武术.xls) ｜ [太极拳](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/太极拳.xls) ｜ [健美操](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/健美操.xls) ｜ [跆拳道](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/跆拳道.xls) ｜ [游泳](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/游泳.xls) ｜ [体育舞蹈](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/体育舞蹈.xls) ｜ [台球](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/台球题库.docx) ｜ [体适能](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/体育/理论考试题库/体适能.xls)
+按项目：[篮球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/篮球.xls) ｜ [排球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/排球.xls) ｜ [足球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/足球.xls) ｜ [羽毛球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/羽毛球.xls) ｜ [乒乓球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/乒乓球.xls) ｜ [网球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/网球.xls) ｜ [武术](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/武术.xls) ｜ [太极拳](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/太极拳.xls) ｜ [健美操](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/健美操.xls) ｜ [跆拳道](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/跆拳道.xls) ｜ [游泳](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/游泳.xls) ｜ [体育舞蹈](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/体育舞蹈.xls) ｜ [台球](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/台球题库.docx) ｜ [体适能](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/体育/理论考试题库/体适能.xls)
 
 ## 成绩构成（仓库经验，仅供参考）
 

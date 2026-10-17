@@ -4,7 +4,7 @@ course: 程序设计原理
 tags: [资料/程序设计, 来源/课程共享计划, 优先级/高]
 优先级: 高
 仓库目录: 2180279_程序设计原理
-source: C:/Users/zhang/Desktop/TJU-CourseSharing
+source: C:/Users/zhang/Desktop/软件/TJU-CourseSharing
 created: 2026-09-24
 updated: 2026-09-24
 ---
@@ -17,11 +17,11 @@ updated: 2026-09-24
 
 | 材料 | 说明 | 链接 |
 | --- | --- | --- |
-| 模拟题 00 | 期末模拟卷 | [模拟题00.pdf](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/2180279_程序设计原理/模拟题00.pdf) |
-| 模拟题 01 | 期末模拟卷 | [模拟题01.pdf](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/2180279_程序设计原理/模拟题01.pdf) |
-| 演示代码 | 按知识点命名的 .cpp/.h，上百个 | [演示代码文件夹](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/2180279_程序设计原理/演示代码) |
-| 教材 | C++ 程序设计（第 3 版），145 MB | [C++程序设计_第3版.pdf](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/2180279_程序设计原理/C++程序设计_第3版.pdf) |
-| 课程说明 | 仓库版考核与经验 | [2180279_程序设计原理_课程说明.docx](file:///C:/Users/zhang/Desktop/TJU-CourseSharing/2180279_程序设计原理/2180279_程序设计原理_课程说明.docx) |
+| 模拟题 00 | 期末模拟卷 | [模拟题00.pdf](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/模拟题00.pdf) |
+| 模拟题 01 | 期末模拟卷 | [模拟题01.pdf](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/模拟题01.pdf) |
+| 演示代码 | 按知识点命名的 .cpp/.h，上百个 | [演示代码文件夹](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/演示代码) |
+| 教材 | C++ 程序设计（第 3 版），145 MB | [C++程序设计_第3版.pdf](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/C++程序设计_第3版.pdf) |
+| 课程说明 | 仓库版考核与经验 | [2180279_程序设计原理_课程说明.docx](file:///C:/Users/zhang/Desktop/软件/TJU-CourseSharing/2180279_程序设计原理/2180279_程序设计原理_课程说明.docx) |
 
 ## 演示代码怎么用
 
