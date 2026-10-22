@@ -1,0 +1,7 @@
+!! the CLI answered nothing, even for a wrapped try/catch probe.
+   So this is NOT your expression and NOT a quoting problem. Likely causes:
+   the app is busy or blocked, the vault name does not match, or the command
+   line interface needs Obsidian to be restarted.
+   Stop retrying the expression. Use the fallbacks in SKILL.md instead:
+   edit the markdown files directly for note work, or edit .obsidian\app.json
+   with the user's consent for settings, then have them restart Obsidian.
