@@ -12,18 +12,20 @@
 @media(max-width:790px){main{padding:20px 13px}.top{margin-bottom:19px}.layout{grid-template-columns:1fr;gap:22px}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:23px}.status{grid-column:1/-1}.status p{min-height:0}.section:last-child{grid-column:1/-1}.foot{flex-direction:column;gap:4px}.scene svg .annotations{display:none}.mobile-note{display:inline}.view-note{font-size:10px;left:14px;bottom:5px}.key{font-size:10px;padding:5px 15px 14px;gap:12px}#scene{aspect-ratio:1180/800}.stage-tools{gap:4px}.scene-heading{font-size:12px}}
 @media(max-width:460px){.sidebar{grid-template-columns:1fr}.section:last-child{grid-column:auto}.top h1{font-size:28px}.subtitle{font-size:12px}.stage-top{gap:11px}.stage-tools{width:100%}.stage-tools .small{flex:1}.timeline button{font-size:10px}.actions{gap:6px}.actions button{font-size:11px;padding:9px 8px}.actions select{font-size:11px}.view-note{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.mechanism-panel{border-top:1px solid var(--line);padding:21px 22px;background:#fafbf6}.mechanism-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.mechanism-header h2{font-size:15px;margin:0}.mechanism-header span{font-size:11px;color:var(--muted)}#mechanism{display:block;width:100%;height:auto;margin-top:10px}.mechanism-copy{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;font-size:12px;line-height:1.8;color:var(--muted)}.mechanism-copy b{color:var(--ink);font-weight:600}.grip-state{padding:10px 0;font-size:12px;line-height:1.8;color:var(--teal)}.timeline{flex-wrap:wrap}.timeline button{min-height:30px}.swatch.grip{background:#9d71a7}.checks{line-height:1.8}.manual-dim{font-family:Consolas,'Microsoft YaHei',sans-serif}
+@media(max-width:650px){.mechanism-panel{padding:17px 13px}.mechanism-copy{grid-template-columns:1fr;gap:7px}#mechanism .small-detail{display:none}.timeline{gap:3px}.timeline button{font-size:10px}}
 </style>
 </head>
 <body>
 <main id="app">
   <div class="eyebrow">MECHANISM STUDY / 01　折叠收纳展柜</div>
-  <header class="top"><div><h1>展示，收回，<span>推走。</span></h1><p class="subtitle">展品始终固定在托座上。沿用剪叉与丝杆结构，让收纳按顺序发生。</p></div><div class="version">交互结构提案 V1.0<br>概念尺寸 · 单位 mm<br>离线可用 / 无外部依赖</div></header>
+  <header class="top"><div><h1>下降，夹紧，<span>保护。</span></h1><p class="subtitle">先由托座承托下降，落座后机械夹爪收拢，再合盖并移动。</p></div><div class="version">交互结构提案 V2.0<br>三轨凸轮 · 对向软垫夹爪<br>概念尺寸 / 离线可用</div></header>
   <div class="layout">
     <section class="stage" aria-label="展柜交互演示">
       <div class="stage-top"><div class="scene-heading"><span class="dot"></span><span id="viewLabel">轴测剖视 · 双组同步剪叉</span></div><div class="stage-tools"><button class="small" id="viewBtn" type="button">切换正视</button><button class="small" id="fullBtn" type="button" aria-pressed="false">放大视图</button><button class="small" id="exportBtn" type="button">保存 SVG</button></div></div>
       <div class="scene">
         <svg id="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 800" role="img" aria-labelledby="svgTitle svgDesc">
-          <title id="svgTitle">剪叉升降式移动收纳展柜</title><desc id="svgDesc">两组等长剪叉由同一滑块位置同步驱动。先下降、落座，再关闭双翻盖、锁定、收起支撑脚并移动。可拖动下方进度条检查每个状态。</desc>
+          <title id="svgTitle">下降后夹紧的移动收纳展柜</title><desc id="svgDesc">展台先下降并落座，两侧软垫夹爪再向中间收拢。夹紧确认后关闭双翻盖、锁定、收脚并移动。反向先开盖，松爪后才升台。</desc>
           <defs>
             <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#dde6df"/></pattern>
             <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#a7b7af" stroke-width="1.5"/></pattern>
@@ -35,40 +37,47 @@
         </svg>
         <div class="view-note">沿用参考图：固定端＋滑动端＋中心铰接。<span class="mobile-note">小屏可放大查看。</span><br>虚线表示导向、拉索或被遮挡的连接。</div>
       </div>
-      <div class="key"><span><i class="swatch"></i>升降机构</span><span><i class="swatch object"></i>展品与固定托座</span><span><i class="swatch shell"></i>箱体与双翻盖</span><span>● 铰接　▰ 滑块</span></div>
+      <div class="key"><span><i class="swatch"></i>升降机构</span><span><i class="swatch object"></i>展品与仿形托座</span><span><i class="swatch grip"></i>对向夹爪</span><span><i class="swatch shell"></i>箱体与双翻盖</span></div>
       <div class="controls">
         <div class="actions"><button type="button" class="primary" id="storeBtn">收纳演示</button><button type="button" id="showBtn">展开展示</button><button type="button" id="cycleBtn">完整往返</button><button type="button" id="pauseBtn" disabled>暂停</button><select id="speed" aria-label="演示速度"><option value="1">正常速度</option><option value="0.6">慢速 ×0.6</option><option value="2">快速 ×2</option></select></div>
         <label class="scrub-label" for="progress"><span>拖动检查任意时刻</span><span class="mono" id="progressValue">0%</span></label><input id="progress" type="range" min="0" max="1000" value="0" step="1" aria-label="收纳进度">
-        <nav class="timeline" aria-label="跳转动作阶段"><button type="button" data-progress="0">01 展示</button><button type="button" data-progress="0.32">02 下降</button><button type="button" data-progress="0.62">03 落座</button><button type="button" data-progress="0.84">04 合盖</button><button type="button" data-progress="1">05 移动</button></nav>
+        <nav class="timeline" aria-label="跳转动作阶段"><button type="button" data-progress="0">01 展示</button><button type="button" data-progress="0.26">02 下降</button><button type="button" data-progress="0.50">03 落座</button><button type="button" data-progress="0.60">04 夹紧</button><button type="button" data-progress="0.86">05 合盖</button><button type="button" data-progress="1">06 移动</button></nav>
       </div>
+      <section class="mechanism-panel" aria-label="手工联动与夹爪传动细化">
+        <div class="mechanism-header"><h2>手工联动拆解</h2><span>与主进度同步 · 三轨凸轮＋拉索＋对向齿条</span></div>
+        <svg id="mechanism" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 460" role="img" aria-labelledby="mechTitle mechDesc"><title id="mechTitle">三轨直动槽凸轮和机械夹爪</title><desc id="mechDesc">A 轨先驱动剪叉滑块，B 轨在平台落座后拉紧夹爪，C 轨在夹紧之后通过拉索驱动翻盖。凸轮板平移，固定导向中的滚子跟随各槽运动。夹爪通过中央齿轮与两条反向齿条同步收拢。</desc><defs><clipPath id="camWindow"><rect x="24" y="56" width="516" height="332" rx="7"/></clipPath></defs><g id="mechanismDrawing"></g></svg>
+        <div class="mechanism-copy"><div><b>A / 平台下降</b><br>240 mm 操作总程中的前段，经双动滑轮复绕将从动件位移放大 4 倍，带动剪叉滑块。后段为停歇槽。</div><div><b>B / 落座后夹紧</b><br>拉索带动一条齿条，中央齿轮同步驱动另一侧反向齿条。单爪行程 20 mm；限力弹簧吸收接触后的过行程。</div><div><b>C / 夹紧后合盖</b><br>横向均衡杆同时牵引两根盖板拉索，绕恒定半径 20 mm 的铰轴卷盘关盖。开盖方向设置复位扭簧。</div></div>
+        <details style="margin-top:15px"><summary>拉索接法、保持与反向展开</summary><p>A 轨从动件驱动两级动滑轮，形成 4:1 位移关系；升降采用正、反两根牵引索闭合传动并设置张紧件。示意中的 A 槽按实际剪叉滑块位移除以 4 生成，不能用平台高度线性替代。</p><p>B 轨通过柔性套管拉索连接随平台移动的夹爪；套管在柜后留出升降所需的弯曲余量。夹爪夹持展品下部可承力位置的定制托圈，软垫与串联限力弹簧缓冲接触；到位保持件负责运输时保持夹紧。夹紧力需要根据展品和托圈试验确定，此页不设通用牛顿值。</p><p>C 轨带动均衡杆下移约 47.1 mm，使两个半径 20 mm 的卷盘各转动 135°。拉索从每个卷盘的柜内侧切线向下引出；关盖时卷盘上的包覆弧缩短，下方直线段同步增长。复位扭簧负责在拉索释放后打开轻质盖板，并设置开盖限位。</p><p>反向推回操作杆时依次开盖、解除夹紧保持并释放 B 索，夹爪由小回位弹簧张开，最后 A 轨才驱动展台上升。主动画中的锁销、驻车和支撑脚是单独动作；三轨凸轮只安排升降、夹紧、盖板三路，未把所有锁止和驻车机构都做成单杆联动。</p></details>
+      </section>
     </section>
     <aside class="sidebar">
-      <section class="status" id="statusPanel" aria-live="polite"><div class="status-kicker" id="stateIndex">01 / DISPLAY</div><h2 id="stateTitle">展开 · 稳定展示</h2><p id="stateDesc">平台升至柜口，展示锁止到位。支撑脚落地，脚轮驻车，展品保持固定。</p><div class="status-line"><span id="lockState">展示位已锁定</span><span id="motionState">驻车中</span></div></section>
+      <section class="status" id="statusPanel" aria-live="polite"><div class="status-kicker" id="stateIndex">01 / DISPLAY</div><h2 id="stateTitle">展开 · 承托展示</h2><p id="stateDesc">展品由仿形托座承托定位，夹爪张开。平台锁止，脚轮驻车，支撑脚落地。</p><div class="status-line"><span id="lockState">展示位已锁定</span><span id="motionState">驻车中</span></div></section>
       <section class="section"><div class="section-title">当前几何</div><div class="readouts"><div class="readout"><label>平台上表面距箱底</label><strong class="mono" id="heightValue">520</strong><small>mm</small></div><div class="readout"><label>剪叉杆倾角</label><strong class="mono" id="angleValue">53.9</strong><small>°</small></div><div class="readout"><label>下端滑块位移</label><strong class="mono" id="travelValue">0</strong><small>mm</small></div><div class="readout"><label>收纳后顶部净空</label><strong class="mono" id="clearanceValue">65</strong><small>mm</small></div></div>
         <div class="parameter"><label for="objectHeight"><span>展品＋托座总高</span><span class="mono"><span id="objectHeightValue">230</span> mm</span></label><input id="objectHeight" type="range" min="140" max="320" step="5" value="230"><p id="clearanceHint">合盖需至少 20 mm 概念余量；当前尺寸可收入柜内。</p><button type="button" class="small" id="faultBtn" style="margin-top:10px">试试：展品过高会怎样？</button></div>
       </section>
-      <section class="section"><div class="section-title">驱动与观察</div><div class="option-row"><button type="button" id="electricBtn" aria-pressed="true">电机丝杆版</button><button type="button" id="manualBtn" aria-pressed="false">手工拉杆版</button></div><div class="checks"><label><input type="checkbox" id="cutaway" checked>剖开箱体</label><label><input type="checkbox" id="dims" checked>尺寸标注</label></div><p class="part-detail" id="driveDesc">保留参考图中的电机、丝杆、螺母滑块。盖板另设驱动，依上下限位与锁止信号顺序动作。</p><svg id="sequence" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 110" role="img" aria-label="动作行程图：平台先下降，顶盖后关闭"><g id="sequenceDrawing"></g></svg></section>
-      <section class="section"><div class="section-title">点选查看结构</div><div class="part-list" id="parts"><button type="button" data-part="object"><b>01</b>展品托座与固定件</button><button type="button" data-part="lift"><b>02</b>双组剪叉与横向同步轴</button><button type="button" data-part="drive"><b>03</b>驱动滑块与水平导轨</button><button type="button" data-part="lids"><b>04</b>双翻盖与侧置铰链</button><button type="button" data-part="base"><b>05</b>落座承托、脚轮与支撑脚</button></div><p class="part-detail" id="partDetail">选择一个部件，在图中高亮观察。橙色展品与托座全程作为一个整体移动。</p>
+      <section class="section"><div class="section-title">驱动与观察</div><div class="option-row"><button type="button" id="electricBtn" aria-pressed="false">电机丝杆版</button><button type="button" id="manualBtn" aria-pressed="true">手工拉杆版</button></div><div class="checks"><label><input type="checkbox" id="cutaway" checked>剖开箱体</label><label><input type="checkbox" id="dims" checked>尺寸标注</label><label><input type="checkbox" id="clampOK" checked>模拟夹紧确认</label></div><div class="grip-state" id="gripState">夹爪张开 · 展品由托座定位</div><p class="part-detail" id="driveDesc">三轨槽凸轮依次输出：A 降台、B 拉索夹紧、C 拉索关盖。下方拆解图同步显示滚子位置和停歇段。</p><svg id="sequence" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 130" role="img" aria-label="动作行程图：平台先下降、夹爪后收拢、最后关闭顶盖"><g id="sequenceDrawing"></g></svg></section>
+      <section class="section"><div class="section-title">点选查看结构</div><div class="part-list" id="parts"><button type="button" data-part="object"><b>01</b>展品与仿形托座</button><button type="button" data-part="grip"><b>02</b>软垫夹爪与同步齿条</button><button type="button" data-part="lift"><b>03</b>双组剪叉与横向同步轴</button><button type="button" data-part="drive"><b>04</b>凸轮输入与升降滑块</button><button type="button" data-part="lids"><b>05</b>翻盖卷盘与双路拉索</button><button type="button" data-part="base"><b>06</b>承托锁止、脚轮与支撑脚</button></div><p class="part-detail" id="partDetail">选择部件高亮查看。下降阶段夹爪张开，平台落座后才收拢。</p>
         <details><summary>概念尺寸与制作映射</summary><p>箱体外廓约 640 × 460 × 500 mm，脚轮另高约 80 mm；平台 560 × 350 × 20 mm；剪叉销轴中心距 520 mm；升降行程 315 mm。尺寸仅供结构讨论，未计板厚、公差及制造避让。</p><p>手工模型可先按约 1:2 缩放：箱体用硬纸板，连杆用双层纸板或木条，销轴用竹签加垫片，滑槽用纸轨配短吸管，轻质盖板用纸板与透明片，拉索用棉线。</p><p>建议先验证单组剪叉与滑槽，再加第二组同步剪叉和盖板。纸板模型采用轻质替身展品，瓶盖轮仅用于平整桌面演示。</p></details>
-        <details style="margin-top:13px"><summary>联动边界与下一步设计</summary><p>此页验证等长剪叉的几何关系与动作先后。电机版展示顺序控制；手工版的双槽凸轮、杠杆传动及拉索走线为待细化机构，行程图不是可直接加工的凸轮槽形。</p><p>盖板在平台下降到底、展品留足净空后才运动。净空检查为演示中的软件约束，实物还需要限位、锁止和阻挡检测。未验证承载、弹性变形、防倾覆、运输减振或密封性能。</p><p>移动段表示室内平整地面上的人工推行，固定箱体负责容纳展品，折叠发生在内部剪叉和翻盖处。</p></details>
+        <details style="margin-top:13px"><summary>尺寸、夹紧与联动边界</summary><p>下降时由定制仿形托座承托定位，不能假设未夹紧的任意展品都能稳定升降。示例夹爪带软垫，通过承力托圈夹持；可接触位置与夹紧力需按展品确认。</p><p>三条凸轮槽画出的是从动滚子中心轨迹，已经按剪叉几何和卷盘半径计算位移。滚子半径补偿、槽宽、公差、压力角、拉索预紧和夹紧保持解锁仍需工程复核，不能直接据此加工承载机构。</p><p>模拟夹紧确认复选框用于演示“不到位不合盖”。实物可采用行程与限力状态确认，并配合机械止挡；此页未实现其完整锁止结构。未验证承载、易碎件接触应力、运输减振与密封性能。</p></details>
       </section>
     </aside>
   </div>
-  <footer class="foot"><span><strong>先降台 → 落座锁定 → 合盖 → 解除驻车 → 推行</strong>　反向操作依次展开。</span><span>概念运动学演示 · 不是制造图或载荷仿真</span></footer>
+  <footer class="foot"><span><strong>先降台 → 落座 → 夹紧确认 → 合盖 → 解除驻车 → 推行</strong>　反向先松爪，再升台。</span><span>V2.0 · 概念运动学与传动关系 · 非加工图</span></footer>
   <div class="sr-only" id="announcement" aria-live="polite"></div>
 </main>
 <script>
 'use strict';
 (()=>{
 const $=id=>document.getElementById(id), clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), smooth=x=>{x=clamp(x);return x*x*(3-2*x)}, segment=(p,a,b)=>smooth((p-a)/(b-a));
-const C={width:640,depth:460,rim:500,base:80,rod:520,hHigh:420,hLow:105,plate:20,hinge:135,margin:20};
+const C={width:640,depth:460,rim:500,base:80,rod:520,hHigh:420,hLow:105,plate:20,hinge:135,margin:20,inputTravel:240,liftRatio:4,jawStroke:20,drumRadius:20};
 const dHigh=Math.sqrt(C.rod*C.rod-C.hHigh*C.hHigh),dLow=Math.sqrt(C.rod*C.rod-C.hLow*C.hLow);
-const state={p:0,objectHeight:230,mode:'electric',cutaway:true,dims:true,front:false,selected:null,running:false,paused:false,raf:0,target:1,cycle:false,phase:'',last:0,hold:0};
-const partText={object:'展品通过专用托座固定在平台上。模型中的四个定位件夹持托座，不直接夹紧脆弱展品；实际支承需按物件定制。',lift:'两组相同的 X 形剪叉通过横轴连接。每组含两个等长连杆、五个铰接位置，上下滑动端保持相同水平位置。',drive:'固定端保持不动，滑动端沿水平导轨外移时平台下降。丝杆版由螺母驱动；手工版用拉杆传动替代。',lids:'左右两片顶盖围绕柜口外侧铰链转动。盖板先完整打开，平台才能上升；展品进入柜内后才允许合盖。',base:'收纳后平台落在四个承托块上并锁定。展示时支撑脚落地且脚轮驻车；移动前收脚并解除驻车。'};
-function geometry(p=state.p,objectHeight=state.objectHeight){
- const lower=segment(p,.06,.58),h=C.hHigh-(C.hHigh-C.hLow)*lower,d=Math.sqrt(C.rod*C.rod-h*h),z=C.base+h;
- const lid=C.hinge*(1-segment(p,.64,.84)),feet=1-segment(p,.90,.94),move=segment(p,.94,1),clearance=C.rim-(C.base+C.hLow+C.plate+objectHeight);
- return {p,h,d,z,top:z+C.plate,objectTop:z+C.plate+objectHeight,lid,feet,move,clearance,angle:Math.asin(h/C.rod)*180/Math.PI,travel:d-dHigh,lower,baseLocked:p>=.62,displayLocked:p<=.02,lidLocked:p>=.90};
+const state={p:0,objectHeight:230,mode:'manual',clampOK:true,cutaway:true,dims:true,front:false,selected:null,running:false,paused:false,raf:0,target:1,cycle:false,phase:'',last:0,hold:0};
+const partText={object:'下降时由仿形托座承托定位。夹爪保持张开，平台落座后才夹紧展品下部的定制承力托圈。',grip:'中央齿轮啮合两条反向齿条，使左右软垫夹爪各内移 20 mm。串联限力弹簧缓冲接触，回位弹簧在拉索释放后张开夹爪。',lift:'两组相同的 X 形剪叉通过横轴连接。每组含两个等长连杆、五个铰接位置，上下滑动端保持相同水平位置。',drive:'手工版由三轨槽凸轮分时输出，A 轨经 4:1 复绕拉索驱动升降滑块，B 轨夹紧，C 轨关盖。电机版保留参考图的丝杆。',lids:'盖板在平台落座且夹紧确认后才运动。手工版由内侧切线引出的拉索牵引恒半径卷盘关盖，复位扭簧负责打开。',base:'平台下降后先落在承托块上并锁定，再夹紧展品。移动前收脚解除驻车；锁销与驻车动作仍为单独机构。'};
+function geometry(p=state.p,objectHeight=state.objectHeight,clampOK=state.clampOK){
+ const lower=segment(p,.04,.46),h=C.hHigh-(C.hHigh-C.hLow)*lower,d=Math.sqrt(C.rod*C.rod-h*h),z=C.base+h;
+ const grip=segment(p,.52,.66),gripConfirmed=grip>=1&&clampOK;
+ const lid=C.hinge*(1-segment(p,.70,.86)),feet=1-segment(p,.90,.94),move=segment(p,.94,1),clearance=C.rim-(C.base+C.hLow+C.plate+objectHeight);
+ return {p,h,d,z,top:z+C.plate,objectTop:z+C.plate+objectHeight,lid,feet,move,clearance,angle:Math.asin(h/C.rod)*180/Math.PI,travel:d-dHigh,lower,grip,gripConfirmed,jawTravel:C.jawStroke*grip,baseLocked:p>=.49,displayLocked:p<=.02,lidLocked:p>=.90,camA:(d-dHigh)/C.liftRatio,camB:C.jawStroke*grip,camC:C.drumRadius*(C.hinge-lid)*Math.PI/180};
 }
 function P(x,y,z){return state.front?[330+x*.76,690-z*.76]:[240+.76*(x+.44*y),690-.76*(z+.28*y)];}
 const pts=a=>a.map(v=>P(...v).map(n=>n.toFixed(2)).join(',')).join(' ');
@@ -118,10 +127,12 @@ function draw(){
   for(let x=56;x<595;x+=12)drive+=line([x,43,51],[x+5,43,65],`stroke="#eaf3e7" stroke-width="2" opacity="${.6+.35*Math.sin(g.travel*.3+x)}"`);
   drive+=box(589,20,30,24,45,50,'#b2c8b8');
  }else{
-  drive+=line([nutX,43,58],[720+g.travel*.24,43,58],'stroke="#628878" stroke-width="9"');
-  drive+=box(710+g.travel*.24,15,35,18,60,46,'#dca26c');
-  // Conceptual control module: exact cam/lever geometry intentionally not fabricated.
+  drive+=line([620,22,58],[680+C.inputTravel*g.p,22,58],'stroke="#628878" stroke-width="9"');
+  drive+=box(670+C.inputTravel*g.p,0,35,18,45,46,'#dca26c');
+  // Input rod acts on a cam plate, not directly on the lift carriage.
   drive+=box(610,145,20,34,105,85,'#c0d5c3');
+  drive+=line([610,25,102],[nutX,25,102],'stroke="#b18a4e" stroke-width="2" stroke-dasharray="5 4"');
+  drive+=line([nutX,25,102],[nutX,43,58],'stroke="#b18a4e" stroke-width="2"');
  }
  drive+=box(nutX-20,12,33,40,60,50,'#75a593');
  drive+=line([nutX,43,77],[nutX,90,80],'stroke="#416d5d" stroke-width="8"');
@@ -136,6 +147,24 @@ function draw(){
  obj+=box(224,146,g.top,192,168,10,'#adba9f');obj+=vase(g);
  for(const [x,y]of [[225,160],[390,160],[225,280],[390,280]])obj+=box(x,y,g.top+9,25,16,10,'#936c46');
  s+=part('object',obj);
+ // Symmetric jaws travel with the platform, but close only after it is seated.
+ const radius=50*(state.objectHeight-10)/220,openGap=C.jawStroke*(1-g.grip),left=320-radius-openGap,right=320+radius+openGap;
+ const contactZ=g.top+10+24*(state.objectHeight-10)/220;
+ let jaws=box(195,142,g.top+3,250,34,9,'#c8b5ca');
+ jaws+=line([210,158,g.top+14],[430,158,g.top+14],'stroke="#a386ac" stroke-width="4"');
+ for(const [face,side]of [[left,-1],[right,1]]){
+  const body=side<0?face-20:face+4;
+  jaws+=box(body,143,g.top+10,16,31,18,'#a587ae');
+  jaws+=line([face+side*12,158,g.top+24],[face+side*12,230,contactZ],'stroke="#8e6d9a" stroke-width="8" stroke-linecap="round"');
+  jaws+=box(side<0?face-12:face+6,211,contactZ-15,6,38,30,'#9778a2');
+  jaws+=box(side<0?face-6:face,213,contactZ-12,6,34,24,g.gripConfirmed?'#77a995':'#cfb8d0');
+ }
+ const cp=P(320,230,contactZ);jaws+=`<ellipse cx="${cp[0]}" cy="${cp[1]}" rx="${radius*.76}" ry="${7*(state.objectHeight-10)/220}" fill="none" stroke="#a79e7e" stroke-width="3" stroke-dasharray="4 2"/>`;
+ const gear=P(320,159,g.top+16);jaws+=`<circle cx="${gear[0]}" cy="${gear[1]}" r="8" fill="#e9dbeb" stroke="#81668c" stroke-width="2"/><path d="M${gear[0]-5} ${gear[1]}h10" stroke="#81668c" transform="rotate(${g.grip*76},${gear[0]},${gear[1]})"/>`;
+ if(state.mode==='manual'){
+  const a=P(590,430,80),b=P(580,430,g.top+16);jaws+=`<path d="M${a} C${a[0]+45} ${a[1]-70} ${b[0]+45} ${b[1]+70} ${b}" fill="none" stroke="#b5a0bd" stroke-width="4" stroke-dasharray="8 4"/>`;
+ }
+ s+=part('grip',jaws);
  // Latches: top display bolts and bottom transport bolts are distinct.
  if(g.displayLocked)for(const x of [40,575])s+=box(x,20,486,28,22,14,'#d29855');
  if(g.baseLocked)for(const x of [66,535])s+=box(x,9,185,25,18,14,'#d29855');
@@ -152,16 +181,19 @@ function draw(){
  }
  for(const x of [0,W])for(const y of [80,350]){lids+=pin(x,y,H,5);lids+=line([x,y-14,H],[x,y+14,H],'stroke="#456d5b" stroke-width="6"');}
  if(state.mode==='manual'){
-  for(const [x,f]of [[-8,lp],[648,rp]]){
-   let A=P(x,25,65),B=P(x,25,470),T=P(...f(65,25));
-   lids+=`<path d="M${A} L${B} L${T}" fill="none" stroke="#ba8b52" stroke-width="2" stroke-dasharray="6 4"/>`;
+  for(const [hinge,sign]of [[0,1],[640,-1]]){
+   const R=C.drumRadius;
+   lids+=line([hinge+sign*R,25,65-g.camC],[hinge+sign*R,25,H],'stroke="#b18342" stroke-width="2.5"');
+   const center=P(hinge,25,H);lids+=`<circle cx="${center[0]}" cy="${center[1]}" r="${R*.76}" fill="#eee2c7" stroke="#af8950" stroke-width="1.4"/>`;
+   let rope='';for(let i=0;i<=40;i++){const ang=(Math.PI/2+a)*i/40,q=P(hinge+sign*R*Math.cos(ang),25,H+R*Math.sin(ang));rope+=(i?'L':'M')+q[0]+' '+q[1];}
+   lids+=`<path d="${rope}" fill="none" stroke="#b18342" stroke-width="2.5"/>`;
   }
  }else{for(const x of [-12,628])lids+=box(x,196,468,24,50,30,'#9fbda8');}
  if(g.lidLocked)lids+=box(307,-6,490,26,16,18,'#be8b49');
  s+=part('lids',lids);
  if(g.move>.05){const [x,y]=P(320,0,-110);s+=`<path d="M${x-50} ${y}h100m-14-8 14 8-14 8" stroke="#5a8c71" stroke-width="2" fill="none"/>`;}
  s+='</g>';$('drawing').innerHTML=s;
- drawAnnotations(g,shift);drawSequence(g);updateUI(g);
+ drawAnnotations(g,shift);drawSequence(g);drawMechanism(g);updateUI(g);
 }
 function drawAnnotations(g,shift){let a='';
  function call(text,screen,world){let t=P(...world);t[0]+=shift;let [x,y]=screen;a+=`<path d="M${x+8} ${y+10} L${x+8} ${t[1]} L${t[0]} ${t[1]}" fill="none" stroke="#9aada2" stroke-width="1"/><circle cx="${t[0]}" cy="${t[1]}" r="3" fill="#668a75"/><rect x="${x}" y="${y-15}" width="${text.length*16+20}" height="29" rx="5" class="callout"/><text x="${x+10}" y="${y+5}" class="label">${text}</text>`;}
