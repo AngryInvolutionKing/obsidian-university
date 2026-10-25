@@ -15,25 +15,40 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
     await page.waitForFunction(() => !!window.cabinetDemo);
     const checks = await page.evaluate(() => {
       const demo = window.cabinetDemo, c = demo.constants;
-      let maxRodError = 0;
+      let maxRodError = 0, maxRopeError = 0;
       for (let i = 0; i <= 1000; i++) {
         const g = demo.geometry(i / 1000, 230);
         maxRodError = Math.max(maxRodError, Math.abs(Math.hypot(g.d, g.h) - c.rod));
+        if(g.lower < 1 && g.grip > 0) throw new Error('平台未降到底便开始夹紧');
+        if(g.grip > 0 && !g.baseLocked) throw new Error('平台未落座锁定便开始夹紧');
+        if(g.lid < c.hinge - 1e-6 && !g.gripConfirmed) throw new Error('夹紧未确认便开始关盖');
+        if(Math.abs(g.camA * c.liftRatio - g.travel)>1e-8) throw new Error('A 槽与复绕位移不一致');
+        const ropeLength = c.rim - (65 - g.camC) + c.drumRadius * (Math.PI / 2 + g.lid * Math.PI / 180);
+        const referenceLength = c.rim - 65 + c.drumRadius * (Math.PI / 2 + c.hinge * Math.PI / 180);
+        maxRopeError = Math.max(maxRopeError, Math.abs(ropeLength - referenceLength));
         if (g.lid < c.hinge - 1e-6 && g.objectTop > c.rim - c.margin) throw new Error('盖板进入运动时展品净空不足');
         if (g.move > 0 && !(g.baseLocked && g.lidLocked && g.feet < 1e-6 && g.lid < 1e-6)) throw new Error('移动联锁不成立');
       }
-      return { samples: 1001, maxRodError, high: demo.geometry(0, 230), low: demo.geometry(1, 230) };
+      return { samples: 1001, maxRodError, maxRopeError, high: demo.geometry(0, 230), low: demo.geometry(1, 230) };
     });
     assert(checks.maxRodError < 1e-8, '剪叉杆长不守恒');
+    assert(checks.maxRopeError < 1e-8, '卷盘包覆弧与自由索段总长不守恒');
     assert(checks.low.clearance === 65, '净空与概念尺寸不一致');
     fs.mkdirSync(path.join(__dirname, 'verification'), { recursive: true });
     const top = () => page.evaluate(() => window.scrollTo(0, 0));
     await top();
     await page.screenshot({ path: path.join(__dirname, 'verification', '01-display.png') });
-    await page.locator('[data-progress="0.32"]').click();
+    await page.locator('[data-progress="0.26"]').click();
     assert((await page.locator('#stateTitle').innerText()).includes('下降'), '下降阶段跳转失败');
     await top();
     await page.screenshot({ path: path.join(__dirname, 'verification', '02-lowering.png') });
+    await page.locator('[data-progress="0.60"]').click();
+    assert((await page.locator('#stateTitle').innerText()).includes('夹爪'), '夹紧阶段跳转失败');
+    const clampState = await page.evaluate(() => window.cabinetDemo.geometry(window.cabinetDemo.getState().p));
+    assert(clampState.lower === 1 && clampState.baseLocked && clampState.grip > 0 && clampState.grip < 1, '夹紧阶段未保持平台落座');
+    await top();
+    await page.screenshot({ path: path.join(__dirname, 'verification', '02b-clamping.png') });
+    await page.locator('#mechanism').screenshot({ path: path.join(__dirname, 'verification', '02c-cam-grip.png') });
     await page.locator('[data-progress="1"]').click();
     assert((await page.locator('#stateTitle').innerText()).includes('推行'), '移动阶段跳转失败');
     await top();
@@ -51,9 +66,15 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
     await page.screenshot({ path: path.join(__dirname, 'verification', '04-solid-front.png') });
     await page.locator('#objectHeight').evaluate(el => { el.value = '320'; el.dispatchEvent(new Event('input', { bubbles: true })); });
     const blocked = await page.evaluate(() => ({ p: window.cabinetDemo.getState().p, g: window.cabinetDemo.geometry(window.cabinetDemo.getState().p) }));
-    assert(blocked.p === .64 && blocked.g.lid === checks.high.lid && blocked.g.move === 0, '过高展品未阻止合盖与移动');
+    assert(blocked.p === .70 && blocked.g.lid === checks.high.lid && blocked.g.move === 0, '过高展品未阻止合盖与移动');
     assert((await page.locator('#stateTitle').innerText()).includes('阻止'), '异常状态没有显示');
     await page.locator('#objectHeight').evaluate(el => { el.value = '230'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+    await page.locator('#clampOK').uncheck();
+    await page.locator('[data-progress="1"]').click();
+    const gripBlocked = await page.evaluate(() => ({p:window.cabinetDemo.getState().p,g:window.cabinetDemo.geometry(window.cabinetDemo.getState().p)}));
+    assert(gripBlocked.p === .70 && !gripBlocked.g.gripConfirmed && gripBlocked.g.lid===checks.high.lid && gripBlocked.g.move===0, '夹紧未确认没有阻止合盖');
+    assert((await page.locator('#stateDesc').innerText()).includes('夹紧确认'), '夹紧异常提示缺失');
+    await page.locator('#clampOK').check();
     await page.locator('#electricBtn').click();
     await page.locator('#viewBtn').click();
     await page.locator('#cutaway').check();
@@ -87,7 +108,7 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
       if (width === 390) await page.screenshot({ path: path.join(__dirname, 'verification', '05-mobile.png'), fullPage: false });
     }
     assert(errors.length === 0, `浏览器运行错误: ${errors.join('; ')}`);
-    const report = { result: 'PASS', checks: ['1001 个剪叉状态的杆长守恒', '合盖前净空与移动前锁止顺序', '阶段跳转、驱动切换、剖视与正视切换', '过高展品阻止合盖与移动', '播放、暂停、继续、反向展开', '当前 SVG 导出', '390 / 768 / 1440px 无水平溢出', '无浏览器脚本错误'], samples: checks.samples, rodLengthError: checks.maxRodError, storedClearanceMM: checks.low.clearance };
+    const report = { result: 'PASS', checks: ['1001 个状态：杆长守恒、下降后夹紧、确认后合盖', 'A 槽与 4:1 复绕位移一致', '盖板卷盘包覆弧与直线索段总长守恒', '夹紧未确认、展品过高均阻止合盖和移动', '阶段跳转、驱动切换、剖视与正视切换', '播放、暂停、继续、反向展开与完整往返', '当前 SVG 导出', '390 / 768 / 1440px 无水平溢出', '无浏览器脚本错误'], samples: checks.samples, rodLengthError: checks.maxRodError, ropeLengthError: checks.maxRopeError, storedClearanceMM: checks.low.clearance };
     fs.writeFileSync(path.join(__dirname, 'verification', 'report.json'), JSON.stringify(report, null, 2));
     console.log(JSON.stringify(report, null, 2));
   } finally { await browser.close(); }

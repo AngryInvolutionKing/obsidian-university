@@ -197,41 +197,68 @@ function draw(){
 }
 function drawAnnotations(g,shift){let a='';
  function call(text,screen,world){let t=P(...world);t[0]+=shift;let [x,y]=screen;a+=`<path d="M${x+8} ${y+10} L${x+8} ${t[1]} L${t[0]} ${t[1]}" fill="none" stroke="#9aada2" stroke-width="1"/><circle cx="${t[0]}" cy="${t[1]}" r="3" fill="#668a75"/><rect x="${x}" y="${y-15}" width="${text.length*16+20}" height="29" rx="5" class="callout"/><text x="${x+10}" y="${y+5}" class="label">${text}</text>`;}
- if(!state.front){if(state.cutaway||g.objectTop>C.rim)call('固定托座，随台移动',[82,55],[230,150,g.top+8]);if(state.cutaway)call('中心铰接 · 双组同步',[43,382],[65+g.d/2,90,80+g.h/2]);call(g.lid<1?'双翻盖已闭合':'外翻顶盖',[917,55],[640,300,500]);if(state.cutaway)call(state.mode==='electric'?'丝杆＋螺母滑块':'拉杆驱动滑块',[866,589],[65+g.d,43,65]);}
+ if(!state.front){if(state.cutaway||g.objectTop>C.rim)call('仿形托座，承托下降',[82,55],[230,150,g.top+8]);if(state.cutaway)call('中心铰接 · 双组同步',[43,382],[65+g.d/2,90,80+g.h/2]);call(g.lid<1?'双翻盖已闭合':'外翻顶盖',[917,55],[640,300,500]);if(state.cutaway){call(state.mode==='electric'?'丝杆＋螺母滑块':'三轨凸轮＋拉索',[866,589],[65+g.d,43,65]);call(g.grip>.99?'软垫夹爪已收拢':'软垫夹爪',[884,362],[320,160,g.top+20]);}}
  if(state.dims){
   function dim(A,B,text,dx=0,dy=0){let u=P(...A),v=P(...B);u[0]+=shift;v[0]+=shift;const x=(u[0]+v[0])/2+dx,y=(u[1]+v[1])/2+dy;a+=`<line x1="${u[0]}" y1="${u[1]}" x2="${v[0]}" y2="${v[1]}" class="dim" marker-start="url(#arrow)" marker-end="url(#arrow)"/><text x="${x}" y="${y}" class="dimlabel" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="7" stroke-linejoin="round">${text}</text>`;}
   dim([0,-110,-12],[640,-110,-12],'640 mm 箱宽',0,22);
   const xb=state.front?-115:-95;dim([xb,0,0],[xb,0,500],'500 mm',-38,0);
   if(!state.front)dim([695,0,-13],[695,460,-13],'460 mm',45,13);
-  if(state.cutaway&&g.p>=.58){const top=205+state.objectHeight;let v=P(470,40,500),b=P(470,40,top);a+=`<path d="M${v[0]+shift} ${v[1]}V${b[1]}" stroke="${g.clearance<20?'#b1463d':'#b18448'}" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/><text x="${v[0]+shift+12}" y="${(v[1]+b[1])/2}" class="label" style="fill:${g.clearance<20?'#b1463d':'#946b32'}">净空 ${Math.round(g.clearance)}</text>`;}
+  if(state.cutaway&&g.p>=.46){const top=205+state.objectHeight;let v=P(470,40,500),b=P(470,40,top);a+=`<path d="M${v[0]+shift} ${v[1]}V${b[1]}" stroke="${g.clearance<20?'#b1463d':'#b18448'}" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/><text x="${v[0]+shift+12}" y="${(v[1]+b[1])/2}" class="label" style="fill:${g.clearance<20?'#b1463d':'#946b32'}">净空 ${Math.round(g.clearance)}</text>`;}
  }
- if(g.clearance<C.margin&&g.p>=.58){a+=`<rect x="373" y="60" width="435" height="42" rx="8" fill="#fff1e9" stroke="#d9b09b"/><text x="590" y="87" text-anchor="middle" class="label" style="fill:#a04734">净空不足：合盖与移动已阻止</text>`;}
+ if(g.p>=.699&&(g.clearance<C.margin||!state.clampOK)){a+=`<rect x="373" y="60" width="435" height="42" rx="8" fill="#fff1e9" stroke="#d9b09b"/><text x="590" y="87" text-anchor="middle" class="label" style="fill:#a04734">${g.clearance<C.margin?'净空不足':'夹紧未确认'}：合盖与移动已阻止</text>`;}
  $('annotations').innerHTML=a;
 }
-function drawSequence(g){let s='<text x="1" y="15" font-size="11" fill="#63776e">分段动作行程（不是凸轮槽形）</text><line x1="29" y1="88" x2="297" y2="88" stroke="#d3ddd4"/>';
+function drawSequence(g){let s='<text x="1" y="15" font-size="11" fill="#63776e">先下降 → 后夹紧 → 再合盖</text><line x1="29" y1="88" x2="297" y2="88" stroke="#d3ddd4"/>';
  function graph(fn,color){let path='';for(let i=0;i<=100;i++){const p=i/100,x=30+260*p,y=30+45*fn(p);path+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}return `<path d="${path}" stroke="${color}" stroke-width="2.4" fill="none"/>`;}
- s+=graph(p=>segment(p,.06,.58),'#187d77')+graph(p=>1-segment(p,.64,.84),'#bc8349');s+=`<line x1="${30+260*g.p}" y1="24" x2="${30+260*g.p}" y2="88" stroke="#203e38" stroke-width="1" stroke-dasharray="3 3"/><text x="30" y="104" font-size="10" fill="#63776e">展示</text><text x="266" y="104" font-size="10" fill="#63776e">收纳</text><text x="32" y="26" font-size="10" fill="#187d77">平台高位</text><text x="217" y="75" font-size="10" fill="#bc8349">盖板闭合</text>`;$('sequenceDrawing').innerHTML=s;
+ s+=graph(p=>segment(p,.04,.46),'#187d77')+graph(p=>1-segment(p,.52,.66),'#9870a6')+graph(p=>1-segment(p,.70,.86),'#bc8349');s+=`<line x1="${30+260*g.p}" y1="24" x2="${30+260*g.p}" y2="88" stroke="#203e38" stroke-width="1" stroke-dasharray="3 3"/><text x="30" y="104" font-size="10" fill="#63776e">展示</text><text x="266" y="104" font-size="10" fill="#63776e">收纳</text><text x="30" y="124" font-size="10" fill="#187d77">A 平台下降</text><text x="122" y="124" font-size="10" fill="#9870a6">B 夹爪收拢</text><text x="220" y="124" font-size="10" fill="#bc8349">C 顶盖闭合</text>`;$('sequenceDrawing').innerHTML=s;
+}
+function drawMechanism(g){
+ const k=1.44,px=165-C.inputTravel*g.p*k,colors=['#187d77','#9870a6','#b18342'],keys=['camA','camB','camC'],rows=[90,200,280];
+ let m='<text x="26" y="28" font-size="18" font-weight="600" fill="#254840">三轨直动槽凸轮 · 正视展开</text><text x="600" y="28" font-size="18" font-weight="600" fill="#254840">对向软垫夹爪 · 俯视</text><rect x="24" y="56" width="516" height="332" rx="7" fill="#f1f4e9" stroke="#d0dbce"/>';
+ m+=`<g clip-path="url(#camWindow)"><rect x="${px-16}" y="67" width="380" height="305" rx="8" fill="#e2e9da" stroke="#9db2a0" stroke-width="1.5"/>`;
+ for(let j=0;j<3;j++){
+  let d='';for(let i=0;i<=150;i++){const p=i/150,q=geometry(p,state.objectHeight,true),x=px+C.inputTravel*p*k,y=rows[j]+q[keys[j]]*k;d+=(i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2);}
+  m+=`<path d="${d}" fill="none" stroke="${colors[j]}" stroke-width="12" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#fffdf3" stroke-width="7" stroke-linecap="round"/>`;
+ }
+ m+='</g>';
+ for(let j=0;j<3;j++){
+  const cy=rows[j]+g[keys[j]]*k;m+=`<rect x="157" y="${rows[j]-12}" width="16" height="${j===0?102:j===1?61:99}" rx="3" fill="none" stroke="#748c7f" stroke-dasharray="4 3"/><line x1="165" y1="${cy}" x2="165" y2="${cy-18}" stroke="#3b5c50" stroke-width="3"/><circle cx="165" cy="${cy}" r="5" fill="#f9f4db" stroke="${colors[j]}" stroke-width="2"/><rect x="30" y="${rows[j]-27}" width="118" height="24" rx="3" fill="#fafbf6"/><text x="35" y="${rows[j]-10}" font-size="13" fill="${colors[j]}">${['A 升降','B 夹紧','C 关盖'][j]} ${g[keys[j]].toFixed(1)} mm</text>`;
+ }
+ m+=`<text x="26" y="411" font-size="14" fill="#31564a">操作杆：${(C.inputTravel*g.p).toFixed(0)} / 240 mm　控制板向左移</text><path d="M460 405H390m12-6-12 6 12 6" fill="none" stroke="#728d7c" stroke-width="1.5"/><text x="26" y="436" font-size="12" fill="#73877a" class="small-detail">槽线为滚子中心轨迹；槽宽、滚子补偿及压力角需复核。</text>`;
+ // Two opposed racks mesh with one fixed pinion: equal and opposite jaw travel.
+ const L=714+26*g.grip,R=866-26*g.grip;
+ m+='<rect x="602" y="61" width="370" height="303" rx="8" fill="#f4f0f5" stroke="#dfd2e1"/><path d="M625 119H949 M625 293H949" stroke="#c7b7cc" stroke-width="8" stroke-linecap="round"/><circle cx="790" cy="211" r="50" fill="#ead0ac" stroke="#bc966c" stroke-width="2"/><text x="790" y="216" font-size="13" fill="#7c5d41" text-anchor="middle">承力托圈</text>';
+ m+=`<rect x="${L-28}" y="107" width="${824-(L-28)}" height="13" fill="#b89dc0" stroke="#82668b"/><rect x="756" y="150" width="${R+28-756}" height="13" fill="#b89dc0" stroke="#82668b"/>`;
+ for(let i=0;i<10;i++){m+=`<path d="M${L-17+i*10} 120v5h5v-5 M${R+17-i*10} 150v-5h-5v5" fill="none" stroke="#8c6d96" stroke-width="1.5"/>`;}
+ m+=`<g transform="translate(790 135) rotate(${g.grip*26/20*180/Math.PI})"><circle r="20" fill="#e3d6e6" stroke="#8e7298" stroke-width="4"/>`;
+ for(let i=0;i<12;i++){const a=i*Math.PI/6;m+=`<line x1="${16*Math.cos(a)}" y1="${16*Math.sin(a)}" x2="${23*Math.cos(a)}" y2="${23*Math.sin(a)}" stroke="#82668b" stroke-width="4"/>`;}
+ m+='</g><circle cx="790" cy="135" r="4" fill="#82668b"/>';
+ for(const [face,sgn]of [[L,-1],[R,1]]){const bx=sgn<0?face-25:face+8;m+=`<rect x="${bx}" y="105" width="17" height="195" rx="5" fill="#b89dc0" stroke="#8e7298" stroke-width="1.5"/><rect x="${sgn<0?face-8:face}" y="185" width="8" height="52" rx="3" fill="${g.gripConfirmed?'#77a995':'#cfb8d0'}" stroke="#8e7298"/><path d="M${sgn<0?face-35:face+35} 269l-5-5 10-6-10-6 10-6-5-5" stroke="#8e7298" stroke-width="1.8" fill="none"/>`;}
+ m+=`<path d="M640 321H745 M940 321H835 M734 315l11 6-11 6 M846 315l-11 6 11 6" stroke="#9870a6" stroke-width="1.7" fill="none"/><text x="790" y="348" font-size="13" text-anchor="middle" fill="#81618b">单爪内移 ${g.jawTravel.toFixed(1)} / 20 mm</text><text x="601" y="394" font-size="13" fill="#456354">B 拉索 → 齿条 → 中央齿轮 → 对侧齿条</text><text x="601" y="417" font-size="12" fill="#73877a" class="small-detail">接触后由限力弹簧让位；回位弹簧负责松爪。</text><text x="601" y="438" font-size="12" fill="#73877a" class="small-detail">C 卷盘半径 20 mm · 总牵引约 47.1 mm。</text>`;
+ $('mechanismDrawing').innerHTML=m;
 }
 function updateUI(g){
  $('progress').value=Math.round(state.p*1000);$('progressValue').textContent=Math.round(state.p*100)+'%';$('heightValue').textContent=Math.round(g.top);$('angleValue').textContent=g.angle.toFixed(1);$('travelValue').textContent=Math.round(g.travel);$('clearanceValue').textContent=Math.round(g.clearance);$('clearanceValue').classList.toggle('risk',g.clearance<C.margin);$('objectHeightValue').textContent=state.objectHeight;$('objectHeight').value=state.objectHeight;
  let phase,title,desc,index,lock,motion='驻车中';
- if(g.p<=.02){phase='display';index='01 / DISPLAY';title='展开 · 稳定展示';desc='平台升至柜口，展示锁止到位。支撑脚落地，脚轮驻车，展品保持固定。';lock='展示位已锁定';}
- else if(g.p<.06){phase='unlock';index='02 / RELEASE';title='解除展示锁止';desc='保持支撑与驻车，先退出展示位锁销，再启动平台下降。';lock='展示锁销退出';}
- else if(g.p<.58){phase='lower';index='02 / LOWER';title='回收 · 平台下降';desc='滑块向外移动，双组剪叉同步折拢。展品与托座整体下降，顶盖保持完全打开。';lock='盖板禁止关闭';}
- else if(g.p<.64){phase='seat';index='03 / SEAT & LOCK';title='落座 · 承托锁定';desc='平台已落在底部承托块上；锁定后，推行载荷由承托结构传到箱体。';lock=g.baseLocked?'底部锁止到位':'底部锁销进入';}
- else if(g.p<.90){phase='close';index='04 / CLOSE';title=g.p<.84?'保护 · 双盖闭合':'封盖 · 锁扣进入';desc='确认平台到底、底部锁止与顶部净空后，两片顶盖向中间合拢，随后锁住盖板。';lock=g.p<.84?'底部已锁定':'盖板正在锁定';}
- else if(g.p<.94){phase='feet';index='05 / RELEASE PARKING';title='收脚 · 准备移动';desc='展品已收入柜内，底部与顶盖锁定。现在收起支撑脚并解除脚轮驻车。';lock='底部／盖板已锁定';motion='解除驻车';}
- else{phase='move';index='05 / MOVE';title='收纳完成 · 整柜推行';desc='展品保持固定并受到箱体包围，脚轮滚动。移动段表示人工推行；反向播放依次恢复展示。';lock='底部／盖板已锁定';motion='允许推行';}
- const blocked=g.clearance<C.margin&&g.p>=.639;
- if(blocked){phase='blocked';index='INTERLOCK / 净空检查';title='合盖被阻止';desc=`展品＋托座高 ${state.objectHeight} mm，收纳净空 ${Math.round(g.clearance)} mm，低于预留的 20 mm。请调低高度后再继续。`;lock='顶盖保持打开';motion='移动被阻止';}
+ if(g.p<=.02){phase='display';index='01 / DISPLAY';title='展开 · 承托展示';desc='展品由仿形托座承托定位，夹爪张开。平台锁止，支撑脚落地，脚轮驻车。';lock='展示位已锁定';}
+ else if(g.p<.04){phase='unlock';index='02 / RELEASE';title='解除展示锁止';desc='保持支撑与驻车，退出展示位锁销。夹爪保持张开，先让平台下降。';lock='展示锁销退出';}
+ else if(g.p<.46){phase='lower';index='02 / LOWER';title='回收 · 平台下降';desc='双组剪叉同步折拢。展品在仿形托座中承托定位，夹爪保持张开，顶盖完全打开。';lock='夹爪与顶盖停歇';}
+ else if(g.p<.52){phase='seat';index='03 / SEAT & LOCK';title='落座 · 承托锁定';desc='平台先落在底部承托块上并锁定。此时升降停止，夹爪尚未收拢。';lock=g.baseLocked?'底部锁止到位':'底部锁销进入';}
+ else if(g.p<.70){phase='grip';index='04 / GRIP';title=g.grip<1?'保护 · 机械夹爪收拢':'夹紧完成 · 等待确认';desc='左右软垫夹爪通过两条齿条同步向中间移动，夹持定制承力托圈；限力弹簧缓冲接触后的过行程。';lock=g.gripConfirmed?'夹紧已确认':'夹爪正在收拢';}
+ else if(g.p<.90){phase='close';index='05 / CLOSE';title=g.p<.86?'保护 · 双盖闭合':'封盖 · 锁扣进入';desc='平台已落座、夹紧已确认且顶部净空足够，两根拉索牵引左右卷盘关盖。夹爪保持夹紧。';lock=g.p<.86?'夹紧保持中':'盖板正在锁定';}
+ else if(g.p<.94){phase='feet';index='06 / RELEASE PARKING';title='收脚 · 准备移动';desc='展品夹紧，平台与顶盖锁定。收起支撑脚并解除脚轮驻车，再进行人工推行。';lock='夹紧／底部／盖板锁定';motion='解除驻车';}
+ else{phase='move';index='06 / MOVE';title='收纳完成 · 整柜推行';desc='展品在柜内保持夹紧。反向展开依次驻车、开盖、松爪，再升起平台；升降阶段夹爪均张开。';lock='夹紧／底部／盖板锁定';motion='允许推行';}
+ const blocked=(g.clearance<C.margin||!state.clampOK)&&g.p>=.699;
+ if(blocked){phase='blocked';index='INTERLOCK / 合盖检查';title='合盖被阻止';desc=g.clearance<C.margin?`展品总高 ${state.objectHeight} mm，净空 ${Math.round(g.clearance)} mm，低于预留的 20 mm。请调低高度后继续。`:'夹爪已执行收拢，但模拟夹紧确认未通过。顶盖保持打开，禁止移动；勾选“模拟夹紧确认”后可继续。';lock='顶盖保持打开';motion='移动被阻止';}
  $('stateIndex').textContent=index;$('stateTitle').textContent=title;$('stateDesc').textContent=desc;$('lockState').textContent=lock;$('motionState').textContent=motion;$('statusPanel').classList.toggle('error',blocked);
  $('clearanceHint').textContent=g.clearance<C.margin?'当前净空不足，演示将停在合盖之前。最大建议总高 275 mm。':'合盖需至少 20 mm 概念余量；当前尺寸可收入柜内。';$('clearanceHint').classList.toggle('risk',g.clearance<C.margin);
  if(state.phase!==phase){state.phase=phase;$('announcement').textContent=title;}
- const current=g.p<.06?0:g.p<.58?1:g.p<.64?2:g.p<.94?3:4;
+ $('gripState').textContent=g.grip===0?'夹爪张开 · 展品由仿形托座承托':g.grip<1?`夹爪收拢中 · 单爪位移 ${g.jawTravel.toFixed(1)} mm`:g.gripConfirmed?'夹紧已确认 · 软垫与限力弹簧接触保护':'夹爪已收拢 · 夹紧尚未确认';
+ const current=g.p<.04?0:g.p<.46?1:g.p<.52?2:g.p<.70?3:g.p<.94?4:5;
  document.querySelectorAll('.timeline button').forEach((b,i)=>{b.classList.toggle('active',i===current);if(i===current)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
  $('pauseBtn').disabled=!state.running&&!state.paused;$('pauseBtn').textContent=state.paused?'继续':'暂停';
 }
-function constrain(p){return geometry(p).clearance<C.margin?Math.min(clamp(p),.64):clamp(p);}
+function constrain(p){return geometry(p).clearance<C.margin||!state.clampOK?Math.min(clamp(p),.70):clamp(p);}
 function setProgress(p){state.p=constrain(Number(p));draw();}
 function stop(paused=false){state.running=false;state.paused=paused;state.last=0;if(state.raf)cancelAnimationFrame(state.raf);state.raf=0;}
 function schedule(){state.raf=requestAnimationFrame(tick);}
@@ -248,16 +275,17 @@ $('progress').addEventListener('input',e=>{stop();state.cycle=false;state.target
 document.querySelectorAll('[data-progress]').forEach(b=>b.addEventListener('click',()=>{stop();state.target=1;setProgress(b.dataset.progress);}));
 $('objectHeight').addEventListener('input',e=>{stop();state.objectHeight=Number(e.target.value);state.p=constrain(state.p);draw();});
 $('faultBtn').addEventListener('click',()=>{stop();state.objectHeight=320;state.p=0;start(1);});
-function mode(v){state.mode=v;$('electricBtn').setAttribute('aria-pressed',v==='electric');$('manualBtn').setAttribute('aria-pressed',v==='manual');$('driveDesc').textContent=v==='electric'?'保留参考图中的电机、丝杆、螺母滑块。盖板另设驱动，依上下限位与锁止信号顺序动作。':'拉杆替代丝杆驱动滑块，侧置联动模块安排“先降台、后拉索关盖”。虚线为拉索路径示意，双槽凸轮与杠杆尚需细化。';draw();}
+function mode(v){state.mode=v;$('electricBtn').setAttribute('aria-pressed',v==='electric');$('manualBtn').setAttribute('aria-pressed',v==='manual');$('driveDesc').textContent=v==='electric'?'沿用电机丝杆升降。平台到底并锁定后，夹爪执行收拢，确认成功后才驱动盖板。':'三轨槽凸轮依次输出：A 降台、B 拉索夹紧、C 拉索关盖。下方拆解图同步显示滚子位置和停歇段。';draw();}
 $('electricBtn').addEventListener('click',()=>mode('electric'));$('manualBtn').addEventListener('click',()=>mode('manual'));
+$('clampOK').addEventListener('change',e=>{stop();state.clampOK=e.target.checked;state.p=constrain(state.p);draw();});
 $('cutaway').addEventListener('change',e=>{state.cutaway=e.target.checked;draw();});$('dims').addEventListener('change',e=>{state.dims=e.target.checked;draw();});
 $('viewBtn').addEventListener('click',()=>{state.front=!state.front;$('viewBtn').textContent=state.front?'切换轴测':'切换正视';$('viewLabel').textContent=state.front?'正视剖面 · 前后两组投影重合':'轴测剖视 · 双组同步剪叉';draw();});
 $('fullBtn').addEventListener('click',()=>{const on=$('app').classList.toggle('fullscreen');$('fullBtn').setAttribute('aria-pressed',on);$('fullBtn').textContent=on?'恢复布局':'放大视图';});
-function selectPart(id){state.selected=state.selected===id?null:id;$('partDetail').textContent=state.selected?partText[id]:'选择一个部件，在图中高亮观察。橙色展品与托座全程作为一个整体移动。';document.querySelectorAll('#parts button').forEach(b=>{b.classList.toggle('selected',b.dataset.part===state.selected);b.setAttribute('aria-pressed',b.dataset.part===state.selected);});draw();}
+function selectPart(id){state.selected=state.selected===id?null:id;$('partDetail').textContent=state.selected?partText[id]:'选择部件高亮查看。下降阶段夹爪张开，平台落座后才收拢。';document.querySelectorAll('#parts button').forEach(b=>{b.classList.toggle('selected',b.dataset.part===state.selected);b.setAttribute('aria-pressed',b.dataset.part===state.selected);});draw();}
 $('parts').addEventListener('click',e=>{const b=e.target.closest('[data-part]');if(b)selectPart(b.dataset.part);});$('drawing').addEventListener('click',e=>{const b=e.target.closest('[data-part]');if(b)selectPart(b.dataset.part);});
 $('exportBtn').addEventListener('click',()=>{const clone=$('scene').cloneNode(true);clone.setAttribute('width','1180');clone.setAttribute('height','800');if(!state.dims)clone.querySelectorAll('.dim,.dimlabel').forEach(n=>n.remove());const blob=new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n'+new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`折叠展柜-${state.mode}-${Math.round(state.p*100)}.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 // Read-only geometry API for reproducible verification and future dimensional refinement.
-window.cabinetDemo=Object.freeze({geometry:(p,h)=>geometry(clamp(p),h===undefined?state.objectHeight:h),getState:()=>({...state}),constants:{...C},endpoints:{dHigh,dLow}});
+window.cabinetDemo=Object.freeze({geometry:(p,h,ok)=>geometry(clamp(p),h===undefined?state.objectHeight:h,ok===undefined?state.clampOK:ok),getState:()=>({...state}),constants:{...C},endpoints:{dHigh,dLow}});
 draw();
 })();
 </script>
