@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "esbuild": "0.25.12",
+    "three": "0.184.0"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.80"
+  }
+}
