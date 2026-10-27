@@ -8,9 +8,9 @@ export function createWorld(canvasFactory) {
  const gradient=new T.DataTexture(new Uint8Array([82,145,208,255]),4,1,T.RedFormat); gradient.needsUpdate=true;
  const mats=new Map();
  function mat(c){if(!mats.has(c))mats.set(c,new T.MeshToonMaterial({color:c,gradientMap:gradient}));return mats.get(c);}
- const ink=new T.LineBasicMaterial({color:0x111b2a,transparent:true,opacity:.63});
+ const ink=new T.LineBasicMaterial({color:0x0a1420,transparent:true,opacity:.84});
  const colors={cream:0xd2c9b2,frame:0x354b56,teal:0x287c79,road:0x273445,metal:0x647889,roof:0x355364,white:0xdfded0,pink:0xe596ac};
- const warm=new T.MeshStandardMaterial({color:0xfff2cb,emissive:0xffd79c,emissiveIntensity:1.1,roughness:.4});
+ const warm=new T.MeshStandardMaterial({color:0xfff2cb,emissive:0xffc37a,emissiveIntensity:1.30,roughness:.4});
  const cool=new T.MeshStandardMaterial({color:0xbcf6ef,emissive:0x74e1e2,emissiveIntensity:1.5});
  const glass=new T.MeshPhysicalMaterial({color:0x89c3c9,roughness:.14,metalness:.18,transparent:true,opacity:.095,depthWrite:false,side:T.DoubleSide});
  function mesh(g,m,x,y,z,name='',outline=false,parent=world){const o=new T.Mesh(g,typeof m==='number'?mat(m):m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent.add(o);if(outline){const l=new T.LineSegments(new T.EdgesGeometry(g,35),ink);o.add(l);}return o;}
@@ -31,7 +31,7 @@ export function createWorld(canvasFactory) {
  for(let z=-5.25;z<2.65;z+=.55)box(8.5,.006,.014,.88,.292,z,0x505e69,'Pavement joint',false);
  for(let x=-3.45;x<5.1;x+=.43)box(.4,.22,.18,x,.12,2.71,0x8d9aa2,'Kerbstone');
  for(let z=-5.3;z<2.65;z+=.43)box(.18,.22,.4,-3.45,.12,z,0x8d9aa2,'Kerbstone');
- for(let i=0;i<7;i++)box(.43,.012,1.8,-1.8+i*.82,.035,4.15,0xb3bdc1,'Zebra crossing',false);
+ for(let i=0;i<7;i++)box(.43,.012,1.8,-1.8+i*.82,.035,4.15,0x9dabb1,'Zebra crossing',false);
  for(let z=-4.5;z<2.4;z+=1.8)box(.065,.015,.8,-4.6,.038,z,0xacae9b,'Street marking',false);
  box(5.5,.012,.055,.8,.04,5.22,0xb1baa9,'Edge line',false);
  for(let x=3.45;x<5;x+=1.35){box(.055,.01,1.6,x,.30,1.5,0xc6c4b3,'Parking bay line',false);box(1.2,.01,.055,x+.6,.3,2.27,0xc6c4b3,'Parking bay line',false);}
@@ -66,9 +66,9 @@ export function createWorld(canvasFactory) {
  for(let z of [-3.35,1.35])box(6.6,.17,.09,-.15,3.42,z,0x587f8b,'Raised roof rim');
  for(let z=-3.1;z<1.25;z+=.38)box(6.4,.008,.014,-.15,3.35,z,0x314f5c,'Roof standing seam',false);
  box(6.7,.64,.24,-.15,2.90,1.28,colors.frame,'Front fascia');
- const sign=label('雨宿り  AMAYADORI',6.45,.49,-.15,2.94,1.412,{bg:'#f0ead7',fg:'#246e69',stripe:'#df9776',glow:.85,size:.57});
+ const sign=label('雨宿り  AMAYADORI',6.45,.49,-.15,2.94,1.412,{bg:'#f0ead7',fg:'#246e69',stripe:'#df9776',glow:.95,size:.57});
  box(.24,.64,4.43,3.08,2.90,-1,colors.frame,'East fascia');
- label('雨宿り  •  24 OPEN',4.21,.49,3.21,2.94,-1,{bg:'#f0ead7',fg:'#246e69',stripe:'#df9776',glow:.85,size:.56,side:true});
+ label('雨宿り  •  24 OPEN',4.21,.49,3.21,2.94,-1,{bg:'#f0ead7',fg:'#246e69',stripe:'#df9776',glow:.95,size:.56,side:true});
  box(6.52,.095,.48,-.15,2.55,1.48,colors.teal,'Rain canopy');
  box(5.8,.035,.12,-.15,2.49,1.5,warm,'Warm under-canopy strip',false);
  cylinder(.047,2.40,-3.24,1.53,1.40,0x557783,'Rain downpipe');
@@ -146,8 +146,9 @@ export function createWorld(canvasFactory) {
  // Soft painted pools of spilled light, also exported to Blender.
  function pool(x,z,sx,sz,color,opacity){const m=new T.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false});const o=mesh(new T.CircleGeometry(1,40),m,x,.065,z,'Light reflected in a puddle');o.rotation.x=-Math.PI/2;o.scale.set(sx,sz,1);return o;}
  pool(-.15,3.28,2.7,.30,0x88b6a2,.07);pool(3.82,3.62,.48,.74,0xd5ae7e,.10);pool(-2.7,3.45,.35,.60,0x6cc9d2,.12);
- const ambient=new T.HemisphereLight(0xb4cced,0x566079,1.55);scene.add(ambient);
- const moon=new T.DirectionalLight(0xa9c6ee,1.65);moon.position.set(-3,9,6);moon.castShadow=true;moon.shadow.mapSize.set(2048,2048);Object.assign(moon.shadow.camera,{left:-8,right:8,top:8,bottom:-8,near:.1,far:30});moon.shadow.bias=-.0005;moon.shadow.normalBias=.03;scene.add(moon);
- lamp(-1.7,2.25,-1.4,0xffd69a,14,6);lamp(1.45,2.25,-.5,0xffdca4,12,5);const frontLight=lamp(-.4,2.32,1.8,0xffd5a0,5,6);lamp(-2.5,1.4,2.6,0x7acbe5,2,3);lamp(4.1,3.8,2.23,0xffd499,9,6);
+ const ambient=new T.HemisphereLight(0xb4cced,0x566079,1.18);scene.add(ambient);
+ const moon=new T.DirectionalLight(0xa9c6ee,1.50);moon.position.set(-3,9,6);moon.castShadow=true;moon.shadow.mapSize.set(2048,2048);Object.assign(moon.shadow.camera,{left:-8,right:8,top:8,bottom:-8,near:.1,far:30});moon.shadow.bias=-.0005;moon.shadow.normalBias=.03;scene.add(moon);
+ const rim=new T.DirectionalLight(0x8fbfff,.35);rim.position.set(6.5,4.2,-7.5);scene.add(rim);
+  lamp(-1.7,2.25,-1.4,0xffb871,13,6);lamp(1.45,2.25,-.5,0xffcf96,10,5);const frontLight=lamp(-.4,2.32,1.8,0xffb060,10,6);lamp(-2.5,1.4,2.6,0x7acbe5,2,3);lamp(4.1,3.8,2.23,0xffd499,9,6);
  return {scene,world,doors,sign,signals,frontLight,glass,rand};
 }
