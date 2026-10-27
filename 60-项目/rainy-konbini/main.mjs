@@ -31,7 +31,7 @@ if(lineParts.length){const l=new T.LineSegments(mergeGeometries(lineParts),new T
 const reflectShader={...Reflector.ReflectorShader,uniforms:T.UniformsUtils.clone(Reflector.ReflectorShader.uniforms)};
 reflectShader.uniforms.uTime={value:0};
 reflectShader.fragmentShader=reflectShader.fragmentShader.replace('uniform vec3 color;','uniform vec3 color; uniform float uTime;').replace('vec4 base = texture2DProj( tDiffuse, vUv );','vec4 uv = vUv; uv.x += sin(uv.y*170.0+uTime*1.6)*0.0012*uv.w; uv.y += sin(uv.x*210.0-uTime)*0.0007*uv.w; vec4 base = texture2DProj( tDiffuse, uv );').replace('vec4( blendOverlay( base.rgb, color ), 1.0 )','vec4( mix(vec3(0.025,0.045,0.075), base.rgb, 0.32), 1.0 )');
-const water=new Reflector(new T.PlaneGeometry(11.18,11.18),{color:0x6a8597,textureWidth:768,textureHeight:768,clipBias:.003,multisample:0,shader:reflectShader});water.rotation.x=-Math.PI/2;water.position.y=.022;scene.add(water);world.add(hullGroup);const origRender=renderer.render.bind(renderer);renderer.render=(s,c)=>{const skip=c!==camera;if(skip)hullGroup.visible=false;origRender(s,c);if(skip)hullGroup.visible=true;};
+const water=new Reflector(new T.PlaneGeometry(11.18,11.18),{color:0x6a8597,textureWidth:512,textureHeight:512,clipBias:.003,multisample:0,shader:reflectShader});water.rotation.x=-Math.PI/2;water.position.y=.022;scene.add(water);world.add(hullGroup);const origRender=renderer.render.bind(renderer);renderer.render=(s,c)=>{const skip=c!==camera;if(skip)hullGroup.visible=false;origRender(s,c);if(skip)hullGroup.visible=true;};
 // Rain remains entirely over the square miniature and respects the roof.
 const rainCount=1700,positions=new Float32Array(rainCount*6),drops=[];
 for(let i=0;i<rainCount;i++)drops.push({x:(rand()-.5)*11.1,z:(rand()-.5)*11.1,y:rand()*7.3,speed:5.5+rand()*2.5,length:.12+rand()*.20});
@@ -53,7 +53,7 @@ const grade=new ShaderPass({uniforms:{tDiffuse:{value:null},uVig:{value:1.00},uS
  col*=mix(vec3(1.07,1.00,.92),vec3(.79,.92,1.13),smoothstep(.62,.05,lum));
  vec2 q=vUv-.5;col*=1.-dot(q,q)*uVig;
  gl_FragColor=vec4(clamp(col,0.,1.),c.a);}`});
-const composer=new EffectComposer(renderer,new T.WebGLRenderTarget(innerWidth,innerHeight,{type:T.HalfFloatType,samples:4}));composer.addPass(new RenderPass(scene,camera));const bloom=new UnrealBloomPass(new T.Vector2(innerWidth,innerHeight),.26,.40,1.25);composer.addPass(bloom);composer.addPass(new OutputPass());composer.addPass(grade);
+const composer=new EffectComposer(renderer,new T.WebGLRenderTarget(innerWidth,innerHeight,{type:T.HalfFloatType,samples:0}));composer.addPass(new RenderPass(scene,camera));const bloom=new UnrealBloomPass(new T.Vector2(innerWidth*.6,innerHeight*.6),.30,.32,1.60);composer.addPass(bloom);composer.addPass(new OutputPass());composer.addPass(grade);
 let last=performance.now(),elapsed=0;
 function frame(now){const dt=Math.min((now-last)/1000,.05);last=now;elapsed+=dt;const t=elapsed;controls.update();
  water.material.uniforms.uTime.value=t;

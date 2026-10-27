@@ -10,7 +10,7 @@ export function createWorld(canvasFactory) {
  function mat(c){if(!mats.has(c))mats.set(c,new T.MeshToonMaterial({color:c,gradientMap:gradient}));return mats.get(c);}
  const ink=new T.LineBasicMaterial({color:0x0a1420,transparent:true,opacity:.84});
  const colors={cream:0xd2c9b2,frame:0x354b56,teal:0x287c79,road:0x273445,metal:0x647889,roof:0x355364,white:0xdfded0,pink:0xe596ac};
- const warm=new T.MeshStandardMaterial({color:0xfff2cb,emissive:0xffc37a,emissiveIntensity:1.30,roughness:.4});
+ const warm=new T.MeshStandardMaterial({color:0xfff2cb,emissive:0xffc37a,emissiveIntensity:1.12,roughness:.4});
  const cool=new T.MeshStandardMaterial({color:0xbcf6ef,emissive:0x74e1e2,emissiveIntensity:1.5});
  const glass=new T.MeshPhysicalMaterial({color:0x89c3c9,roughness:.14,metalness:.18,transparent:true,opacity:.095,depthWrite:false,side:T.DoubleSide});
  function mesh(g,m,x,y,z,name='',outline=false,parent=world){const o=new T.Mesh(g,typeof m==='number'?mat(m):m);o.position.set(x,y,z);o.name=name;o.castShadow=true;o.receiveShadow=true;parent.add(o);if(outline){const l=new T.LineSegments(new T.EdgesGeometry(g,35),ink);o.add(l);}return o;}
