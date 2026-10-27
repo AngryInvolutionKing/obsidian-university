@@ -1,0 +1,6 @@
+node_modules/
+model/
+*.blend
+*.blend1
+*.png
+*.tar.gz
