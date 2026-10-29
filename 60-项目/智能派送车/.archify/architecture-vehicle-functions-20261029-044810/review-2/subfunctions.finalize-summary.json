@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\sub.candidate.json",
+    "sha256": "cd7e25fa8c66d45d7aa99f0d45bdd42f994f7529669a51be24831037c7832b35",
+    "bytes": 6344
+  },
+  "artifact": {
+    "path": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\subfunctions.html",
+    "sha256": "b9874b9d47aac3e1b4a61cca47552f5676552313ab0512f4769a4d6a6a725212",
+    "bytes": 829624
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\review-2\\subfunctions.finalize.json",
+    "summaryReceipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\review-2\\subfunctions.finalize-summary.json",
+    "browserCheckReceipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\review-2\\subfunctions.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-29T11:55:51.813Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4460,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 1,
+      "routesOverSuggestedBends": 1,
+      "routesOverSuggestedStretch": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "m4",
+            "from": "drop",
+            "to": "m_sink",
+            "label": "定点投放",
+            "collectionIndex": 8,
+            "artifactIndex": 9
+          },
+          "right": {
+            "id": "s5",
+            "from": "s_control",
+            "to": "move",
+            "label": "行驶指令",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "point": [
+            933,
+            260
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "s5",
+            "from": "s_control",
+            "to": "move",
+            "label": "行驶指令",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "bends": 5,
+          "stretch": 1.544
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "drop → m_sink crosses s_control → move: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "s_control → move needs 5 bends: move node s_control or move so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}
