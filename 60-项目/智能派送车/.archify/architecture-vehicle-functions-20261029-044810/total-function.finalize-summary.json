@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total.candidate.json",
+    "sha256": "a5e531a2e75be8a6dabab9b4246af8ba3d6bb208c675c2135f3fff0c4773555a",
+    "bytes": 3217
+  },
+  "artifact": {
+    "path": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total-function.html",
+    "sha256": "a7274966335fce78305c7c5e4400517a87fe27f86a9ec2f7b47fffcd317ebdf9",
+    "bytes": 813476
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total-function.finalize.json",
+    "summaryReceipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total-function.finalize-summary.json",
+    "browserCheckReceipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total-function.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-29T11:55:51.813Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 10402,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "图3-1（a）智能派送车总功能图",
+    "locale": "zh-CN",
+    "output": ".archify/architecture-vehicle-functions-20261029-044810/total-function.html",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "power_in",
+      "type": "external",
+      "label": "电能",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "cargo_in",
+      "type": "external",
+      "label": "三个待投包裹",
+      "pos": [
+        40,
+        170
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "signal_in",
+      "type": "external",
+      "label": "轨迹与投放标记",
+      "sublabel": "启动指令",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "function",
+      "type": "backend",
+      "label": "自主运送与投放包裹",
+      "sublabel": "循迹行驶 · 定点投放 · 返回停车区",
+      "pos": [
+        350,
+        125
+      ],
+      "size": [
+        220,
+        160
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "energy_out",
+      "type": "external",
+      "label": "车辆与投放运动",
+      "pos": [
+        740,
+        40
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "cargo_out",
+      "type": "external",
+      "label": "已投放的包裹",
+      "pos": [
+        740,
+        170
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "state_out",
+      "type": "external",
+      "label": "运行与任务状态",
+      "pos": [
+        740,
+        300
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "icon": "none"
+    }
+  ],
+  "connections": [
+    {
+      "id": "power-enter",
+      "from": "power_in",
+      "to": "function",
+      "label": "电能",
+      "variant": "emphasis"
+    },
+    {
+      "id": "cargo-enter",
+      "from": "cargo_in",
+      "to": "function",
+      "label": "包裹"
+    },
+    {
+      "id": "signal-enter",
+      "from": "signal_in",
+      "to": "function",
+      "label": "标记与指令",
+      "variant": "dashed"
+    },
+    {
+      "id": "power-leave",
+      "from": "function",
+      "to": "energy_out",
+      "label": "运动",
+      "variant": "emphasis"
+    },
+    {
+      "id": "cargo-leave",
+      "from": "function",
+      "to": "cargo_out",
+      "label": "投放"
+    },
+    {
+      "id": "status-leave",
+      "from": "function",
+      "to": "state_out",
+      "label": "状态",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "图意",
+      "items": [
+        "能量流：电能输入并产生车辆与投放运动。",
+        "物料流：三件包裹送至三个指定投放点。",
+        "信号流：识别轨迹与投放标记，形成运行状态信息。",
+        "包裹可在去程或返程投放，小车返回停车区。"
+      ]
+    }
+  ]
+}

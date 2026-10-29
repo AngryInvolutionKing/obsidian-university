@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "68fce67d-a9b4-4bee-a4d9-fc192e8985f2",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total.candidate.json",
+  "output": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\total-function.html",
+  "specification": {
+    "sha256": "a5e531a2e75be8a6dabab9b4246af8ba3d6bb208c675c2135f3fff0c4773555a",
+    "bytes": 3217
+  },
+  "artifact": {
+    "sha256": "a7274966335fce78305c7c5e4400517a87fe27f86a9ec2f7b47fffcd317ebdf9",
+    "bytes": 813476
+  }
+}
