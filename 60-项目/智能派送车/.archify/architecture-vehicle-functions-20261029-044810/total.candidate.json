@@ -58,7 +58,7 @@
       "id": "function",
       "type": "backend",
       "label": "自主运送与投放包裹",
-      "sublabel": "循迹行驶 · 定点投放 · 返回停车区",
+      "sublabel": "循迹行驶 · 定点投放 · 返航停车",
       "pos": [
         350,
         125

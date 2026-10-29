@@ -57,7 +57,7 @@
       "id": "move",
       "type": "backend",
       "label": "驱动车辆行驶",
-      "sublabel": "循迹行驶与返航",
+      "sublabel": "循迹行驶、返航与停车",
       "pos": [
         740,
         60

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\sub-v2.candidate.json",
+    "sha256": "f65b09105d2c26fac1d63fccdd0303b52e1c04b8093f30090fc45549adbce034",
+    "bytes": 6665
+  },
+  "artifact": {
+    "path": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\subfunctions-v2.html",
+    "sha256": "3cf3599c6f8a5552f4fcdb9c41591f03a3a7ddbea13337c2fc13c20efb8292cb",
+    "bytes": 830971
+  },
+  "gates": {
+    "validate": "not-run",
+    "deliver": "fail",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "deliver",
+  "diagnostics": [
+    {
+      "code": "delivery/concurrent-attempt",
+      "severity": "error",
+      "message": "Could not start delivery for \"D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\subfunctions-v2.html\": Another delivery attempt owns \"D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\subfunctions-v2.html\" through lock \"D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\.archify-delivery-lock.json\".",
+      "subject": {
+        "output": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\subfunctions-v2.html",
+        "lock": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\.archify-delivery-lock.json"
+      },
+      "evidence": {
+        "reason": "Another delivery attempt owns \"D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\subfunctions-v2.html\" through lock \"D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\.archify-delivery-lock.json\"."
+      },
+      "supportedFixes": [
+        "wait for the active delivery to finish, then retry"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\final-sub\\subfunctions-v2.finalize.json",
+    "summaryReceipt": "D:\\学习笔记\\大学\\60-项目\\智能派送车\\.archify\\architecture-vehicle-functions-20261029-044810\\final-sub\\subfunctions-v2.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-29T11:55:51.813Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 453,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

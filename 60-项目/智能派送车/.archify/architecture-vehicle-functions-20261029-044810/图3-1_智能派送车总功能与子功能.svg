@@ -1,50 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1260" viewBox="0 0 1500 1260" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1370" viewBox="0 0 1500 1370" role="img" aria-labelledby="title desc">
 <title id="title">图3-1 智能派送车功能分析</title>
 <desc id="desc">上方为能量、物料和信号的输入输出黑箱图，下方为包含同三类流的子功能图。包裹可在去程或返程投放。</desc>
-<metadata>基于经 Archify 校验的 total.candidate.json 与 sub.candidate.json：六条总功能连接和十五条子功能连接。</metadata>
+<metadata>基于经 Archify 校验的 total.candidate.json 与 sub.candidate.json：六条总功能连接和十六条子功能连接。</metadata>
 <style>
 .bg{fill:white} .box{fill:white;stroke:#000;stroke-width:2} .boundary{fill:none;stroke:#000;stroke-width:2}
 .energy,.material,.signal{fill:none;stroke:#000;stroke-linejoin:round}
 .energy{stroke-width:3.6} .material{stroke-width:2.2} .signal{stroke-width:2.3;stroke-dasharray:9 6}
 .label,.box-text,.cap,.small{font-family:SimSun,Microsoft YaHei,Arial,sans-serif;fill:#000}
-.label{font-size:26px} .box-text{font-size:27px} .small{font-size:21px} .cap{font-size:28px} .subcap{font-size:27px} .legend{font-size:23px}
+.label{font-size:26px} .box-text{font-size:27px} .small{font-size:21px} .cap{font-size:28px} .subcap{font-size:27px} .legend{font-size:23px} .input-small{font-size:23px}
 </style>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#000"/></marker></defs>
-<rect class="bg" width="1500" height="1260"/>
+<rect class="bg" width="1500" height="1370"/>
 <text class="label" x="190" y="34" text-anchor="middle">输入</text><text class="label" x="1280" y="34" text-anchor="middle">输出</text>
 <rect class="box" x="565" y="54" width="315" height="226"/>
-<text class="box-text" x="722.5" y="140" text-anchor="middle"><tspan x="722.5">自主运送与投放包裹</tspan><tspan x="722.5" dy="37" class="small">循迹行驶、定点投放</tspan><tspan x="722.5" dy="30" class="small">返回停车区</tspan></text>
+<text class="box-text" x="722.5" y="140" text-anchor="middle"><tspan x="722.5">自主运送与投放包裹</tspan><tspan x="722.5" dy="37" class="small">循迹行驶、定点投放</tspan><tspan x="722.5" dy="30" class="small">返回停车区并停车</tspan></text>
 <text class="label" x="40" y="103">能量：电能</text><path class="energy" d="M300 96 L565 96" marker-end="url(#arrow)"/><path class="energy" d="M880 96 L1118 96" marker-end="url(#arrow)"/><text class="label" x="1138" y="103">车辆与投放运动</text>
-<text class="label" x="40" y="168">物料：三个待投包裹</text><path class="material" d="M300 161 L565 161" marker-end="url(#arrow)"/><path class="material" d="M880 161 L1118 161" marker-end="url(#arrow)"/><text class="label" x="1138" y="168">已投放的包裹</text>
-<text class="label" x="40" y="225">信号：轨迹与投放标记</text><text class="label" x="118" y="256">及启动指令</text><path class="signal" d="M300 232 L565 232" marker-end="url(#arrow)"/><path class="signal" d="M880 232 L1118 232" marker-end="url(#arrow)"/><text class="label" x="1138" y="239">运行与任务状态</text>
+<text class="label" x="40" y="168">物料：三个待投包裹</text><path class="material" d="M300 161 L565 161" marker-end="url(#arrow)"/><path class="material" d="M880 161 L1118 161" marker-end="url(#arrow)"/><text class="label" x="1138" y="168">三个指定点的包裹</text>
+<text class="label input-small" x="40" y="225">信号：轨迹与投放标记</text><text class="label" x="118" y="256">及启动指令</text><path class="signal" d="M300 232 L565 232" marker-end="url(#arrow)"/><path class="signal" d="M880 232 L1118 232" marker-end="url(#arrow)"/><text class="label" x="1138" y="239">运行与任务状态</text>
 <text class="cap subcap" x="750" y="332" text-anchor="middle">（a）总功能图</text>
 <rect class="boundary" x="248" y="390" width="948" height="642"/><text class="small" x="262" y="414">智能派送车系统边界</text>
 <text class="label" x="20" y="503">能量：电能</text><path class="energy" d="M194 495 L310 495" marker-end="url(#arrow)"/>
 <text class="label" x="20" y="743">物料：三个包裹</text><path class="material" d="M218 735 L310 735" marker-end="url(#arrow)"/>
-<text class="label" x="20" y="928">信号：轨迹、标记</text><text class="label" x="98" y="959">与启动</text><path class="signal" d="M218 945 L310 945" marker-end="url(#arrow)"/>
+<text class="label input-small" x="20" y="928">信号：轨迹线</text><text class="label input-small" x="98" y="959">及投放标记</text><path class="signal" d="M218 945 L310 945" marker-end="url(#arrow)"/>
 <path class="energy" d="M505 495 L580 495" marker-end="url(#arrow)"/><path class="energy" d="M775 495 L870 495" marker-end="url(#arrow)"/>
 <path class="material" d="M505 735 L580 735" marker-end="url(#arrow)"/><path class="material" d="M775 735 L870 735" marker-end="url(#arrow)"/>
 <path class="signal" d="M505 945 L580 945" marker-end="url(#arrow)"/><path class="signal" d="M775 945 L870 945" marker-end="url(#arrow)"/>
 <path class="energy" d="M677.5 541 L677.5 610 L967.5 610 L967.5 689" marker-end="url(#arrow)"/>
-<path class="energy" d="M1065 495 L1235 495" marker-end="url(#arrow)"/><text class="label" x="1253" y="487">车辆行驶</text><text class="label" x="1253" y="518">与返航</text>
-<path class="material" d="M1065 735 L1235 735" marker-end="url(#arrow)"/><text class="label" x="1253" y="727">已投放的</text><text class="label" x="1253" y="758">三个包裹</text>
+<path class="energy" d="M1065 495 L1235 495" marker-end="url(#arrow)"/><text class="label" x="1253" y="487">车辆行驶</text><text class="label" x="1253" y="518">返航与停车</text>
+<path class="material" d="M1065 735 L1235 735" marker-end="url(#arrow)"/><text class="label" x="1253" y="727">已投放至</text><text class="label" x="1253" y="758">三个指定点</text>
 <path class="signal" d="M1065 945 L1235 945" marker-end="url(#arrow)"/><text class="label" x="1253" y="937">运行与</text><text class="label" x="1253" y="968">任务状态</text>
 <path class="signal" d="M967.5 899 L967.5 781" marker-end="url(#arrow)"/><circle cx="967.5" cy="840" r="4" fill="#000"/>
 <path d="M967.5 840 L1135 840 L1135 600 L900 600 L900 541" fill="none" stroke="#fff" stroke-width="8"/>
 <path class="signal" d="M967.5 840 L1135 840 L1135 600 L900 600 L900 541" marker-end="url(#arrow)"/>
 <rect class="box" x="310" y="449" width="195" height="92"/><text x="407.5" y="483" class="box-text" text-anchor="middle"><tspan x="407.5" dy="0">接收并分配</tspan><tspan x="407.5" dy="31">电能</tspan></text>
 <rect class="box" x="580" y="449" width="195" height="92"/><text x="677.5" y="483" class="box-text" text-anchor="middle"><tspan x="677.5" dy="0">转换驱动</tspan><tspan x="677.5" dy="31">能量</tspan></text>
-<rect class="box" x="870" y="449" width="195" height="92"/><text x="967.5" y="490" class="box-text" text-anchor="middle"><tspan x="967.5" dy="0">驱动车辆行驶</tspan><tspan x="967.5" dy="27" class="small">循迹行驶与返航</tspan></text>
+<rect class="box" x="870" y="449" width="195" height="92"/><text x="967.5" y="490" class="box-text" text-anchor="middle"><tspan x="967.5" dy="0">驱动车辆行驶</tspan><tspan x="967.5" dy="27" class="small">循迹、返航与停车</tspan></text>
 <rect class="box" x="310" y="689" width="195" height="92"/><text x="407.5" y="723" class="box-text" text-anchor="middle"><tspan x="407.5" dy="0">装载并承载</tspan><tspan x="407.5" dy="31">包裹</tspan></text>
 <rect class="box" x="580" y="689" width="195" height="92"/><text x="677.5" y="737" class="box-text" text-anchor="middle"><tspan x="677.5" dy="0">分离待投包裹</tspan></text>
 <rect class="box" x="870" y="689" width="195" height="92"/><text x="967.5" y="730" class="box-text" text-anchor="middle"><tspan x="967.5" dy="0">投放包裹</tspan><tspan x="967.5" dy="27" class="small">到达投放点后执行</tspan></text>
 <rect class="box" x="310" y="899" width="195" height="92"/><text x="407.5" y="933" class="box-text" text-anchor="middle"><tspan x="407.5" dy="0">检测轨迹</tspan><tspan x="407.5" dy="31">与标记</tspan></text>
 <rect class="box" x="580" y="899" width="195" height="92"/><text x="677.5" y="933" class="box-text" text-anchor="middle"><tspan x="677.5" dy="0">判断位置</tspan><tspan x="677.5" dy="31">与任务</tspan></text>
 <rect class="box" x="870" y="899" width="195" height="92"/><text x="967.5" y="947" class="box-text" text-anchor="middle"><tspan x="967.5" dy="0">生成控制指令</tspan></text>
-<text class="cap subcap" x="750" y="1073" text-anchor="middle">（b）子功能细化图</text>
-<line class="energy" x1="190" y1="1121" x2="255" y2="1121"/><text class="label legend" x="267" y="1129">能量流</text>
-<line class="material" x1="492" y1="1121" x2="557" y2="1121"/><text class="label legend" x="569" y="1129">物料流</text>
-<line class="signal" x1="788" y1="1121" x2="853" y2="1121"/><text class="label legend" x="865" y="1129">信号流</text>
-<text class="small" x="750" y="1162" text-anchor="middle">注：投放可在去程或返程进行，交叉线不表示连接。</text>
-<text class="cap" x="750" y="1215" text-anchor="middle">图3-1 智能派送车功能分析</text>
+<path class="signal" d="M677.5 1080 L677.5 991" marker-end="url(#arrow)"/><text class="label" x="677.5" y="1115" text-anchor="middle">启动指令</text><text class="cap subcap" x="750" y="1173" text-anchor="middle">（b）子功能细化图</text>
+<line class="energy" x1="190" y1="1221" x2="255" y2="1221"/><text class="label legend" x="267" y="1229">能量流</text>
+<line class="material" x1="492" y1="1221" x2="557" y2="1221"/><text class="label legend" x="569" y="1229">物料流</text>
+<line class="signal" x1="788" y1="1221" x2="853" y2="1221"/><text class="label legend" x="865" y="1229">信号流</text>
+<text class="small" x="750" y="1262" text-anchor="middle">注：投放可在去程或返程进行，无节点的交叉线不表示连接。</text>
+<text class="cap" x="750" y="1315" text-anchor="middle">图3-1 智能派送车功能分析</text>
 </svg>
