@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "图3-1（b）智能派送车子功能细化图",
+    "locale": "zh-CN",
+    "output": ".archify/architecture-vehicle-functions-20261029-044810/subfunctions-v2.html",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "e_source",
+      "type": "external",
+      "label": "电能",
+      "pos": [
+        20,
+        60
+      ],
+      "size": [
+        120,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "e_supply",
+      "type": "backend",
+      "label": "接收并分配电能",
+      "pos": [
+        230,
+        60
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "e_convert",
+      "type": "backend",
+      "label": "转换驱动能量",
+      "pos": [
+        470,
+        60
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "move",
+      "type": "backend",
+      "label": "驱动车辆行驶",
+      "sublabel": "循迹行驶与返航",
+      "pos": [
+        740,
+        60
+      ],
+      "size": [
+        155,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "e_sink",
+      "type": "external",
+      "label": "行驶运动",
+      "pos": [
+        1040,
+        60
+      ],
+      "size": [
+        140,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "m_source",
+      "type": "external",
+      "label": "三个待投包裹",
+      "pos": [
+        20,
+        230
+      ],
+      "size": [
+        120,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "m_hold",
+      "type": "backend",
+      "label": "装载并承载包裹",
+      "pos": [
+        230,
+        230
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "m_separate",
+      "type": "backend",
+      "label": "分离待投包裹",
+      "pos": [
+        470,
+        230
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "drop",
+      "type": "backend",
+      "label": "投放包裹",
+      "sublabel": "到达投放点后执行",
+      "pos": [
+        740,
+        230
+      ],
+      "size": [
+        155,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "m_sink",
+      "type": "external",
+      "label": "三个已投包裹",
+      "pos": [
+        1040,
+        230
+      ],
+      "size": [
+        140,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "s_source",
+      "type": "external",
+      "label": "轨迹与投放标记",
+      "pos": [
+        20,
+        400
+      ],
+      "size": [
+        120,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "s_sense",
+      "type": "backend",
+      "label": "检测轨迹与标记",
+      "pos": [
+        230,
+        400
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "s_decide",
+      "type": "backend",
+      "label": "判断位置与任务",
+      "pos": [
+        470,
+        400
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "s_control",
+      "type": "backend",
+      "label": "生成控制指令",
+      "pos": [
+        740,
+        400
+      ],
+      "size": [
+        155,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "s_sink",
+      "type": "external",
+      "label": "运行与任务状态",
+      "pos": [
+        1040,
+        400
+      ],
+      "size": [
+        140,
+        60
+      ],
+      "icon": "none"
+    },
+    {
+      "id": "s_start",
+      "type": "external",
+      "label": "启动指令",
+      "pos": [
+        470,
+        545
+      ],
+      "size": [
+        150,
+        60
+      ],
+      "icon": "none"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "智能派送车系统边界",
+      "wraps": [
+        "e_supply",
+        "e_convert",
+        "move",
+        "m_hold",
+        "m_separate",
+        "drop",
+        "s_sense",
+        "s_decide",
+        "s_control"
+      ],
+      "pad": 30
+    }
+  ],
+  "connections": [
+    {
+      "id": "e1",
+      "from": "e_source",
+      "to": "e_supply",
+      "label": "电能",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e2",
+      "from": "e_supply",
+      "to": "e_convert",
+      "label": "供电",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e3",
+      "from": "e_convert",
+      "to": "move",
+      "label": "驱动能",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e4",
+      "from": "move",
+      "to": "e_sink",
+      "label": "运动",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e5",
+      "from": "e_convert",
+      "to": "drop",
+      "label": "投放驱动能",
+      "variant": "emphasis"
+    },
+    {
+      "id": "m1",
+      "from": "m_source",
+      "to": "m_hold",
+      "label": "待投包裹"
+    },
+    {
+      "id": "m2",
+      "from": "m_hold",
+      "to": "m_separate",
+      "label": "待投包裹"
+    },
+    {
+      "id": "m3",
+      "from": "m_separate",
+      "to": "drop",
+      "label": "单件包裹"
+    },
+    {
+      "id": "m4",
+      "from": "drop",
+      "to": "m_sink",
+      "label": "定点投放"
+    },
+    {
+      "id": "s1",
+      "from": "s_source",
+      "to": "s_sense",
+      "label": "外界信息",
+      "variant": "dashed"
+    },
+    {
+      "id": "s2",
+      "from": "s_sense",
+      "to": "s_decide",
+      "label": "轨迹与标记",
+      "variant": "dashed"
+    },
+    {
+      "id": "s3",
+      "from": "s_decide",
+      "to": "s_control",
+      "label": "位置信息",
+      "variant": "dashed"
+    },
+    {
+      "id": "s4",
+      "from": "s_control",
+      "to": "s_sink",
+      "label": "任务状态",
+      "variant": "dashed"
+    },
+    {
+      "id": "s5",
+      "from": "s_control",
+      "to": "move",
+      "label": "行驶指令",
+      "variant": "dashed"
+    },
+    {
+      "id": "s6",
+      "from": "s_control",
+      "to": "drop",
+      "label": "投放指令",
+      "variant": "dashed"
+    },
+    {
+      "id": "s0",
+      "from": "s_start",
+      "to": "s_decide",
+      "label": "启动",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "连线说明",
+      "items": [
+        "粗实线：能量流。",
+        "普通实线：包裹等物料流。",
+        "虚线：轨迹、标记和控制指令等信号流。",
+        "投放可发生在去程或返程，流程图不限定具体投放顺序。"
+      ]
+    }
+  ]
+}
