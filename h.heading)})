@@ -1,0 +1,3 @@
+!! the CLI did not answer within 90 s and was killed.
+   Obsidian is probably busy or waiting on a modal dialog. Ask the user
+   to look at the Obsidian window, then try again.
